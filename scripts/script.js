@@ -15,7 +15,7 @@ function getUserInput() {
   function searchGiphy(searchQuery) { 
     var url = 
   "https://api.giphy.com/v1/gifs/search?api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ&q="
-    + searchQuery; 
+    + searchQuery +"&limit=5&lang=es"; 
         
     // AJAX Request 
       
@@ -46,7 +46,7 @@ function getUserInput() {
     // Clear the old content since this function  
     // will be used on every search that we want 
     // to reset the div 
-//    container.innerHTML = ""; 
+    container.innerHTML = ""; 
     
     // Loop through data array and add IMG html 
     images.forEach(function (image) { 
@@ -59,3 +59,4 @@ function getUserInput() {
         + src + "' class='container-image' />"; 
     }); 
   }
+

@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFOS</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <header>
         <div>
-            <img id="logo" src="./images/logo-mobile.svg" alt="logo blue dot"> 
+            <img id="logo" src="./images/logo-mobile.svg"> 
+            <img src="./images/burger.svg">
         </div>
         <nav>             
             <ul>
@@ -20,17 +25,15 @@
         </nav>
     </header>
 
-    <h1>Inspírate, busca, guarda y crea los mejores GIFOS</h1>
+    <h1>Inspírate, busca, guarda y crea los mejores <span class="verde">GIFOS</span></h1>
 
 
-    <section>
+    <section id="search">
         <div>
-        <img src="images/RandomBitmap.png" width=100px>
-            <input type="text" class="busqueda" placeholder="Busca GIFOS y más" required>
-            <input type="submit" class="buscar" value="Buscar">
-        </form>    
+        <img src="images/ilustra_header.svg">
+        <input type="search" class="busqueda" placeholder="Busca GIFOS y más" results="5" >
         </div>
-        <div class="display">
+        <div id="trendingTopics">
             <p>Trending: </p>
             <p>Reactions, Entertainment, Sports, Stickers, Artists </p>
         </div>
@@ -38,19 +41,19 @@
     </section>
 
 
-    <section>
+    <section id="trendingGIFOS">
         <h2>Trending GIFOS</h2>
-            <p>Mira los últimos GIFO de nuestra comunidad.</p>
-            <img src="images/RandomBitmap.png" width=100px>
+            <p>Mira los últimos GIFOS de nuestra comunidad.</p>
+            <img src="images/RandomBitmap.png" >
     </section>
 
     <footer>
             
         <div> Compartir en: 
             <ul>
-                <li><a href="http://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="http://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="http://www.facebook.com"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="http://www.instagram.com"><img src="./images/icon_instagram.svg"></a></li>
+                <li><a href="http://www.twitter.com"><img src="images/icon_twitter.svg"></a></li>
+                <li><a href="http://www.facebook.com"><img src="images/icon_facebook.svg"></a></li>
             </ul>    
         </div>
 
