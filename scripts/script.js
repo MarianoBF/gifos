@@ -17,11 +17,20 @@
 
 // Barra búsqueda
 
-// function buscar() {
-//   document.getElementById("iconoBusqueda").style.background = "none";
-//   document.getElementById("barraBusqueda").style.paddingLeft = "15%";
-//   document.getElementById("iconoBusqueda").style.background = "#FFF url(/images/close.svg) 0 0 no-repeat";
-// }
+// document.getElementById("iconoBusqueda").style.background = "none";
+// document.getElementById("barraBusqueda").style.paddingLeft = "15%";
+// document.getElementById("iconoBusqueda").style.background = "#FFF url(/images/close.svg) 0 0 no-repeat";
+
+
+
+function buscar() {
+ 
+
+   var query = document.querySelector(".busqueda").value; 
+   
+   alert(query)
+
+  }
 
 
 
@@ -88,4 +97,59 @@
 //   }
 
 
+/*********************************
+CALESITA
+*********************************/
 
+var firstval = 0;
+var runSlider;
+
+function Carousel() {
+clearTimeout(runSlider);
+    firstval += 2;
+    parent = document.getElementById('imagenesCalesita');
+    parent.style.left = "-" + firstval + "px";
+    if (!(firstval % 180)) {
+        setTimeout(Carousel, 3000);
+        firstval = 0;
+        var firstChild = parent.firstElementChild;
+        parent.appendChild(firstChild);
+        parent.style.left= 0;
+        return;
+    }
+    runCarousel = setTimeout(Carousel, 10);
+}
+Carousel();
+
+//OPCIÓN BOTONES
+// function leftClick(){
+// firstval += 2;
+//     parent = document.getElementById('imagenesCalesita');
+//     parent.style.left = "-" + firstval + "px";
+    
+//     if (!(firstval % 130)) {
+        
+//         firstval = 0;
+//         var firstChild = parent.firstElementChild;
+//         parent.appendChild(firstChild);
+//         parent.style.left= 0;
+//         return;
+//     }
+//     runSlider = setTimeout(leftClick, 10);
+// }
+
+// function rightClick(){
+// firstval += 2;
+//     parent = document.getElementById('imagenesCalesita');
+//     parent.style.left =  firstval + "px";
+    
+//     if (!(firstval % 130)) {
+        
+//         firstval = 0;
+//         var firstChild = parent.firstElementChild;
+//         parent.appendChild(firstChild);
+//         parent.style.left= 0;
+//         return;
+//     }
+//     runSlider = setTimeout(rightClick, 10);
+// }

@@ -59,12 +59,12 @@
     <h1>Inspírate, busca, guarda y crea los mejores <span class="verde">GIFOS</span></h1>
 
 
-    <section id="search">
+    <section id="busqueda">
         <div>
         <img src="images/ilustra_header.svg">
-        <form>
-        <input onkeydown="buscar()" id="barraBusqueda" type="search" class="busqueda" placeholder="Busca GIFOS y más" data-type="search" >
-        <input type="submit" id="iconoBusqueda" value="">
+        <form onsubmit="buscar()" id="formulario">
+        <input onkeydown="" id="barraBusqueda" type="search" class="busqueda" placeholder="Busca GIFOS y más" data-type="search" required>
+        <input  type="submit" id="iconoBusqueda" value="">
 
         </form>    
         </div>
@@ -81,13 +81,40 @@
             <img src="images/RandomBitmap.png" >
     </section>
 
+    <section id="favoritos">
+        <h2>FAVORITOS</h2>
+            <img src="images/RandomBitmap.png" >
+    </section>
+
+    <section id="misGifos">
+        <h2>MIS GIFOS</h2>
+            <img src="images/RandomBitmap.png" >
+    </section>
+
 
     <section id="trendingGIFOS">
         <h2>Trending GIFOS</h2>
             <p>Mira los últimos</p>
             <p> GIFOS de nuestra comunidad.</p>
-            <img src="images/RandomBitmap.png" >
-    </section>
+           
+         <div id="calesita">
+            <!-- <a class="left" href="#wrapper-carousel"  style="font-size:100px;z-index:3000;" onclick="leftClick()">&lsaquo;</a> -->
+            <div id="main-carousel">
+                <div id="imagenesCalesita">
+                    <div class="child"><img src="https://placekitten.com/200/200"> </div>
+                    <div class="child"><img src="https://placekitten.com/250/250"> </div>
+                    <div class="child"><img src="https://placekitten.com/300/300"> </div>
+                    <div class="child"><img src="https://placekitten.com/450/450"> </div>
+                    <div class="child"><img src="https://placekitten.com/180/180"> </div>
+                    <div class="child"><img src="https://placekitten.com/400/400"> </div>
+                    </div></div>
+              <!-- <a class="right" href="#wrapper-carousel"  style="font-size:100px;z-index:3000" onclick="rightClick()">&rsaquo;</a> -->
+             
+            </div>
+
+
+
+        </section>
 
     <footer>
             

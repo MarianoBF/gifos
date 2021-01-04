@@ -14,116 +14,15 @@ h1 {
     margin: 5% 11%;
 }
 
-form {
-    position: relative;
-}
 
-#search img {
-    max-width: 75%;
-    display: block;
-    margin: 0 auto;
-}
+/*
+1-HEADER, NAVEGACIÓN y FOOTER
+2-BARRA BÚSQUEDA
+3-CALESITA
+4-RESTO ESTILOS
+5-MEDIA QUERY
+*/
 
-#search input[type="search"] {
-    display: block;
-    margin: 0 auto;
-    width: 90vw;
-    line-height: 50px;
-    border: 1px solid #572EE5;
-    border-radius: 27px;
-    color: #000000;
-    font-size: 16px;
-
-}
-
-#iconoBusqueda {
-    background: #FFF url(/images/icon-search.svg) 0 0 no-repeat;
-    height: 21px;
-    padding: 12px;
-    position: absolute;
-    right: 40px;
-    top: 15px;
-    width: 21px;
-    border: 0;
-    cursor: pointer;
-}
-
-input[type="search"]::-webkit-search-cancel-button {
-    color: #572EE5;
-    position: absolute;
-    right: 40px;
-    top: 15px;
-    border: 0;
-    font-size: 30px;
-    /* display: none;*/
-} 
-
-
-#trendingTopics {
-    margin: 0 20%;
-    margin-bottom: 4%;
-}
-
-#trendingTopics p {
-    line-height: 25px;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
-}
-
-#trendingTopics p:nth-of-type(2) {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-#resultadosBusqueda {
-    display: none;
-    text-align: center;
-}
-
-#resultadosBusqueda img {
-    width: 100px;
-}
-
-#trendingGIFOS {
-    text-align: center;
-    background-color: #F3F5F8;
-    padding-top: 5%;
-    padding-bottom: 8%;
-    margin: 0;
-}
-
-#trendingGIFOS h2 {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
-}
-
-#trendingGIFOS p {
-    font-weight: 400;
-    line-height: 23px;
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-}
-
-#trendingGIFOS img {
-    max-width: 250px;
-    max-height: 200px;
-    margin: 20px;
-}
-
-.verde {
-    color: #50E3C2;
-}
-
-
-::-webkit-input-placeholder {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    text-align: center;
-    padding-left: 0;
-  }
 
 /*
 ***********************************************
@@ -132,7 +31,7 @@ input[type="search"]::-webkit-search-cancel-button {
 */
 
 .desplegable {
-    height: 88%;
+    height: 90%;
     width: 0;
     position: fixed;
     z-index: 1; 
@@ -167,11 +66,9 @@ input[type="search"]::-webkit-search-cancel-button {
     transition: 0.3s; 
   }
 
-
 #cerrarmenu {
     display: none;
 }
-
 
 header {
     display: flex;
@@ -219,13 +116,188 @@ footer ul li a:visited {
     color: black;
 }
 
+
 /*
 ***********************************************
-
+2-BARRA BÚSQUEDA
 ***********************************************
 */
 
-/***************************/
+form {
+    position: relative;
+}
+
+#busqueda img {
+    max-width: 75%;
+    display: block;
+    margin: 0 auto;
+}
+
+#busqueda input[type="search"] {
+    display: block;
+    margin: 0 auto;
+    width: 90vw;
+    line-height: 50px;
+    border: 1px solid #572EE5;
+    border-radius: 27px;
+    color: #000000;
+    font-size: 16px;
+    padding-left: 10%;
+}
+
+#busqueda input[type="search"]:valid + input {
+    background: none;
+    width: 0;
+    height: 0;
+    padding: 0;
+}
+
+#iconoBusqueda {
+    background: #FFF url(/images/icon-search.svg) 0 0 no-repeat;
+    height: 21px;
+    padding: 12px;
+    position: absolute;
+    right: 40px;
+    top: 15px;
+    width: 21px;
+    border: 0;
+    cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    -webkit-appearance: none;
+    height: 25px;
+    width: 25px;
+    background: #FFF url(/images/close.svg) 0 0 no-repeat;
+} 
+
+::-webkit-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    padding-left: 20%;
+  }
+
+/*
+***********************************************
+3-CALESITA
+***********************************************
+*/
+
+
+#calesita {
+    position: relative;
+    max-width: 70%;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    display:flex;
+}
+#main-carousel {
+    position: relative;
+    width: 450px;
+    height: 150px;
+    overflow:hidden;
+}
+ #imagenesCalesita {
+    position: absolute;
+    width: 450px;
+    height: 150px;
+}
+.child {
+    width: 130px;
+    height: 150px;
+    padding-top: 35px;
+    float: left;
+    text-align: center;
+    font-size: 60px;
+    padding: 0 5%;
+}
+
+.child img {
+    width: 150px;
+    height: 150px;
+}
+
+
+
+/*
+***********************************************
+4-RESTO ESTILOS
+***********************************************
+*/
+
+#trendingTopics {
+    margin: 0 20%;
+    margin-bottom: 4%;
+}
+
+#trendingTopics p {
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+#trendingTopics p:nth-of-type(2) {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#resultadosBusqueda, #favoritos, #misGifos {
+    display: none;
+    text-align: center;
+}
+
+#resultadosBusqueda img {
+    width: 100px;
+}
+
+#trendingGIFOS {
+    text-align: center;
+    background-color: #F3F5F8;
+    padding-top: 5%;
+    padding-bottom: 8%;
+    margin: 0;
+}
+
+#trendingGIFOS h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+#trendingGIFOS p {
+    font-weight: 400;
+    line-height: 23px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+
+
+.verde {
+    color: #50E3C2;
+}
+
+
+
+
+
+
+
+
+
+
+/*
+***********************************************
+5-MEDIA QUERY
+***********************************************
+*/
+
 
 
 @media (min-width: 768px) {
