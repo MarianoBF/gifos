@@ -59,7 +59,7 @@ const urltrending = "https://api.giphy.com/v1/gifs/trending?"
 
 fetch(urltrending)
   .then(res => res.json())
-  .then(({ data }) => console.log(data))
+  .then(({ data }) => data.map(mostrarTrending))
 
 function mostrarTrending (gif) {
   const imagen = document.createElement('IMG')
