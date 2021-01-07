@@ -116,6 +116,33 @@ footer ul li a:visited {
     color: black;
 }
 
+footer a {
+    text-decoration: none;
+}
+
+#facebook {
+    background: url(/images/icon_facebook.svg) 0 0 no-repeat;
+    }
+
+#facebook:hover {
+    background: url(/images/icon_facebook_hover.svg) 0 0 no-repeat;
+}
+
+#twitter {
+    background: url(/images/icon_twitter.svg) 0 0 no-repeat;
+    }
+
+#twitter:hover {
+    background: url(/images/icon_twitter_hover.svg) 0 0 no-repeat;
+}
+
+#instagram {
+    background: url(/images/icon_instagram.svg) 0 0 no-repeat;
+    }
+
+#instagram:hover {
+    background: url(/images/icon_instagram_hover.svg) 0 0 no-repeat;
+}
 
 /*
 ***********************************************
@@ -255,18 +282,30 @@ input[type="search"]::-webkit-search-cancel-button {
 
 #contenedorBusqueda {
     display: grid;
-    grid-template-columns: 40% 40%;
-    row-gap: 5%;
-    column-gap: 5%;
-    margin: 0 5%;
+    grid-template-columns: 50% 50%;
+    margin: 0 auto;
+    height: 100%;
 }
-
 
 #resultadosBusqueda img {
     width: 125px;
     height: 125px;
+    padding: 5% 0;
     margin: auto;
+    display: block;
+}
 
+#resultadosBusqueda button {
+    border-radius: 25px;
+    background: #FFF;
+    border: 1px solid #572EE5;
+    color: #572EE5;
+    font-weight: 700;
+    font-size: 13px;
+    height: 40px;
+    width: 110px;
+    margin: 8% auto;
+    display: block;
 }
 
 #trendingGIFOS {

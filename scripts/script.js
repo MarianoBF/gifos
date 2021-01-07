@@ -24,7 +24,7 @@ event.preventDefault();
 
 var busqueda = document.querySelector(".busqueda").value; 
 
-document.getElementById("resultadosBusqueda").style.display = "block";
+document.getElementById("resultadosBusqueda").style.display = "initial";
 document.getElementById("tituloBusqueda").innerHTML = busqueda
 
 let vaciar = document.getElementById("contenedorBusqueda");
@@ -32,7 +32,7 @@ vaciar.textContent = "";
 
 function mostrarGiphy (gif) {
   const imagen = document.createElement('IMG')
-  imagen.src = gif.images.downsized.url
+  imagen.src = gif.images.preview_gif.url
   document.getElementById("contenedorBusqueda").appendChild(imagen);
 }
 
@@ -41,11 +41,12 @@ const urlbusqueda = "https://api.giphy.com/v1/gifs/search?"
 +"&q="
 +busqueda
 +"&lang=es"
-+"&limit=3"
++"&limit=12"
 
 fetch(urlbusqueda)
   .then(resultado => resultado.json())
   .then(({ data }) =>  data.map(mostrarGiphy));
+  
 }
 
 /*********************************
@@ -58,11 +59,11 @@ const urltrending = "https://api.giphy.com/v1/gifs/trending?"
 
 fetch(urltrending)
   .then(res => res.json())
-  .then(({ data }) => data.map(mostrarTrending))
+  .then(({ data }) => console.log(data))
 
 function mostrarTrending (gif) {
   const imagen = document.createElement('IMG')
-  imagen.src = gif.images.original.url
+  imagen.src = gif.images.preview_gif.url
   document.getElementById("contenedorTrending").appendChild(imagen);
 }
 
