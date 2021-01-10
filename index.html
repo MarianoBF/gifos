@@ -17,11 +17,11 @@
             <img src="/images/logo-mobile.svg">
         </div>
         <div>
-            <img id="abrirmenu" onclick="openNav()" src="./images/burger.svg">
-            <img id="cerrarmenu" onclick="closeNav()" src="./images/close.svg">
+            <img id="abrirMenu" src="./images/burger.svg">
+            <img id="cerrarMenu" src="./images/close.svg">
         <nav id="menu" class="desplegable">             
             <div class="desplegable-opciones">
-                <a href="#">Modo Nocturno</a>
+                <a href="#" id="modoOscuro">Modo Nocturno</a>
                 <hr />
                 <a href="#">Favoritos</a>
                 <hr />
@@ -37,10 +37,11 @@
     <section id="busqueda">
         <div>
             <img src="images/ilustra_header.svg">
-            <form onSubmit="buscar()" method="GET" id="formulario">
-                <input onkeyup="sugerencias()" id="barraBusqueda" type="search" class="busqueda" list="busquedasSugeridas" placeholder="Busca GIFOS y más" required>
+            <form method="GET" id="formulario" name="formulario">
+                <input id="barraBusqueda" type="search" class="busqueda" list="busquedasSugeridas" placeholder="Busca GIFOS y más" required>
                 <input type="submit" id="iconoBusqueda" value="">
-                <datalist id="busquedasSugeridas"> 
+                <datalist id="busquedasSugeridas">
+                    <option class="opcionesBusquedasSugeridas"></option>
                 </datalist>
             </form>    
         </div>

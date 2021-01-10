@@ -8,31 +8,45 @@
 
 
 /*********************************
-1-MENÚ DESPLEGABLE
+1-MENÚ DESPLEGABLE y MODO OSCURO
 *********************************/
+document.getElementById("abrirMenu").addEventListener("click", abrirNav);
 
-  function openNav() {
-    document.getElementById("menu").style.width = "100%";
-    document.getElementById("abrirmenu").style.display = "none";
-    document.getElementById("cerrarmenu").style.display = "inline";
-  }
+function abrirNav() {
+  document.getElementById("menu").style.width = "100%";
+  document.getElementById("abrirMenu").style.display = "none";
+  document.getElementById("cerrarMenu").style.display = "inline";
+}
  
-  function closeNav() {
-    document.getElementById("menu").style.width = "0%";
-    document.getElementById("abrirmenu").style.display = "inline";
-    document.getElementById("cerrarmenu").style.display = "none";
-  }
+document.getElementById("cerrarMenu").addEventListener("click", cerrarNav);
 
+function cerrarNav() {
+  document.getElementById("menu").style.width = "0%";
+  document.getElementById("abrirMenu").style.display = "inline";
+  document.getElementById("cerrarMenu").style.display = "none";
+}
+
+document.getElementById("modoOscuro").addEventListener("click", oscurizador);
+
+function oscurizador() {
+  document.getElementsByTagName("body")[0].classList.toggle("modoOscuro");
+  cerrarNav();
+}
 
 /*********************************
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
 *********************************/
 
+document.getElementById("barraBusqueda").addEventListener("keyup", sugerencias);
+
 function sugerencias() {
 
-let sugerencia = document.querySelector(".busqueda").value; 
+let sugerencia = document.getElementById("barraBusqueda").value; 
 
 if (sugerencia.length > 2) {
+
+  document.getElementById("busquedasSugeridas").innerHTML = "";
+
 
 let urlSugerencias = "https://api.giphy.com/v1/tags/related/" 
 +sugerencia
@@ -43,20 +57,30 @@ fetch(urlSugerencias)
   .then(({ data }) => data.map(mostrarSugerencias))
 
 function mostrarSugerencias (sug) {
+  // document.getElementById("busquedasSugeridas").textContent = '';
 
-let opcionSug = document.createElement("option"); 
-var valorSug = document.createTextNode(sug.name); 
+let opcionSug = document.createElement("option");
+opcionSug.className = "opcionesBusquedasSugeridas"
+let valorSug = document.createTextNode(sug.name); 
   opcionSug.appendChild(valorSug); 
   document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
-
-};}
 }
+
+}
+
+;}
+
+document.getElementById("iconoBusqueda").addEventListener("click", buscar);
+
+
+let formulario = document.getElementsByName("formulario");
+formulario[0].addEventListener("submit", buscar);
 
 function buscar() {
 
 event.preventDefault();
 
-var busqueda = document.querySelector(".busqueda").value; 
+let busqueda = document.getElementById("barraBusqueda").value; 
 
 document.getElementById("resultadosBusqueda").style.display = "initial";
 document.getElementById("tituloBusqueda").innerHTML = busqueda
@@ -65,8 +89,9 @@ let vaciar = document.getElementById("contenedorBusqueda");
 vaciar.textContent = "";
 
 function mostrarGiphy (gif) {
-  let imagen = document.createElement('IMG')
-  imagen.src = gif.images.preview_gif.url
+  let imagen = document.createElement('IMG');
+  imagen.src = gif.images.preview_gif.url;
+  imagen.className = "gifChico";
   document.getElementById("contenedorBusqueda").appendChild(imagen);
 }
 
@@ -87,6 +112,23 @@ fetch(urlBusqueda)
 3- TRENDING (TEXTO Y GIFS)
 *********************************/
 
+let urlTemasTrending = "https://api.giphy.com/v1/trending/searches?" 
++"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
+
+fetch(urlTemasTrending)
+  .then(res => res.json())
+  .then(({ data }) => data.map(mostrarTemasTrending))
+
+let cantidadTrending = 0;
+
+function mostrarTemasTrending (tema) {
+  tema = mayusculizar(tema)
+  cantidadTrending++
+  cantidadTrending < 8 ? document.getElementById("temasTrending").innerHTML += tema + " - " : 
+  cantidadTrending == 8 ? document.getElementById("temasTrending").innerHTML += tema : null;
+}
+
+
 let urlTrending = "https://api.giphy.com/v1/gifs/trending?" 
 +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
 +"&limit=12"
@@ -96,32 +138,19 @@ fetch(urlTrending)
   .then(({ data }) => data.map(mostrarTrending))
 
 function mostrarTrending (gif) {
-  let imagen = document.createElement('IMG')
-  imagen.src = gif.images.preview_gif.url
+  let imagen = document.createElement('IMG');
+  imagen.src = gif.images.preview_gif.url;
+  imagen.className = "gifChico";
   document.getElementById("contenedorTrending").appendChild(imagen);
 }
-
-let urlTemasTrending = "https://api.giphy.com/v1/trending/searches?" 
-+"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
-
-fetch(urlTemasTrending)
-  .then(res => res.json())
-  .then(({ data }) => data.map(mostrarTemasTrending))
-
-function mostrarTemasTrending (tema) {
-  tema = mayusculizar(tema)
-  document.getElementById("temasTrending").innerHTML += tema + " - " 
-  
-}
-
 
 
 /*********************************
 4-CALESITA
 *********************************/
 
-var firstval = 0;
-var runSlider;
+let firstval = 0;
+let runSlider;
 
 function Carousel() {
 clearTimeout(runSlider);
@@ -131,7 +160,7 @@ clearTimeout(runSlider);
     if (!(firstval % 180)) {
         setTimeout(Carousel, 3000);
         firstval = 0;
-        var firstChild = parent.firstElementChild;
+        let firstChild = parent.firstElementChild;
         parent.appendChild(firstChild);
         parent.style.left= 0;
         return;
@@ -149,7 +178,7 @@ Carousel();
 //     if (!(firstval % 130)) {
         
 //         firstval = 0;
-//         var firstChild = parent.firstElementChild;
+//         ***var firstChild = parent.firstElementChild;
 //         parent.appendChild(firstChild);
 //         parent.style.left= 0;
 //         return;
@@ -165,7 +194,7 @@ Carousel();
 //     if (!(firstval % 130)) {
         
 //         firstval = 0;
-//         var firstChild = parent.firstElementChild;
+//         ****var firstChild = parent.firstElementChild;
 //         parent.appendChild(firstChild);
 //         parent.style.left= 0;
 //         return;
@@ -182,4 +211,5 @@ let mayusculizar = (palabras) => {
   palabras = palabras.split(" ");
   palabras = palabras.map((word, index) => word[0].toUpperCase() + word.slice(1));
   palabras = palabras.join(" ")
-  return palabras }
+  return palabras 
+}

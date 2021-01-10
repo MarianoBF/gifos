@@ -14,6 +14,9 @@ h1 {
     margin: 5% 11%;
 }
 
+.modoOscuro {
+    background: black;
+}
 
 /*
 1-HEADER, NAVEGACIÓN y FOOTER
@@ -66,7 +69,7 @@ h1 {
     transition: 0.3s; 
   }
 
-#cerrarmenu {
+#cerrarMenu {
     display: none;
 }
 
@@ -172,10 +175,10 @@ form {
     padding-left: 10%;
 }
 
-#busqueda input[type="search"]:valid + input {
-    background: none;
-    width: 0;
-    height: 0;
+#busqueda input[type="search"]:valid + input:nth-of-type(2) {
+    background: url(/images/icon-search_grey.svg) 0 0 no-repeat;
+    right: 0;
+    left: 30px;
     padding: 0;
 }
 
@@ -189,6 +192,18 @@ form {
     width: 21px;
     border: 0;
     cursor: pointer;
+}
+
+#busquedasSugeridas {
+    position: relative;
+}
+
+.opcionesBusquedasSugeridas {
+    background: url(/images/icon-search_grey.svg) 0 0 no-repeat;
+    position: absolute;
+    right: 0;
+    left: 30px;
+    padding: 0;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -244,19 +259,18 @@ input[type="search"]::-webkit-search-cancel-button {
     font-size: 60px;
 }
 
-#contenedorTrending img {
-    width: 125px;
-    height: 125px;
-    padding: 0 2%;
-}
-
-
-
 /*
 ***********************************************
 4-RESTO ESTILOS
 ***********************************************
 */
+
+.gifChico {
+    width: 125px;
+    height: 125px;
+    padding: 0 2%;
+}
+
 
 #trendingTopics {
     margin: 0 20%;
@@ -288,8 +302,6 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 #resultadosBusqueda img {
-    width: 125px;
-    height: 125px;
     padding: 5% 0;
     margin: auto;
     display: block;
