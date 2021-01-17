@@ -155,6 +155,22 @@ footer a {
 
 form {
     position: relative;
+    border: 1px solid #572EE5;
+    border-radius: 27px;
+    padding: 0 -30px;
+    width: 90vw;
+    margin: 0 auto;
+
+}
+
+form hr {
+    width: 0;
+    margin: 0;
+}
+
+form ul {
+    width: 0;
+    margin: 0;
 }
 
 #busqueda img {
@@ -168,7 +184,7 @@ form {
     margin: 0 auto;
     width: 90vw;
     line-height: 50px;
-    border: 1px solid #572EE5;
+    border: 1px solid transparent;
     border-radius: 27px;
     color: #000000;
     font-size: 16px;
@@ -200,10 +216,14 @@ form {
 
 .opcionesBusquedasSugeridas {
     background: url(/images/icon-search_grey.svg) 0 0 no-repeat;
-    position: absolute;
-    right: 0;
-    left: 30px;
-    padding: 0;
+    padding: 10;
+    list-style: none;
+    line-height: 30px;
+    color: #9CAFC3;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    text-indent: 30px;
+
 }
 
 input[type="search"]::-webkit-search-cancel-button {

@@ -38,11 +38,11 @@
         <div>
             <img src="images/ilustra_header.svg">
             <form method="GET" id="formulario" name="formulario">
-                <input id="barraBusqueda" type="search" class="busqueda" list="busquedasSugeridas" placeholder="Busca GIFOS y más" required>
+                <input id="barraBusqueda" type="search" class="busqueda" list="busquedasSugeridas" placeholder="Busca GIFOS y más" autocomplete="off" required>
                 <input type="submit" id="iconoBusqueda" value="">
-                <datalist id="busquedasSugeridas">
-                    <option class="opcionesBusquedasSugeridas"></option>
-                </datalist>
+                <hr />
+                <ul id="busquedasSugeridas">
+                </ul>
             </form>    
         </div>
         <div id="trendingTopics" >

@@ -59,8 +59,8 @@ fetch(urlSugerencias)
 function mostrarSugerencias (sug) {
   // document.getElementById("busquedasSugeridas").textContent = '';
 
-let opcionSug = document.createElement("option");
-opcionSug.className = "opcionesBusquedasSugeridas"
+let opcionSug = document.createElement("li");
+opcionSug.className = "opcionesBusquedasSugeridas";
 let valorSug = document.createTextNode(sug.name); 
   opcionSug.appendChild(valorSug); 
   document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
@@ -108,6 +108,36 @@ fetch(urlBusqueda)
   
 }
 
+function buscarTrending() {
+
+  let busqueda = this.id; 
+  
+  document.getElementById("resultadosBusqueda").style.display = "initial";
+  document.getElementById("tituloBusqueda").innerHTML = busqueda
+  
+  let vaciar = document.getElementById("contenedorBusqueda");
+  vaciar.textContent = "";
+  
+  function mostrarGiphy (gif) {
+    let imagen = document.createElement('IMG');
+    imagen.src = gif.images.preview_gif.url;
+    imagen.className = "gifChico";
+    document.getElementById("contenedorBusqueda").appendChild(imagen);
+  }
+  
+  let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
+  +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
+  +"&q="
+  +busqueda
+  +"&lang=es"
+  +"&limit=12"
+  
+  fetch(urlBusqueda)
+    .then(resultado => resultado.json())
+    .then(({ data }) =>  data.map(mostrarGiphy));
+    
+  }
+
 /*********************************
 3- TRENDING (TEXTO Y GIFS)
 *********************************/
@@ -124,16 +154,20 @@ let cantidadTrending = 0;
 function mostrarTemasTrending (tema) {
   tema = mayusculizar(tema)
   cantidadTrending++
-  cantidadTrending < 8 ? document.getElementById("temasTrending").innerHTML += tema + " - " : 
-  cantidadTrending == 8 ? document.getElementById("temasTrending").innerHTML += tema : null;
+  let temaTrending = document.createElement('A');
+  temaTrending.id = tema
+  temaTrending.addEventListener("click", buscarTrending);
+  cantidadTrending < 8 ? temaTrending.innerHTML = tema + " - ":
+  cantidadTrending == 8 ? temaTrending.innerHTML = tema: null;
+  document.getElementById("temasTrending").appendChild(temaTrending)
 }
 
 
-let urlTrending = "https://api.giphy.com/v1/gifs/trending?" 
+let urlGIFTrending = "https://api.giphy.com/v1/gifs/trending?" 
 +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
 +"&limit=12"
 
-fetch(urlTrending)
+fetch(urlGIFTrending)
   .then(res => res.json())
   .then(({ data }) => data.map(mostrarTrending))
 
