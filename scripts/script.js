@@ -169,12 +169,14 @@ let urlGIFTrending = "https://api.giphy.com/v1/gifs/trending?"
 
 fetch(urlGIFTrending)
   .then(res => res.json())
+  // .then(({ data }) => console.log(data))
   .then(({ data }) => data.map(mostrarTrending))
 
 function mostrarTrending (gif) {
   let imagen = document.createElement('IMG');
   imagen.src = gif.images.preview_gif.url;
   imagen.className = "gifChico";
+  imagen.id = gif.id
   document.getElementById("contenedorTrending").appendChild(imagen);
 }
 
@@ -184,8 +186,9 @@ function mostrarTrending (gif) {
 *********************************/
 
 let contenedor = document.getElementById('contenedorTrending');
+let corredor = 0;
+let calesitaGirando = setInterval(clicDerecho, 2000)
 
-setInterval(clicDerecho, 2000)
 
 document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
 
@@ -199,35 +202,52 @@ document.getElementById("flechaDerecha").addEventListener("click", clicDerecho);
 
 function clicDerecho(){
     corredor -= 200;
-    corredor2 = corredor + "px"
+    corredor >= -1200 ? corredor2 = corredor + "px" : corredor2 = corredor = 0;
     contenedor.style.marginLeft = corredor2;
 }
-
 
 /********************
 5-MODAL
 *******************/
 
-// document.getElementById("misGifos").addEventListener("click", activarModales);
+setTimeout(activarModales, 1000)
 
+let idActivo = "";
 
-// function activarModales() {
-
-// const gifs = document.getElementsByClassName("gifChico")
-
-// for (let i = 0; i < gifs.length; i++) {
-//   gifs[i].addEventListener("click", modalGif)};
-
-// // gifs.forEach(el => el.addEventListener("click", modalGif));
+function activarModales() {
+  const gifs = document.querySelectorAll(".gifChico")
+  for (let gif of gifs) { gif.addEventListener("click", modalGif) };
+ }
   
-// function modalGif() {
-//   let imagen = document.getElementById(this.id);
-//   imagen.classList.add("modalGifImagen");
-//   let contenedor = imagen.parentElement;
-//   contenedor.classList.add("modalGifContenedor");
-// }
+function modalGif() {
+  let imagen = document.getElementById(this.id);
+  imagen.classList.add("modalGifImagen");
+  imagen.classList.remove("gifChico");
+  idActivo = this.id;
+  let contenedor = imagen.parentElement;
+  contenedor.classList.add("modalGifContenedor");
+  contenedor.classList.remove("contenedorTrending");
+  let cerrador = document.getElementById("cerrarModal");
+  cerrador.style.display = "initial";
+  clearInterval(calesitaGirando)
+}
 
-// }
+
+document.getElementById("cerrarModal").addEventListener("click", cerrarModalGif);
+
+function cerrarModalGif() {
+  let imagen = document.getElementById(idActivo);
+  imagen.classList.add("gifChico");
+  imagen.classList.remove("modalGifImagen");
+  let contenedor = imagen.parentElement;
+  contenedor.classList.remove("modalGifContenedor");
+  contenedor.classList.add("contenedorTrending");
+  let cerrador = document.getElementById("cerrarModal");
+  cerrador.style.display = "none";
+  calesitaGirando = setInterval(clicDerecho, 2000)
+}
+
+
 
 
 /********************

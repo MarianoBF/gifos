@@ -264,7 +264,7 @@ input[type="search"]::-webkit-search-cancel-button {
     height: 150px;
 }
 
-#contenedorTrending{
+.contenedorTrending{
     width: 350px;
     height: 150px;
     padding-top: 35px;
@@ -285,12 +285,13 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /*********MODAL*/
 
-.cerrarModal {
+#cerrarModal {
+    display: none;
     position: absolute;
     top: 20px;
     right: 30px;
     color: #f1f1f1;
-    font-size: 30px;
+    font-size: 60px;
 }
 
 .modalGifImagen {
@@ -301,7 +302,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .modalGifContenedor {
-    display: none;
+    display: block;
     background: rgba(200, 0, 0, 0.5);
     position: fixed;
     left: 0;
@@ -343,7 +344,7 @@ input[type="search"]::-webkit-search-cancel-button {
     font-weight: 500;
 }
 
-#resultadosBusqueda, #favoritos {
+#resultadosBusqueda, #favoritos, #misGifos{
     display: none;
     text-align: center;
 }
