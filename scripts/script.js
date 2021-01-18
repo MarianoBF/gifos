@@ -183,65 +183,58 @@ function mostrarTrending (gif) {
 4-CALESITA
 *********************************/
 
-let firstval = 0;
-let runSlider;
+let contenedor = document.getElementById('contenedorTrending');
 
-function Carousel() {
-clearTimeout(runSlider);
-    firstval += 2;
-    parent = document.getElementById('contenedorTrending');
-    parent.style.left = "-" + firstval + "px";
-    if (!(firstval % 180)) {
-        setTimeout(Carousel, 3000);
-        firstval = 0;
-        let firstChild = parent.firstElementChild;
-        parent.appendChild(firstChild);
-        parent.style.left= 0;
-        return;
-    }
-    runCarousel = setTimeout(Carousel, 10);
+setInterval(clicDerecho, 2000)
+
+document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
+
+function clicIzquierdo(){
+    corredor += 200;
+    corredor2 = corredor + "px"
+    contenedor.style.marginLeft = corredor2;
 }
-Carousel();
 
-//OPCIÓN BOTONES
-// function leftClick(){
-// firstval += 2;
-//     parent = document.getElementById('imagenesCalesita');
-//     parent.style.left = "-" + firstval + "px";
-    
-//     if (!(firstval % 130)) {
-        
-//         firstval = 0;
-//         ***var firstChild = parent.firstElementChild;
-//         parent.appendChild(firstChild);
-//         parent.style.left= 0;
-//         return;
-//     }
-//     runSlider = setTimeout(leftClick, 10);
+document.getElementById("flechaDerecha").addEventListener("click", clicDerecho);
+
+function clicDerecho(){
+    corredor -= 200;
+    corredor2 = corredor + "px"
+    contenedor.style.marginLeft = corredor2;
+}
+
+
+/********************
+5-MODAL
+*******************/
+
+// document.getElementById("misGifos").addEventListener("click", activarModales);
+
+
+// function activarModales() {
+
+// const gifs = document.getElementsByClassName("gifChico")
+
+// for (let i = 0; i < gifs.length; i++) {
+//   gifs[i].addEventListener("click", modalGif)};
+
+// // gifs.forEach(el => el.addEventListener("click", modalGif));
+  
+// function modalGif() {
+//   let imagen = document.getElementById(this.id);
+//   imagen.classList.add("modalGifImagen");
+//   let contenedor = imagen.parentElement;
+//   contenedor.classList.add("modalGifContenedor");
 // }
 
-// function rightClick(){
-// firstval += 2;
-//     parent = document.getElementById('imagenesCalesita');
-//     parent.style.left =  firstval + "px";
-    
-//     if (!(firstval % 130)) {
-        
-//         firstval = 0;
-//         ****var firstChild = parent.firstElementChild;
-//         parent.appendChild(firstChild);
-//         parent.style.left= 0;
-//         return;
-//     }
-//     runSlider = setTimeout(rightClick, 10);
 // }
 
 
 /********************
-5-AUX
+6-AUX
 *******************/
 
-let mayusculizar = (palabras) => {
+function mayusculizar(palabras) {
   palabras = palabras.split(" ");
   palabras = palabras.map((word, index) => word[0].toUpperCase() + word.slice(1));
   palabras = palabras.join(" ")

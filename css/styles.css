@@ -257,12 +257,6 @@ input[type="search"]::-webkit-search-cancel-button {
     overflow: hidden;
     display:flex;
 }
-#main-carousel {
-    position: relative;
-    width: 450px;
-    height: 150px;
-    overflow:hidden;
-}
 
 #imagenesCalesita {
     position: absolute;
@@ -277,7 +271,46 @@ input[type="search"]::-webkit-search-cancel-button {
     float: left;
     text-align: center;
     font-size: 60px;
+    display: flex;
+    margin-left: 0;
 }
+
+#calesita p {
+    display: none;
+}
+
+.flecha {
+    display: block; /*AJUSTAR*************************** */
+}
+
+/*********MODAL*/
+
+.cerrarModal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 30px;
+}
+
+.modalGifImagen {
+    margin: 25% auto;
+    display: block;
+    width: 50vw;
+    opacity: 1;
+}
+
+.modalGifContenedor {
+    display: none;
+    background: rgba(200, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+}
+
 
 /*
 ***********************************************
@@ -302,6 +335,7 @@ input[type="search"]::-webkit-search-cancel-button {
     font-size: 16px;
     font-weight: 700;
     text-align: center;
+    cursor: pointer;
 }
 
 #trendingTopics p:nth-of-type(2) {
@@ -309,7 +343,7 @@ input[type="search"]::-webkit-search-cancel-button {
     font-weight: 500;
 }
 
-#resultadosBusqueda, #favoritos, #misGifos {
+#resultadosBusqueda, #favoritos {
     display: none;
     text-align: center;
 }
@@ -423,5 +457,20 @@ input[type="search"]::-webkit-search-cancel-button {
         margin-bottom: 7em;
         display: flex;
         justify-content: space-between;
+    }
+
+    #calesita p {
+        display: initial;
+        font-size: 100px;
+        z-index: 3000;
+
+    }
+
+    #flechaIzquierda {
+        float: left;
+    }
+
+    #flechaDerecha {
+        text-align: right;
     }
 }    
