@@ -4,12 +4,14 @@
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
 3-TRENDING (TEXTO Y GIFS)
 4-CALESITA
+5-MODAL
+6-AUX
 */
-
 
 /*********************************
 1-MENÚ DESPLEGABLE y MODO OSCURO
 *********************************/
+{
 document.getElementById("abrirMenu").addEventListener("click", abrirNav);
 
 function abrirNav() {
@@ -29,92 +31,110 @@ function cerrarNav() {
 document.getElementById("modoOscuro").addEventListener("click", oscurizador);
 
 function oscurizador() {
-  document.getElementsByTagName("body")[0].classList.toggle("modoOscuro");
+  document.getElementsByTagName("body")[0].classList.toggle("bodyNocturno");
+  document.getElementById("trendingGIFOS").classList.toggle("backgroundOscuroNocturno");
+  document.getElementById("facebook").classList.toggle("iconoFBNocturno");
+  document.getElementById("twitter").classList.toggle("iconoTWNocturno");
+  document.getElementById("instagram").classList.toggle("iconoIGNocturno");
+  document.getElementById("cerrarModal").classList.toggle("textoNocturno");
+  document.getElementById("barraBusqueda").classList.toggle("barraNocturna");
+  document.getElementById("formulario").classList.toggle("formNocturno");
+  document.getElementById("iconoBusqueda").classList.toggle("iconoBusquedaNocturno");
+
+
+  
+  let logo = document.getElementById("logo"); let logoaux = logo.getAttribute("src")
+  logoaux === "./images/logo-mobile.svg" ? logo.setAttribute("src", "./images/logo-mobile-modo-noct.svg") : logo.setAttribute("src", "./images/logo-mobile.svg")
+  
+  let burger = document.getElementById("abrirMenu"); let burgeraux = burger.getAttribute("src")
+  burgeraux === "./images/burger.svg" ? burger.setAttribute("src", "./images/burger-modo-noct.svg") : burger.setAttribute("src", "./images/burger.svg")
+
+  let cerrar = document.getElementById("cerrarMenu"); let cerraraux = cerrar.getAttribute("src")
+  cerraraux === "./images/close.svg" ? cerrar.setAttribute("src", "./images/close-modo-noct.svg") : cerrar.setAttribute("src", "./images/close.svg")
+
+  let textosNegros = document.getElementsByClassName("textoNegro")
+  for (t of textosNegros) {
+    t.classList.toggle("textoBlanco")
+  }
   cerrarNav();
 }
-
+}
 /*********************************
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
 *********************************/
-
+{
 document.getElementById("barraBusqueda").addEventListener("keyup", sugerencias);
 
 function sugerencias() {
+  let sugerencia = document.getElementById("barraBusqueda").value; 
 
-let sugerencia = document.getElementById("barraBusqueda").value; 
+  if (sugerencia.length > 2) {
 
-if (sugerencia.length > 2) {
+    document.getElementById("busquedasSugeridas").innerHTML = "";
 
-  document.getElementById("busquedasSugeridas").innerHTML = "";
+    let urlSugerencias = "https://api.giphy.com/v1/tags/related/" 
+    +sugerencia
+    +"?api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
 
+    fetch(urlSugerencias)
+      .then(res => res.json())
+      .then(({ data }) => data.map(mostrarSugerencias))
 
-let urlSugerencias = "https://api.giphy.com/v1/tags/related/" 
-+sugerencia
-+"?api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
-
-fetch(urlSugerencias)
-  .then(res => res.json())
-  .then(({ data }) => data.map(mostrarSugerencias))
-
-function mostrarSugerencias (sug) {
-  // document.getElementById("busquedasSugeridas").textContent = '';
-
-let opcionSug = document.createElement("li");
-opcionSug.className = "opcionesBusquedasSugeridas";
-let valorSug = document.createTextNode(sug.name); 
-  opcionSug.appendChild(valorSug); 
-  document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
-}
-
-}
-
-;}
+    function mostrarSugerencias (sug) {
+        let opcionSug = document.createElement("li");
+        opcionSug.className = "opcionesBusquedasSugeridas";
+        let valorSug = document.createTextNode(sug.name); 
+          opcionSug.appendChild(valorSug); 
+          document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
+        } 
+    } 
+  }
 
 document.getElementById("iconoBusqueda").addEventListener("click", buscar);
-
-
 let formulario = document.getElementsByName("formulario");
 formulario[0].addEventListener("submit", buscar);
 
-function buscar() {
+function buscar(e) {
+  e.preventDefault() 
+  let limite = 12;
+  let busqueda = document.getElementById("barraBusqueda").value; 
+  document.getElementById("resultadosBusqueda").style.display = "initial";
+  document.getElementById("tituloBusqueda").innerHTML = busqueda
+  let vaciar = document.getElementById("contenedorBusqueda");
+  vaciar.textContent = "";
 
-event.preventDefault();
+  function mostrarGiphy (gif) {
+    let imagen = document.createElement('IMG');
+    imagen.src = gif.images.preview_gif.url;
+    imagen.className = "gifChico";
+    document.getElementById("contenedorBusqueda").appendChild(imagen);
+  }
 
-let busqueda = document.getElementById("barraBusqueda").value; 
+  let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
+  +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
+  +"&q="
+  +busqueda
+  +"&lang=es"
+  +"&limit="
+  +limite
 
-document.getElementById("resultadosBusqueda").style.display = "initial";
-document.getElementById("tituloBusqueda").innerHTML = busqueda
+  fetch(urlBusqueda)
+    .then(resultado => resultado.json())
+    .then(({ data }) =>  data.map(mostrarGiphy));
 
-let vaciar = document.getElementById("contenedorBusqueda");
-vaciar.textContent = "";
-
-function mostrarGiphy (gif) {
-  let imagen = document.createElement('IMG');
-  imagen.src = gif.images.preview_gif.url;
-  imagen.className = "gifChico";
-  document.getElementById("contenedorBusqueda").appendChild(imagen);
-}
-
-let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
-+"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
-+"&q="
-+busqueda
-+"&lang=es"
-+"&limit=12"
-
-fetch(urlBusqueda)
-  .then(resultado => resultado.json())
-  .then(({ data }) =>  data.map(mostrarGiphy));
-  
-}
+    document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
+    function ExpandirLimite() {
+      limite += 12;
+      buscar()
+    }
+  }
 
 function buscarTrending() {
-
-  let busqueda = this.id; 
+  let busqueda = this.id;
+  let limite = 12;
   
   document.getElementById("resultadosBusqueda").style.display = "initial";
   document.getElementById("tituloBusqueda").innerHTML = busqueda
-  
   let vaciar = document.getElementById("contenedorBusqueda");
   vaciar.textContent = "";
   
@@ -130,18 +150,19 @@ function buscarTrending() {
   +"&q="
   +busqueda
   +"&lang=es"
-  +"&limit=12"
+  +"&limit="
+  +limite
   
   fetch(urlBusqueda)
     .then(resultado => resultado.json())
     .then(({ data }) =>  data.map(mostrarGiphy));
-    
+   
   }
-
+}
 /*********************************
 3- TRENDING (TEXTO Y GIFS)
 *********************************/
-
+{
 let urlTemasTrending = "https://api.giphy.com/v1/trending/searches?" 
 +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
 
@@ -180,11 +201,11 @@ function mostrarTrending (gif) {
   document.getElementById("contenedorTrending").appendChild(imagen);
 }
 
-
+}
 /*********************************
-4-CALESITA
+4-CALESITA y MIS GIFOS
 *********************************/
-
+{
 let contenedor = document.getElementById('contenedorTrending');
 let corredor = 0;
 let calesitaGirando = setInterval(clicDerecho, 2000)
@@ -206,13 +227,30 @@ function clicDerecho(){
     contenedor.style.marginLeft = corredor2;
 }
 
+document.getElementById("enlaceMisGifos").addEventListener("click", mostrarMisGifos)
+
+function mostrarMisGifos() {
+  document.getElementById("menu").style.width = "0%";
+  document.getElementById("misGifos").style.display = "initial";
+  const gifosGuardados = {...localStorage};
+  for (let i = 0; i < localStorage.length; i++) {
+    let llave = localStorage.key(i);
+    let src = localStorage.getItem(llave)
+    console.log(src)
+    mostrarGIF(src, "contenedorMisGifos")
+  }
+  
+    }
+}
+
 /********************
 5-MODAL
 *******************/
-
+{
 setTimeout(activarModales, 1000)
 
 let idActivo = "";
+let urlActivo = "";
 
 function activarModales() {
   const gifs = document.querySelectorAll(".gifChico")
@@ -224,12 +262,13 @@ function modalGif() {
   imagen.classList.add("modalGifImagen");
   imagen.classList.remove("gifChico");
   idActivo = this.id;
-  let contenedor = imagen.parentElement;
+  urlActivo = this.src;
+  let contenedor = document.getElementById("modal");
   contenedor.classList.add("modalGifContenedor");
-  contenedor.classList.remove("contenedorTrending");
-  let cerrador = document.getElementById("cerrarModal");
-  cerrador.style.display = "initial";
+  document.getElementById("cerrarModal").style.display = "initial";
+  document.getElementById("guardarGif").style.display = "initial";
   clearInterval(calesitaGirando)
+
 }
 
 
@@ -239,17 +278,27 @@ function cerrarModalGif() {
   let imagen = document.getElementById(idActivo);
   imagen.classList.add("gifChico");
   imagen.classList.remove("modalGifImagen");
-  let contenedor = imagen.parentElement;
-  contenedor.classList.remove("modalGifContenedor");
-  contenedor.classList.add("contenedorTrending");
+  document.getElementById("modal").classList.remove("modalGifContenedor");
   let cerrador = document.getElementById("cerrarModal");
   cerrador.style.display = "none";
   calesitaGirando = setInterval(clicDerecho, 2000)
 }
 
+document.getElementById("guardarGif").addEventListener("click", GuardarGif);
+function GuardarGif() {
+  localStorage.setItem("gif"+Id(), urlActivo)
+}
 
 
+const Id = GenerarId()
 
+function GenerarId() {
+    let i = 0; 
+    return function GenerarIdAux(){ return i++}
+}
+
+
+}
 /********************
 6-AUX
 *******************/
@@ -259,4 +308,11 @@ function mayusculizar(palabras) {
   palabras = palabras.map((word, index) => word[0].toUpperCase() + word.slice(1));
   palabras = palabras.join(" ")
   return palabras 
+}
+
+function mostrarGIF (gif, puntoInsercion) { //*************************PLANTEAR ESTA UNIVERSAL?? */
+  let imagen = document.createElement('IMG');
+  imagen.src = gif;
+  imagen.className = "gifChico";
+  document.getElementById(puntoInsercion).appendChild(imagen);
 }

@@ -1,0 +1,40 @@
+.bodyNocturno {
+    color: #FFFFFF;
+    background: #37383C;
+    border-top: 5px solid #000000;
+    border-bottom: 5px solid #000000;
+}
+
+.backgroundOscuroNocturno {
+    background: #222326;
+}
+
+.iconoFBNocturno {
+    background: url(/images/icon_facebook_nocturno.svg) 0 0 no-repeat;
+}
+
+.iconoIGNocturno {
+    background: url(/images/icon_instagram_nocturno.svg) 0 0 no-repeat;
+}
+
+.iconoTWNocturno {
+    background: url(/images/icon_twitter_nocturno.svg) 0 0 no-repeat;
+}
+
+.textoBlanco {
+    color: #FFFFFF;
+}
+
+.barraNocturna {
+    background: #37383C;
+    color: #6B7989;
+}
+
+.formNocturno {
+    border: 1px solid #FFFFFF;
+}
+
+.iconoBusquedaNocturno {
+    background: url(/images/icon-search-modo-noct.svg) 0 0 no-repeat;
+
+}
