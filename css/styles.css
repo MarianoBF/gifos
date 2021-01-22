@@ -186,7 +186,7 @@ form ul {
     border-radius: 27px;
     color: #000000;
     font-size: 16px;
-    padding-left: 10%;
+    padding-left: 20%;
 }
 
 #busqueda input[type="search"]:valid + input:nth-of-type(2) {
@@ -214,13 +214,15 @@ form ul {
 
 .opcionesBusquedasSugeridas {
     background: url(/images/icon-search_grey.svg) 0 0 no-repeat;
-    padding: 10;
+    padding-left: 30px;
     list-style: none;
     line-height: 30px;
     color: #9CAFC3;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
-    text-indent: 30px;
+    word-break: normal;
+    word-wrap: normal;
+
 
 }
 

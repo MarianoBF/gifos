@@ -67,6 +67,7 @@ document.getElementById("barraBusqueda").addEventListener("keyup", sugerencias);
 
 function sugerencias() {
   let sugerencia = document.getElementById("barraBusqueda").value; 
+  let cantidadMaximaSugerencias = 5;
 
   if (sugerencia.length > 2) {
 
@@ -81,82 +82,43 @@ function sugerencias() {
       .then(({ data }) => data.map(mostrarSugerencias))
 
     function mostrarSugerencias (sug) {
+        if (document.getElementById("busquedasSugeridas").childElementCount < cantidadMaximaSugerencias) { 
         let opcionSug = document.createElement("li");
         opcionSug.className = "opcionesBusquedasSugeridas";
+        opcionSug.addEventListener("click", buscarSugerencias)
         let valorSug = document.createTextNode(sug.name); 
-          opcionSug.appendChild(valorSug); 
-          document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
-        } 
-    } 
-  }
-
-document.getElementById("iconoBusqueda").addEventListener("click", buscar);
-let formulario = document.getElementsByName("formulario");
-formulario[0].addEventListener("submit", buscar);
-
-function buscar(e) {
-  e.preventDefault() 
-  let limite = 12;
-  let busqueda = document.getElementById("barraBusqueda").value; 
-  document.getElementById("resultadosBusqueda").style.display = "initial";
-  document.getElementById("tituloBusqueda").innerHTML = busqueda
-  let vaciar = document.getElementById("contenedorBusqueda");
-  vaciar.textContent = "";
-
-  function mostrarGiphy (gif) {
-    let imagen = document.createElement('IMG');
-    imagen.src = gif.images.preview_gif.url;
-    imagen.className = "gifChico";
-    document.getElementById("contenedorBusqueda").appendChild(imagen);
-  }
-
-  let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
-  +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
-  +"&q="
-  +busqueda
-  +"&lang=es"
-  +"&limit="
-  +limite
-
-  fetch(urlBusqueda)
-    .then(resultado => resultado.json())
-    .then(({ data }) =>  data.map(mostrarGiphy));
-
-    document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
-    function ExpandirLimite() {
-      limite += 12;
-      buscar()
+        opcionSug.appendChild(valorSug); 
+        document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
+        }
+      }
     }
   }
 
+function buscarSugerencias() {
+  let busqueda = this.innerText;
+  Buscar(busqueda);
+  document.getElementById("busquedasSugeridas").innerHTML = ""; 
+  }
+
+
+document.getElementById("iconoBusqueda").addEventListener("click", buscarBarra);
+let formulario = document.getElementsByName("formulario");
+formulario[0].addEventListener("submit", buscarBarra);
+
+function buscarBarra(e) {
+  e.preventDefault() 
+  let busqueda = document.getElementById("barraBusqueda").value; 
+  Buscar(busqueda)
+  }
+  //   document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
+  //   function ExpandirLimite() {
+  //     limite += 12;
+  //     buscarBarra()
+  //   }
+
 function buscarTrending() {
   let busqueda = this.id;
-  let limite = 12;
-  
-  document.getElementById("resultadosBusqueda").style.display = "initial";
-  document.getElementById("tituloBusqueda").innerHTML = busqueda
-  let vaciar = document.getElementById("contenedorBusqueda");
-  vaciar.textContent = "";
-  
-  function mostrarGiphy (gif) {
-    let imagen = document.createElement('IMG');
-    imagen.src = gif.images.preview_gif.url;
-    imagen.className = "gifChico";
-    document.getElementById("contenedorBusqueda").appendChild(imagen);
-  }
-  
-  let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
-  +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
-  +"&q="
-  +busqueda
-  +"&lang=es"
-  +"&limit="
-  +limite
-  
-  fetch(urlBusqueda)
-    .then(resultado => resultado.json())
-    .then(({ data }) =>  data.map(mostrarGiphy));
-   
+  Buscar(busqueda);
   }
 }
 /*********************************
@@ -208,8 +170,7 @@ function mostrarTrending (gif) {
 {
 let contenedor = document.getElementById('contenedorTrending');
 let corredor = 0;
-let calesitaGirando = setInterval(clicDerecho, 2000)
-
+let calesitaGirando = setInterval(clicDerecho, 2000);
 
 document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
 
@@ -237,7 +198,7 @@ function mostrarMisGifos() {
     let llave = localStorage.key(i);
     let src = localStorage.getItem(llave)
     console.log(src)
-    mostrarGIF(src, "contenedorMisGifos")
+    mostrarGiphyNoBusqueda(src, "contenedorMisGifos")
   }
   
     }
@@ -300,7 +261,7 @@ function GenerarId() {
 
 }
 /********************
-6-AUX
+6-FUNCIONES AUXILIARES Y GENERALES
 *******************/
 
 function mayusculizar(palabras) {
@@ -310,9 +271,37 @@ function mayusculizar(palabras) {
   return palabras 
 }
 
-function mostrarGIF (gif, puntoInsercion) { //*************************PLANTEAR ESTA UNIVERSAL?? */
+function Buscar (busqueda) {
+  let limite = 12;
+  document.getElementById("resultadosBusqueda").style.display = "initial";
+  document.getElementById("tituloBusqueda").innerHTML = busqueda
+  let vaciar = document.getElementById("contenedorBusqueda");
+  vaciar.textContent = ""; 
+   
+  let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
+  +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
+  +"&q="
+  +busqueda
+  +"&lang=es"
+  +"&limit="
+  +limite
+  
+  fetch(urlBusqueda)
+    .then(resultado => resultado.json())
+    .then(({ data }) =>  data.map(mostrarGiphyBusqueda));
+  }
+
+function mostrarGiphyBusqueda (gif) {
+  let imagen = document.createElement('IMG');
+  imagen.src = gif.images.preview_gif.url;
+  imagen.className = "gifChico";
+  document.getElementById("contenedorBusqueda").appendChild(imagen);
+  }
+
+function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
   let imagen = document.createElement('IMG');
   imagen.src = gif;
   imagen.className = "gifChico";
   document.getElementById(puntoInsercion).appendChild(imagen);
-}
+  }
+  
