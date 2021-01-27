@@ -4,8 +4,9 @@
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
 3-TRENDING (TEXTO Y GIFS)
 4-CALESITA
-5-MODAL
-6-AUX
+5-ENLACES INICIO FAVORITOS y MIS GIFOS
+6-MODAL
+7-FUNCIONES AUXILIARES Y GENERALES
 */
 
 /*********************************
@@ -72,6 +73,7 @@ function sugerencias() {
   if (sugerencia.length > 2) {
 
     document.getElementById("busquedasSugeridas").innerHTML = "";
+    document.getElementById("busquedasSugeridas").style.display = "initial";
 
     let urlSugerencias = "https://api.giphy.com/v1/tags/related/" 
     +sugerencia
@@ -106,7 +108,7 @@ let formulario = document.getElementsByName("formulario");
 formulario[0].addEventListener("submit", buscarBarra);
 
 function buscarBarra(e) {
-  e.preventDefault() 
+  e.preventDefault() //Para prevenir reload
   let busqueda = document.getElementById("barraBusqueda").value; 
   Buscar(busqueda)
   }
@@ -131,6 +133,7 @@ let urlTemasTrending = "https://api.giphy.com/v1/trending/searches?"
 fetch(urlTemasTrending)
   .then(res => res.json())
   .then(({ data }) => data.map(mostrarTemasTrending))
+  .catch(error => console.log("Hubo un problema al cargar los temas trending: " + error))
 
 let cantidadTrending = 0;
 
@@ -157,7 +160,8 @@ fetch(urlGIFTrending)
 
 function mostrarTrending (gif) {
   let imagen = document.createElement('IMG');
-  imagen.src = gif.images.preview_gif.url;
+  imagen.src = gif.images.fixed_height.webp;
+  imagen.data = gif.images.original.url;
   imagen.className = "gifChico";
   imagen.id = gif.id
   document.getElementById("contenedorTrending").appendChild(imagen);
@@ -165,7 +169,7 @@ function mostrarTrending (gif) {
 
 }
 /*********************************
-4-CALESITA y MIS GIFOS
+4-CALESITA y MODAL
 *********************************/
 {
 let contenedor = document.getElementById('contenedorTrending');
@@ -175,7 +179,7 @@ let calesitaGirando = setInterval(clicDerecho, 2000);
 document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
 
 function clicIzquierdo(){
-    corredor += 200;
+    corredor += 164;
     corredor2 = corredor + "px"
     contenedor.style.marginLeft = corredor2;
 }
@@ -183,31 +187,12 @@ function clicIzquierdo(){
 document.getElementById("flechaDerecha").addEventListener("click", clicDerecho);
 
 function clicDerecho(){
-    corredor -= 200;
-    corredor >= -1200 ? corredor2 = corredor + "px" : corredor2 = corredor = 0;
+    corredor -= 164;
+    corredor >= -1804 ? corredor2 = corredor + "px" : corredor2 = corredor = 0;
     contenedor.style.marginLeft = corredor2;
 }
 
-document.getElementById("enlaceMisGifos").addEventListener("click", mostrarMisGifos)
 
-function mostrarMisGifos() {
-  document.getElementById("menu").style.width = "0%";
-  document.getElementById("misGifos").style.display = "initial";
-  const gifosGuardados = {...localStorage};
-  for (let i = 0; i < localStorage.length; i++) {
-    let llave = localStorage.key(i);
-    let src = localStorage.getItem(llave)
-    console.log(src)
-    mostrarGiphyNoBusqueda(src, "contenedorMisGifos")
-  }
-  
-    }
-}
-
-/********************
-5-MODAL
-*******************/
-{
 setTimeout(activarModales, 1000)
 
 let idActivo = "";
@@ -219,13 +204,16 @@ function activarModales() {
  }
   
 function modalGif() {
-  let imagen = document.getElementById(this.id);
-  imagen.classList.add("modalGifImagen");
-  imagen.classList.remove("gifChico");
   idActivo = this.id;
   urlActivo = this.src;
-  let contenedor = document.getElementById("modal");
-  contenedor.classList.add("modalGifContenedor");
+  enlaceActivo = this.data;
+  let imagenModal = document.createElement("IMG");
+  imagenModal.src = urlActivo;
+  imagenModal.className = "modalGifImagen";
+  imagenModal.id = "modalAbierto"
+  let contenedorModal = document.getElementById("modal");
+  contenedorModal.classList.add("modalGifContenedor");
+  contenedorModal.appendChild(imagenModal);
   document.getElementById("cerrarModal").style.display = "initial";
   document.getElementById("guardarGif").style.display = "initial";
   clearInterval(calesitaGirando)
@@ -236,9 +224,7 @@ function modalGif() {
 document.getElementById("cerrarModal").addEventListener("click", cerrarModalGif);
 
 function cerrarModalGif() {
-  let imagen = document.getElementById(idActivo);
-  imagen.classList.add("gifChico");
-  imagen.classList.remove("modalGifImagen");
+  document.getElementById("modalAbierto").remove();
   document.getElementById("modal").classList.remove("modalGifContenedor");
   let cerrador = document.getElementById("cerrarModal");
   cerrador.style.display = "none";
@@ -247,7 +233,8 @@ function cerrarModalGif() {
 
 document.getElementById("guardarGif").addEventListener("click", GuardarGif);
 function GuardarGif() {
-  localStorage.setItem("gif"+Id(), urlActivo)
+  localStorage.setItem("gifFavorito"+Id(), urlActivo)
+  alert("Gif guardado!")
 }
 
 
@@ -258,10 +245,169 @@ function GenerarId() {
     return function GenerarIdAux(){ return i++}
 }
 
+document.getElementById("descargarGif").addEventListener("click", DescargarGif);
+
+function DescargarGif() {
+console.log(this)
+let enlace = document.createElement('A');
+enlace.href = enlaceActivo;
+enlace.setAttribute("download", "download");
+// enlace.download = "MiGif.gif";
+document.body.appendChild(enlace);
+enlace.click();
+document.body.removeChild(enlace);
+}
+
+
+
+}
+
+/*********************************
+5- ENLACES INICIO FAVORITOS, MIS GIFOS y CAPTURA
+*********************************/
+{
+
+
+document.getElementById("enlaceFavoritos").addEventListener("click", mostrarFavoritos)
+
+function mostrarFavoritos() {
+  cerrarNav()
+  document.getElementById("contenedorFavoritos").innerHTML = "";
+  document.getElementById("favoritos").style.display = "initial";
+  document.getElementById("misGifos").style.display = "none";
+  document.getElementById("captura").style.display = "none";
+  document.getElementById("busqueda").style.display = "none";
+  document.getElementById("trendingGIFOS").style.display = "none";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    let llave = localStorage.key(i);
+    if (llave < "gifS") {
+    let src = localStorage.getItem(llave)
+    mostrarGiphyNoBusqueda(src, "contenedorFavoritos")
+    }
+  }
+ }
+
+document.getElementById("enlaceMisGifos").addEventListener("click", mostrarMisGifos)
+
+function mostrarMisGifos() {
+  cerrarNav()
+  document.getElementById("contenedorMisGifos").innerHTML = "";
+  document.getElementById("favoritos").style.display = "none";
+  document.getElementById("misGifos").style.display = "initial";
+  document.getElementById("captura").style.display = "none";
+  document.getElementById("busqueda").style.display = "none";
+  document.getElementById("trendingGIFOS").style.display = "none";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    let llave = localStorage.key(i);
+    if (llave >= "gifS") {
+    let src = localStorage.getItem(llave)
+    mostrarGiphyNoBusqueda(src, "contenedorMisGifos")
+    }
+  }
+}
+
+document.getElementById("enlaceCaptura").addEventListener("click", mostrarCaptura)
+
+function mostrarCaptura() {
+  cerrarNav()
+  document.getElementById("contenedorFavoritos").innerHTML = "";
+  document.getElementById("favoritos").style.display = "none";
+  document.getElementById("misGifos").style.display = "none";
+  document.getElementById("captura").style.display = "initial";
+  document.getElementById("busqueda").style.display = "none";
+  document.getElementById("trendingGIFOS").style.display = "none";
+  }
+
+
+
+document.getElementById("enlaceInicio").addEventListener("click", mostrarInicio)
+document.getElementById("logo").addEventListener("click", mostrarInicio)
+
+function mostrarInicio() {
+  cerrarNav()
+  document.getElementById("busqueda").style.display = "initial";
+  document.getElementById("trendingGIFOS").style.display = "initial";
+  document.getElementById("favoritos").style.display = "none";
+  document.getElementById("misGifos").style.display = "none";
+
+}
+}
+
+
+/********************
+6-MODAL /// CAPTURAR GIF
+*******************/
+{ // prueba moderlo a calesita ****************************
+  
+
+//   function getStreamAndRecord () { 
+//     navigator.mediaDevices.getUserMedia({
+//     audio: false,
+//     video: {
+//        height: { max: 480 }
+//     }
+//  })
+//  .then(function(stream) {
+//     video.srcObject = stream;
+//     video.play()
+//  })
+// }
+
+// document.getElementById("iniciarCaptura").addEventListener("click", capturarGif)
+
+let video = document.getElementById("video")
+
+function captureCamera(callback) {
+  navigator.mediaDevices.getUserMedia({ video: true }).then(function(camera) {
+      callback(camera);
+  }).catch(function(error) {
+      alert('Unable to capture your camera. Please check console logs.');
+      console.error(error);
+  });
+}
+
+function stopRecordingCallback() {
+  video.src = URL.createObjectURL(recorder.getBlob());
+  recorder.camera.stop();
+  let blob = recorder.getBlob()
+  invokeSaveAsDialog(blob);
+  // recorder.destroy();
+  // recorder = null;
+}
+
+let recorder;
+
+document.getElementById("iniciarCaptura").addEventListener("click", aGrabar)
+
+function aGrabar() {
+  this.disabled = true;
+  captureCamera(function(camera) {
+    recorder = RecordRTC(camera, {
+    type: 'gif',
+    frameRate: 1,
+    quality: 10,
+    width: 360,
+    hidden: 240,
+    onGifRecordingStarted: function() {
+      console.log('started')
+    }
+  });
+
+  recorder.startRecording();
+  recorder.camera = camera;
+});
+};
+
+document.getElementById("finalizarCaptura").addEventListener("click", function() {
+  this.disabled = true;
+  recorder.stopRecording(stopRecordingCallback);
+})
 
 }
 /********************
-6-FUNCIONES AUXILIARES Y GENERALES
+7-FUNCIONES AUXILIARES Y GENERALES
 *******************/
 
 function mayusculizar(palabras) {
@@ -287,13 +433,24 @@ function Buscar (busqueda) {
   +limite
   
   fetch(urlBusqueda)
-    .then(resultado => resultado.json())
-    .then(({ data }) =>  data.map(mostrarGiphyBusqueda));
+    .then(resultado => {
+      if (resultado.status === 200) {
+        return resultado.json(); 
+      }else {
+        console.log("Hubo un problema con la búsqueda")
+      }
+      })
+    .then(({ data }) => {
+
+    console.log(data)
+    if (data.length === 0) {sinResultados()
+    } else { data.map(mostrarGiphyBusqueda) }
+    });
   }
 
 function mostrarGiphyBusqueda (gif) {
   let imagen = document.createElement('IMG');
-  imagen.src = gif.images.preview_gif.url;
+  imagen.src = gif.images.fixed_height.webp;
   imagen.className = "gifChico";
   document.getElementById("contenedorBusqueda").appendChild(imagen);
   }
@@ -305,3 +462,9 @@ function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
   document.getElementById(puntoInsercion).appendChild(imagen);
   }
   
+function sinResultados() {
+  let mensaje = document.createElement('P');
+  mensaje.innerText = "No se encontraron resultados"
+  document.getElementById("contenedorBusqueda").appendChild(mensaje);
+
+}

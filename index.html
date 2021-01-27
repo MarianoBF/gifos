@@ -28,18 +28,23 @@
             <div class="desplegable-opciones">
                 <a href="#" id="modoOscuro">Modo Nocturno</a>
                 <hr />
-                <a href="#">Favoritos</a>
+                <a id="enlaceFavoritos" href="#favoritos">Favoritos</a>
                 <hr />
                 <a id="enlaceMisGifos" href="#misGifos">Mis GIFOS</a>
                 <hr />
+                <!-- No estaba previsto pero parece necesario -->
+                <a id="enlaceInicio" href="#logo">Inicio</a> 
+                <hr />
+                <a id="enlaceCaptura" href="#captura">Capturar Gif</a> 
             </div>
         </nav>
         </div>
     </header>
 
-    <h1>Inspírate, busca, guarda y crea los mejores <span class="textoVerde">GIFOS</span></h1>
 
     <section id="busqueda">
+        <h1>Inspírate, busca, guarda y crea los mejores <span class="textoVerde">GIFOS</span></h1>
+
         <div>
             <img src="images/ilustra_header.svg">
             <form method="GET" id="formulario" name="formulario">
@@ -67,18 +72,35 @@
 
     <section id="favoritos">
         <h2>FAVORITOS</h2>
-            <img src="images/RandomBitmap.png" >
-    </section>
+            <div id="contenedorFavoritos">
+        </section>
 
     <section id="misGifos">
         <h2>MIS GIFOS</h2>
-        <div id="contenedorMisGifos">
+            <div id="contenedorMisGifos">
+        </div>
+    </section>
+
+    <section id="captura">
+        <h2>Capturar Gif</h2>
+            <div id="contenedorCaptura">
+                <p>Aquí podrás crear tus propios GIFOS</p>
+                <p>¡Crea tu GIFO en sólo 3 pasos!</p>
+                <p>(sólo necesitas una cámara para grabar un video)</p>   
+                <img id="logo" src="./images/paso_1.svg">
+                <img id="logo" src="./images/paso_2.svg">
+                <img id="logo" src="./images/paso_3.svg">
+                <video id="video"></video>
+                <button id="iniciarCaptura">Grabar GIF</button>
+                <button id="finalizarCaptura">Finalizar captura Gif</button>
+
         </div>
     </section>
 
     <section id="modal" class="modal">
     <span class="cerrarModal" id="cerrarModal">&times;</span>
     <span class="guardarGif" id="guardarGif">&hearts;</span>
+    <span class="descargarGif" id="descargarGif">&darr;</span>
     </section>
 
 
@@ -109,7 +131,8 @@
         <p>© GIFOS 2020 All Rights Reserved.</p>
     </footer>
 
-<script src="scripts/script.js"></script> 
+<script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+<script src="scripts/script.js"></script>
 
 </body>
 </html>
