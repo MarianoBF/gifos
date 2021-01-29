@@ -1,4 +1,5 @@
 
+"use strict";
 /*
 1-MENÚ DESPLEGABLE
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
@@ -64,18 +65,19 @@ function cargadorOscurizador() {
   cerraraux === "./images/close.svg" ? cerrar.setAttribute("src", "./images/close_noct.svg") : cerrar.setAttribute("src", "./images/close.svg")
 
   let textosNegros = document.getElementsByClassName("textoNegro")
-  for (t of textosNegros) {
+  for (let t of textosNegros) {
     t.classList.toggle("textoBlanco")
   }
 
   let botonesRedondeados = document.getElementsByClassName("botonRedondeado")
-  for (bot of botonesRedondeados) {
+  for (let bot of botonesRedondeados) {
     bot.classList.toggle("botonRedondeadoNocturno")
   }
 
   cerrarNav();
 }
 }
+
 /*********************************
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
 *********************************/
@@ -141,14 +143,6 @@ document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
     busqueda = localStorage.getItem("busqueda") 
     Buscar(busqueda, limite)
     }
-
-function buscarTrending() {
-  let busqueda = this.id;
-  localStorage.setItem("busqueda", busqueda) 
-  Buscar(busqueda, 12);
-  localStorage.setItem("limite", 12)
-
-  }
 }
 /*********************************
 3- TRENDING (TEXTO Y GIFS)
@@ -167,13 +161,20 @@ let cantidadTrending = 0;
 function mostrarTemasTrending (tema) {
   tema = mayusculizar(tema)
   cantidadTrending++
-  let temaTrending = document.createElement('A');
+  let temaTrending = document.createElement("A");
   temaTrending.id = tema
   temaTrending.addEventListener("click", buscarTrending);
   cantidadTrending < 8 ? temaTrending.innerHTML = tema + " - ":
   cantidadTrending == 8 ? temaTrending.innerHTML = tema: null;
   document.getElementById("temasTrending").appendChild(temaTrending)
 }
+
+function buscarTrending() {
+  let busqueda = this.id;
+  localStorage.setItem("busqueda", busqueda) 
+  Buscar(busqueda, 12);
+  localStorage.setItem("limite", 12)
+  }
 
 
 let urlGIFTrending = "https://api.giphy.com/v1/gifs/trending?" 
@@ -205,6 +206,8 @@ let calesitaGirando = setInterval(clicDerecho, 2000);
 
 document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
 
+let corredor2;
+
 function clicIzquierdo(){
     corredor += 164;
     corredor2 = corredor + "px"
@@ -224,6 +227,7 @@ setTimeout(activarModales, 1000)
 
 let idActivo = "";
 let urlActivo = "";
+let enlaceActivo = "";
 
 function activarModales() {
   const gifs = document.querySelectorAll(".gifChico")
@@ -234,19 +238,26 @@ function modalGif() {
   idActivo = this.id;
   urlActivo = this.src;
   enlaceActivo = this.data;
+
   let imagenModal = document.createElement("IMG");
   imagenModal.src = urlActivo;
   imagenModal.className = "modalGifImagen";
   imagenModal.id = "modalAbierto"
+  let titulo = document.createElement("P");
+  titulo.append(document.createTextNode(""))
+  let usuario = document.createElement("P");
+  titulo.append(document.createTextNode(""))
+
+  
   let contenedorModal = document.getElementById("modal");
   contenedorModal.classList.add("modalGifContenedor");
-  contenedorModal.appendChild(imagenModal);
+  contenedorModal.append(imagenModal, usuario, titulo);
   document.getElementById("cerrarModal").style.display = "initial";
   document.getElementById("guardarGif").style.display = "initial";
+  document.getElementById("descargarGif").style.display = "initial";
+
   clearInterval(calesitaGirando)
-
 }
-
 
 document.getElementById("cerrarModal").addEventListener("click", cerrarModalGif);
 
@@ -261,7 +272,6 @@ function cerrarModalGif() {
 document.getElementById("guardarGif").addEventListener("click", GuardarGif);
 function GuardarGif() {
   localStorage.setItem("gifFavorito"+Id(), urlActivo)
-  alert("Gif guardado!")
 }
 
 
@@ -275,17 +285,18 @@ function GenerarId() {
 document.getElementById("descargarGif").addEventListener("click", DescargarGif);
 
 function DescargarGif() {
-console.log(this)
-let enlace = document.createElement('A');
-enlace.href = enlaceActivo;
-enlace.setAttribute("download", "download");
-// enlace.download = "MiGif.gif";
-document.body.appendChild(enlace);
-enlace.click();
-document.body.removeChild(enlace);
+  fetch(urlActivo)
+  .then((response) => response.blob())
+  .then((blob) => {
+    const urlAux = window.URL.createObjectURL(new Blob([blob]));
+    const AAux = document.createElement("A");
+    AAux.href = urlAux;
+    AAux.setAttribute('download', `GifBajado.gif`);
+    document.body.appendChild(AAux);
+    AAux.click();
+    AAux.parentNode.removeChild(AAux);
+  })
 }
-
-
 
 }
 
@@ -370,9 +381,16 @@ function mostrarInicio() {
   document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("captura").style.display = "none";
 
-
-
 }
+
+function cerrarNav() {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+  document.getElementById("menu").style.width = "0%";
+  document.getElementById("abrirMenu").style.display = "inline";
+  document.getElementById("cerrarMenu").style.display = "none";
+}
+}
+
 }
 /********************
 6-CAPTURAR GIF
@@ -512,14 +530,14 @@ function Buscar (busqueda, limiteBusqueda) {
   }
 
 function mostrarGiphyBusqueda (gif) {
-  let imagen = document.createElement('IMG');
+  let imagen = document.createElement("IMG");
   imagen.src = gif.images.fixed_height.webp;
   imagen.className = "gifChico";
   document.getElementById("contenedorBusqueda").appendChild(imagen);
   }
 
 function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
-  let imagen = document.createElement('IMG');
+  let imagen = document.createElement("IMG");
   imagen.src = gif;
   imagen.className = "gifChico";
   document.getElementById(puntoInsercion).appendChild(imagen);
