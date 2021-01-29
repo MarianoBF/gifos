@@ -9,20 +9,35 @@
     background: #222326;
 }
 
+.logoNocturno {
+    background: url(/images/logo_mobile_noct.svg) 0 0 no-repeat;
+}
+
+#enlaceCapturaNoct {
+    background: url(/images/captura/button_crear_gifo_noct.svg) 0 0 no-repeat;
+}
+
+
 .iconoFBNocturno {
-    background: url(/images/icon_facebook_nocturno.svg) 0 0 no-repeat;
+    background: url(/images/footer/icon_facebook_noct.svg) 0 0 no-repeat;
 }
 
 .iconoIGNocturno {
-    background: url(/images/icon_instagram_nocturno.svg) 0 0 no-repeat;
+    background: url(/images/footer/icon_instagram_noct.svg) 0 0 no-repeat;
 }
 
 .iconoTWNocturno {
-    background: url(/images/icon_twitter_nocturno.svg) 0 0 no-repeat;
+    background: url(/images/footer/icon_twitter_noct.svg) 0 0 no-repeat;
 }
 
 .textoBlanco {
     color: #FFFFFF;
+}
+
+.textoBlancoResultados {
+    font-size: 22px;
+    color: #FFF;
+    font-weight: bold;
 }
 
 .barraNocturna {
@@ -35,6 +50,26 @@
 }
 
 .iconoBusquedaNocturno {
-    background: url(/images/icon-search-modo-noct.svg) 0 0 no-repeat;
+    background: url(/images/search_noct.svg) 0 0 no-repeat;
+
+}
+
+.botonRedondeadoNocturno {
+    color: #FFFFFF;
+    background: #37383C;
+    border: 1px solid #FFF;
+}
+
+.botonRedondeadoNocturno:hover {
+    color: #37383C;
+    background: #FFFFFF;
+    border: 1px solid #37383C
+}
+
+
+@media (min-width: 768px) {
+    .logoNocturno {
+        background: url(/images/logo_desktop_noct.svg) 0 0 no-repeat
+    }
 
 }

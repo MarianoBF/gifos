@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>||| GIFOS ||| </title>
     <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="stylesheet" href="./css/styles_nocturno.css"/>
+    <link id ="modoNocturno" rel="stylesheet" href="./css/styles_nocturno.css"/>
     <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    
-    
 
 </head>
 <body>
     
     <header>
         <div> 
-            <img id="logo" src="./images/logo-mobile.svg">
+            <a id="logo" href="#" class="logo">&nbsp;</a>
         </div>
         <div>
             <img id="abrirMenu" src="./images/burger.svg">
@@ -32,10 +29,7 @@
                 <hr />
                 <a id="enlaceMisGifos" href="#misGifos">Mis GIFOS</a>
                 <hr />
-                <!-- No estaba previsto pero parece necesario -->
-                <a id="enlaceInicio" href="#logo">Inicio</a> 
-                <hr />
-                <a id="enlaceCaptura" href="#captura">Capturar Gif</a> 
+                <a id="enlaceCaptura" href="#captura"></a> 
             </div>
         </nav>
         </div>
@@ -67,16 +61,19 @@
         <h2 id="tituloBusqueda">Query</h2>
         <div id="contenedorBusqueda">
         </div>
-        <button id="verMasGif" class="botonVerMas">VER MÁS</button>
+        <div id="botonVerMasContenedor">
+        <button id="verMasGif" class="botonRedondeado">VER MÁS</button>
+        </div>
     </section>
 
     <section id="favoritos">
-        <h2>FAVORITOS</h2>
+        <img src="./images/icon_favoritos.svg" class="centradoMargin">
+        <h2>Favoritos</h2>
             <div id="contenedorFavoritos">
         </section>
 
     <section id="misGifos">
-        <h2>MIS GIFOS</h2>
+        <h2>Mis GIFOS</h2>
             <div id="contenedorMisGifos">
         </div>
     </section>
@@ -86,11 +83,13 @@
             <div id="contenedorCaptura">
                 <p>Aquí podrás crear tus propios GIFOS</p>
                 <p>¡Crea tu GIFO en sólo 3 pasos!</p>
-                <p>(sólo necesitas una cámara para grabar un video)</p>   
-                <img id="logo" src="./images/paso_1.svg">
-                <img id="logo" src="./images/paso_2.svg">
-                <img id="logo" src="./images/paso_3.svg">
+                <p>(sólo necesitas una cámara para grabar un video)</p>  
                 <video id="video"></video>
+                <img id="paso1" src="./images/captura/paso_1.svg">
+                <img id="paso2" src="./images/captura/paso_2.svg">
+                <img id="paso3" src="./images/captura/paso_3.svg">
+                <hr>
+                <button id="comenzarCaptura" class="botonRedondeado">COMENZAR</button>
                 <button id="iniciarCaptura">Grabar GIF</button>
                 <button id="finalizarCaptura">Finalizar captura Gif</button>
 
@@ -109,14 +108,15 @@
         <h2>Trending GIFOS</h2>
             <p class="textoNegro">Mira los últimos</p>
             <p class="textoNegro"> GIFOS de nuestra comunidad.</p>                   
-        <div id="calesita">
+        <div id="calesitaCompleta">
+            <div id="calesita">
             <div id="imagenesCalesita">
-                <p class="flecha" id="flechaIzquierda">&lsaquo;</p>
-                <p class="flecha" id="flechaDerecha">&rsaquo;</p>
                 <div class="contenedorTrending" id="contenedorTrending">
-
                 </div>
             </div>
+        </div>
+        <a class="flecha" id="flechaIzquierda"><img src="./images/button_slider_left.svg"></a>
+        <a class="flecha" id="flechaDerecha"><img src="./images/button_slider_right.svg"></a>
         </div>
     </section>
 

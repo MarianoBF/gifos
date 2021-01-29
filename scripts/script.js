@@ -3,9 +3,9 @@
 1-MENÚ DESPLEGABLE
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
 3-TRENDING (TEXTO Y GIFS)
-4-CALESITA
+4-CALESITA y MODAL
 5-ENLACES INICIO FAVORITOS y MIS GIFOS
-6-MODAL
+6-CAPTURAR GIF
 7-FUNCIONES AUXILIARES Y GENERALES
 */
 
@@ -24,14 +24,28 @@ function abrirNav() {
 document.getElementById("cerrarMenu").addEventListener("click", cerrarNav);
 
 function cerrarNav() {
+  if (window.matchMedia("(max-width: 768px)").matches) {
   document.getElementById("menu").style.width = "0%";
   document.getElementById("abrirMenu").style.display = "inline";
   document.getElementById("cerrarMenu").style.display = "none";
 }
+}
 
-document.getElementById("modoOscuro").addEventListener("click", oscurizador);
+window.onload = function() {
+  let nocturno = localStorage.getItem("nocturno");
+  nocturno == "1" ? oscurizador() : null;
+}
 
-function oscurizador() {
+document.getElementById("modoOscuro").addEventListener("click", cargadorOscurizador);
+
+function cargadorOscurizador() {
+  let nocturno = localStorage.getItem("nocturno");
+  nocturno === "1" ? localStorage.setItem("nocturno", "0") : localStorage.setItem("nocturno", "1");
+  oscurizador()
+}
+
+  function oscurizador() {
+
   document.getElementsByTagName("body")[0].classList.toggle("bodyNocturno");
   document.getElementById("trendingGIFOS").classList.toggle("backgroundOscuroNocturno");
   document.getElementById("facebook").classList.toggle("iconoFBNocturno");
@@ -41,22 +55,24 @@ function oscurizador() {
   document.getElementById("barraBusqueda").classList.toggle("barraNocturna");
   document.getElementById("formulario").classList.toggle("formNocturno");
   document.getElementById("iconoBusqueda").classList.toggle("iconoBusquedaNocturno");
-
-
-  
-  let logo = document.getElementById("logo"); let logoaux = logo.getAttribute("src")
-  logoaux === "./images/logo-mobile.svg" ? logo.setAttribute("src", "./images/logo-mobile-modo-noct.svg") : logo.setAttribute("src", "./images/logo-mobile.svg")
+  document.getElementById("logo").classList.toggle("logoNocturno")
   
   let burger = document.getElementById("abrirMenu"); let burgeraux = burger.getAttribute("src")
-  burgeraux === "./images/burger.svg" ? burger.setAttribute("src", "./images/burger-modo-noct.svg") : burger.setAttribute("src", "./images/burger.svg")
+  burgeraux === "./images/burger.svg" ? burger.setAttribute("src", "./images/burger_noct.svg") : burger.setAttribute("src", "./images/burger.svg")
 
   let cerrar = document.getElementById("cerrarMenu"); let cerraraux = cerrar.getAttribute("src")
-  cerraraux === "./images/close.svg" ? cerrar.setAttribute("src", "./images/close-modo-noct.svg") : cerrar.setAttribute("src", "./images/close.svg")
+  cerraraux === "./images/close.svg" ? cerrar.setAttribute("src", "./images/close_noct.svg") : cerrar.setAttribute("src", "./images/close.svg")
 
   let textosNegros = document.getElementsByClassName("textoNegro")
   for (t of textosNegros) {
     t.classList.toggle("textoBlanco")
   }
+
+  let botonesRedondeados = document.getElementsByClassName("botonRedondeado")
+  for (bot of botonesRedondeados) {
+    bot.classList.toggle("botonRedondeadoNocturno")
+  }
+
   cerrarNav();
 }
 }
@@ -98,7 +114,7 @@ function sugerencias() {
 
 function buscarSugerencias() {
   let busqueda = this.innerText;
-  Buscar(busqueda);
+  Buscar(busqueda, 12);
   document.getElementById("busquedasSugeridas").innerHTML = ""; 
   }
 
@@ -109,18 +125,29 @@ formulario[0].addEventListener("submit", buscarBarra);
 
 function buscarBarra(e) {
   e.preventDefault() //Para prevenir reload
-  let busqueda = document.getElementById("barraBusqueda").value; 
-  Buscar(busqueda)
+  let busqueda = document.getElementById("barraBusqueda").value;
+  localStorage.setItem("busqueda", busqueda) 
+  Buscar(busqueda, 12)
+  localStorage.setItem("limite", 12)
   }
-  //   document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
-  //   function ExpandirLimite() {
-  //     limite += 12;
-  //     buscarBarra()
-  //   }
+
+  
+document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
+  function ExpandirLimite(e) {
+    let limite = +localStorage.getItem("limite");
+    limite += 12;
+    localStorage.setItem("limite", limite);
+    e.preventDefault() //Para prevenir reload
+    busqueda = localStorage.getItem("busqueda") 
+    Buscar(busqueda, limite)
+    }
 
 function buscarTrending() {
   let busqueda = this.id;
-  Buscar(busqueda);
+  localStorage.setItem("busqueda", busqueda) 
+  Buscar(busqueda, 12);
+  localStorage.setItem("limite", 12)
+
   }
 }
 /*********************************
@@ -263,7 +290,7 @@ document.body.removeChild(enlace);
 }
 
 /*********************************
-5- ENLACES INICIO FAVORITOS, MIS GIFOS y CAPTURA
+5- ENLACES A SECCIONES
 *********************************/
 {
 
@@ -277,15 +304,20 @@ function mostrarFavoritos() {
   document.getElementById("misGifos").style.display = "none";
   document.getElementById("captura").style.display = "none";
   document.getElementById("busqueda").style.display = "none";
+  document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("trendingGIFOS").style.display = "none";
 
+
+  let cantidadFavoritos = 0
   for (let i = 0; i < localStorage.length; i++) {
     let llave = localStorage.key(i);
-    if (llave < "gifS") {
+    if (llave.match(/gifFavorito/)) {
     let src = localStorage.getItem(llave)
     mostrarGiphyNoBusqueda(src, "contenedorFavoritos")
+    cantidadFavoritos++
     }
   }
+  cantidadFavoritos === 0 ? sinFavoritos() : null;
  }
 
 document.getElementById("enlaceMisGifos").addEventListener("click", mostrarMisGifos)
@@ -297,15 +329,19 @@ function mostrarMisGifos() {
   document.getElementById("misGifos").style.display = "initial";
   document.getElementById("captura").style.display = "none";
   document.getElementById("busqueda").style.display = "none";
+  document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("trendingGIFOS").style.display = "none";
 
+  let cantidadMisGifos = 0 
   for (let i = 0; i < localStorage.length; i++) {
     let llave = localStorage.key(i);
-    if (llave >= "gifS") {
+    if (llave.match(/gifSubido/)) {
     let src = localStorage.getItem(llave)
     mostrarGiphyNoBusqueda(src, "contenedorMisGifos")
+    cantidadMisGifos++
     }
   }
+  cantidadMisGifos === 0 ? sinMisGifos() : null;
 }
 
 document.getElementById("enlaceCaptura").addEventListener("click", mostrarCaptura)
@@ -317,12 +353,12 @@ function mostrarCaptura() {
   document.getElementById("misGifos").style.display = "none";
   document.getElementById("captura").style.display = "initial";
   document.getElementById("busqueda").style.display = "none";
+  document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("trendingGIFOS").style.display = "none";
   }
 
 
 
-document.getElementById("enlaceInicio").addEventListener("click", mostrarInicio)
 document.getElementById("logo").addEventListener("click", mostrarInicio)
 
 function mostrarInicio() {
@@ -331,33 +367,34 @@ function mostrarInicio() {
   document.getElementById("trendingGIFOS").style.display = "initial";
   document.getElementById("favoritos").style.display = "none";
   document.getElementById("misGifos").style.display = "none";
+  document.getElementById("resultadosBusqueda").style.display = "none";
+  document.getElementById("captura").style.display = "none";
+
+
 
 }
 }
-
-
 /********************
-6-MODAL /// CAPTURAR GIF
+6-CAPTURAR GIF
 *******************/
-{ // prueba moderlo a calesita ****************************
-  
-
-//   function getStreamAndRecord () { 
-//     navigator.mediaDevices.getUserMedia({
-//     audio: false,
-//     video: {
-//        height: { max: 480 }
-//     }
-//  })
-//  .then(function(stream) {
-//     video.srcObject = stream;
-//     video.play()
-//  })
-// }
-
-// document.getElementById("iniciarCaptura").addEventListener("click", capturarGif)
-
+{
 let video = document.getElementById("video")
+
+document.getElementById("comenzarCaptura").addEventListener("click", mostrarVideo)
+
+
+  function mostrarVideo () { 
+    navigator.mediaDevices.getUserMedia({
+    audio: false,
+    video: {
+       height: { max: 480 }
+    }
+    })
+  .then(function(stream) {
+      video.srcObject = stream;
+      video.play()
+ })
+}
 
 function captureCamera(callback) {
   navigator.mediaDevices.getUserMedia({ video: true }).then(function(camera) {
@@ -372,7 +409,7 @@ function stopRecordingCallback() {
   video.src = URL.createObjectURL(recorder.getBlob());
   recorder.camera.stop();
   let blob = recorder.getBlob()
-  invokeSaveAsDialog(blob);
+  subirGif(blob)
   // recorder.destroy();
   // recorder = null;
 }
@@ -405,6 +442,28 @@ document.getElementById("finalizarCaptura").addEventListener("click", function()
   recorder.stopRecording(stopRecordingCallback);
 })
 
+
+function subirGif(captura) {
+
+let archivo = new FormData();
+archivo.append('file', recorder.getBlob(), 'gifParaSubir.gif');
+
+let urlSubir = "https://upload.giphy.com/v1/gifs" 
++"?api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
+
+fetch(urlSubir, {
+  method: "POST",
+  mode: "no-cors",
+  body: archivo,
+  json: true
+})
+  .then(result => console.log(result))
+  .catch(error => console.log(error))
+
+}
+
+
+
 }
 /********************
 7-FUNCIONES AUXILIARES Y GENERALES
@@ -417,8 +476,9 @@ function mayusculizar(palabras) {
   return palabras 
 }
 
-function Buscar (busqueda) {
-  let limite = 12;
+function Buscar (busqueda, limiteBusqueda) {
+  let hayMas = false;
+  let limite = limiteBusqueda;
   document.getElementById("resultadosBusqueda").style.display = "initial";
   document.getElementById("tituloBusqueda").innerHTML = busqueda
   let vaciar = document.getElementById("contenedorBusqueda");
@@ -440,12 +500,15 @@ function Buscar (busqueda) {
         console.log("Hubo un problema con la búsqueda")
       }
       })
-    .then(({ data }) => {
-
-    console.log(data)
-    if (data.length === 0) {sinResultados()
-    } else { data.map(mostrarGiphyBusqueda) }
+    .then(({ pagination, data }) => {
+      if (data.length === 0) {sinResultados()
+    } else { data.map(mostrarGiphyBusqueda);
+      console.log(pagination.total_count, limiteBusqueda, pagination.total_count >= limiteBusqueda);
+      pagination.total_count >= limiteBusqueda ? hayMas = true : hayMas = false;
+      hayMas ? document.getElementById("verMasGif").style.display = "initial" : document.getElementById("verMasGif").style.display = "none";
+    }
     });
+    
   }
 
 function mostrarGiphyBusqueda (gif) {
@@ -463,8 +526,36 @@ function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
   }
   
 function sinResultados() {
-  let mensaje = document.createElement('P');
-  mensaje.innerText = "No se encontraron resultados"
-  document.getElementById("contenedorBusqueda").appendChild(mensaje);
+  let imagen = document.createElement("IMG");
+  imagen.src = "./images/icon_busqueda_sin_resultados.svg";
+  imagen.className = "mensajeResultadosGrid";
+  let texto = document.createElement("P");
+  texto.innerText = "Intenta con otra búsqueda.";
+  texto.className = "mensajeResultadosGrid";
+  texto.classList.add("textoVerdeResultados");
+  document.getElementById("contenedorBusqueda").append(imagen, texto);
+
+}
+
+
+function sinFavoritos() {
+  let imagen = document.createElement("IMG");
+  imagen.src = "./images/icon_favoritos_sin_contenido.svg";
+  let texto = document.createElement("P");
+  texto.innerText = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!";
+  texto.className = "mensajeResultadosSinGrid";
+  texto.classList.add("textoVerdeResultados");
+  document.getElementById("contenedorFavoritos").append(imagen, texto);
+
+}
+
+function sinMisGifos() {
+  let imagen = document.createElement("IMG");
+  imagen.src = "./images/icon_mis_gifos_sin_contenido.svg";
+  let texto = document.createElement("P");
+  texto.innerText = "¡Anímate a crear tu primer GIFO!";
+  texto.className = "mensajeResultadosSinGrid";
+  texto.classList.add("textoVerdeResultados");
+  document.getElementById("contenedorMisGifos").append(imagen, texto);
 
 }
