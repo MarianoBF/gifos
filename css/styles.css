@@ -18,7 +18,7 @@ h1 {
 1-HEADER, NAVEGACIÓN y FOOTER
 2-BARRA BÚSQUEDA
 3-CALESITA
-4-OTRO
+4-CAPTURAR GIF
 5-RESTO ESTILOS
 6-MEDIA QUERY
 */
@@ -322,10 +322,14 @@ input[type="search"]::-webkit-search-cancel-button {
 #guardarGif {
     display: none;
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
     right: 20vw;
     padding: 0 20px;
     background: url(/images/icon_fav.svg) 0 0 no-repeat;
+}
+
+#guardarGif:active {
+    background: url(/images/icon_fav_active.svg) 0 0 no-repeat;
 }
 
 #guardarGif:hover {
@@ -335,7 +339,7 @@ input[type="search"]::-webkit-search-cancel-button {
 #descargarGif {
     display: none;
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
     right: 5vw;
     background: url(/images/icon_download.svg) 0 0 no-repeat;
 
@@ -365,14 +369,79 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 100%;
 }
 
+.epigrafeModal {
+    position: absolute;
+    bottom: 100px;
+    left: 10vw;
+    font-weight: bold;
+}
+
+.epigrafeModal:nth-of-type(2) {
+    bottom: 40px;
+}
+
+
 /*
 ***********************************************
-4-OTRO
+4-CAPTURAR GIF
 
 ***********************************************
 */
 
+#contenedorCaptura {
+    position: relative;
+}
 
+#contenedorVioleta {
+    border: 1px solid #572EE5;
+    width: 50vw;
+    height: 50vh;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#video {
+    display: none;
+}
+
+#iniciarCaptura, #finalizarCaptura {
+    display: none;
+}
+
+#camaraCaptura {
+    position: absolute;
+    left: 5vw;
+}
+
+#cintaCaptura {
+    background: url(/images/captura/cinta.svg) 0 0 no-repeat;
+    float: right;
+    width: 100px;
+    height: 100px;
+    margin-right: 5%;
+}
+
+.barraGruesa {
+    background: #572EE5;
+    width: 55%;
+    height: 5px;
+    margin: 0.5em auto;
+}
+
+#marcoRecortado {
+    position: relative;
+    top: -60%;
+    max-width: 70vw;
+    max-height: 70vh;
+}
+
+#marcoRecortado svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 /*
 ***********************************************
@@ -476,6 +545,13 @@ input[type="search"]::-webkit-search-cancel-button {
     margin: 0;
 }
 
+.textoVioletaTitulo {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #572EE5;
+}
+
 .textoVerde {
     color: #50E3C2;
 }
@@ -501,7 +577,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .centradoMargin {
-    display: blocK;
+    display: inline-blocK;
     margin: 0 auto;
 }
 
@@ -585,5 +661,21 @@ input[type="search"]::-webkit-search-cancel-button {
     #flechaDerecha {
         float: right;
         margin-right: 20px;
+    }
+
+    .gifChico:hover span {
+        display: block;
+    }
+
+    .gifChico::before {
+        content: "";
+        width: 200px;
+        height: 200px;
+        opacity: 0.7;
+        background: #572EE5;
+        position: relative;
+        left: 0;
+        top: 0;
+
     }
 }    

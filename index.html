@@ -79,21 +79,36 @@
     </section>
 
     <section id="captura">
-        <h2>Capturar Gif</h2>
+        
             <div id="contenedorCaptura">
-                <p>Aquí podrás crear tus propios GIFOS</p>
-                <p>¡Crea tu GIFO en sólo 3 pasos!</p>
-                <p>(sólo necesitas una cámara para grabar un video)</p>  
-                <video id="video"></video>
-                <img id="paso1" src="./images/captura/paso_1.svg">
-                <img id="paso2" src="./images/captura/paso_2.svg">
-                <img id="paso3" src="./images/captura/paso_3.svg">
-                <hr>
+                <img id="camaraCaptura" src="images/captura/camara_luz.svg">
+                <div id="contenedorVioleta" class="centradoMargin">
+                    <div id="textoCaptura">
+                    <p class="textoVioletaTitulo">Aquí podrás crear tus propios <span class="textoVerde">GIFOS</span></p>
+                    <p class="textoNegro">¡Crea tu GIFO en sólo 3 pasos!</p>
+                    <p class="textoNegro">(sólo necesitas una cámara para grabar un video)</p>  
+                    </div>
+                    <video id="video"></video>
+                    <div id="marcoRecortado">
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin slice">
+                            <path d="M20,2 L2,2 L2,20" fill="none" stroke="#50E3C2" stroke-width="0.5" />
+                            <path d="M2,80 L2,98 L20,98" fill="none" stroke="#50E3C2" stroke-width="0.5" />
+                            <path d="M80,98 L98,98 L98,80" fill="none" stroke="#50E3C2" stroke-width="0.5" />
+                            <path d="M98,20 L98,2 L80,2" fill="none" stroke=" #50E3C2" stroke-width="0.5" />
+                        </svg>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <a id="cintaCaptura"><a>
+                <img id="paso1" class="centradoMargin" src="./images/captura/paso_1.svg">
+                <img id="paso2" class="centradoMargin" src="./images/captura/paso_2.svg">
+                <img id="paso3" class="centradoMargin" src="./images/captura/paso_3.svg">
+                <hr class="barraGruesa" />
                 <button id="comenzarCaptura" class="botonRedondeado">COMENZAR</button>
-                <button id="iniciarCaptura">Grabar GIF</button>
-                <button id="finalizarCaptura">Finalizar captura Gif</button>
-
-        </div>
+                <button id="iniciarCaptura" class="botonRedondeado">Grabar GIF</button>
+                <button id="finalizarCaptura" class="botonRedondeado">Finalizar captura Gif</button>
+            </div>
     </section>
 
     <section id="modal" class="modal">

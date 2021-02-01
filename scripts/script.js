@@ -88,7 +88,7 @@ function sugerencias() {
   let sugerencia = document.getElementById("barraBusqueda").value; 
   let cantidadMaximaSugerencias = 5;
 
-  if (sugerencia.length > 2) {
+  // if (sugerencia.length > 2) {}
 
     document.getElementById("busquedasSugeridas").innerHTML = "";
     document.getElementById("busquedasSugeridas").style.display = "initial";
@@ -110,7 +110,7 @@ function sugerencias() {
         opcionSug.appendChild(valorSug); 
         document.getElementById("busquedasSugeridas").appendChild(opcionSug); 
         }
-      }
+      
     }
   }
 
@@ -183,23 +183,27 @@ let urlGIFTrending = "https://api.giphy.com/v1/gifs/trending?"
 
 fetch(urlGIFTrending)
   .then(res => res.json())
-  // .then(({ data }) => console.log(data))
+  //.then(({ data }) => console.log(data))
   .then(({ data }) => data.map(mostrarTrending))
 
 function mostrarTrending (gif) {
-  let imagen = document.createElement('IMG');
+  let imagen = document.createElement("IMG");
   imagen.src = gif.images.fixed_height.webp;
-  imagen.data = gif.images.original.url;
+  imagen.data_url = gif.images.original.url;
+  imagen.data_titulo = gif.title;
+  imagen.data_usuario = gif.username;
   imagen.className = "gifChico";
+  imagen.append(document.createElement("SPAN"))
   imagen.id = gif.id
   document.getElementById("contenedorTrending").appendChild(imagen);
+  activarModales()
 }
 
 }
 /*********************************
 4-CALESITA y MODAL
 *********************************/
-{
+
 let contenedor = document.getElementById('contenedorTrending');
 let corredor = 0;
 let calesitaGirando = setInterval(clicDerecho, 2000);
@@ -223,11 +227,14 @@ function clicDerecho(){
 }
 
 
-setTimeout(activarModales, 1000)
+// setTimeout(activarModales, 1000)
 
 let idActivo = "";
 let urlActivo = "";
 let enlaceActivo = "";
+let tituloActivo = "";
+let usuarioActivo = "";
+
 
 function activarModales() {
   const gifs = document.querySelectorAll(".gifChico")
@@ -237,19 +244,28 @@ function activarModales() {
 function modalGif() {
   idActivo = this.id;
   urlActivo = this.src;
-  enlaceActivo = this.data;
+  enlaceActivo = this.data_url;
+  usuarioActivo = this.data_usuario;
+  tituloActivo = this.data_titulo;
+  console.log(tituloActivo)
 
   let imagenModal = document.createElement("IMG");
   imagenModal.src = urlActivo;
   imagenModal.className = "modalGifImagen";
   imagenModal.id = "modalAbierto"
   let titulo = document.createElement("P");
-  titulo.append(document.createTextNode(""))
+  titulo.append(document.createTextNode(usuarioActivo))
+  titulo.className = "epigrafeModal"
   let usuario = document.createElement("P");
-  titulo.append(document.createTextNode(""))
+  usuario.append(document.createTextNode(tituloActivo))
+  usuario.className = "epigrafeModal"
 
   
   let contenedorModal = document.getElementById("modal");
+  let textoViejo = contenedorModal.getElementsByTagName("p")
+    for (let i = textoViejo.length - 1 ; i >= 0; i--) {
+      contenedorModal.removeChild(textoViejo[i]); }
+    console.log(contenedorModal, textoViejo)
   contenedorModal.classList.add("modalGifContenedor");
   contenedorModal.append(imagenModal, usuario, titulo);
   document.getElementById("cerrarModal").style.display = "initial";
@@ -298,7 +314,7 @@ function DescargarGif() {
   })
 }
 
-}
+
 
 /*********************************
 5- ENLACES A SECCIONES
@@ -401,7 +417,14 @@ let video = document.getElementById("video")
 document.getElementById("comenzarCaptura").addEventListener("click", mostrarVideo)
 
 
-  function mostrarVideo () { 
+  function mostrarVideo () {
+    document.getElementById("comenzarCaptura").style.display = "none";
+    document.getElementById("iniciarCaptura").style.display = "initial";
+    document.getElementById("video").style.display = "initial";
+    document.getElementById("textoCaptura").style.display = "none";
+
+ 
+ 
     navigator.mediaDevices.getUserMedia({
     audio: false,
     video: {
@@ -534,6 +557,8 @@ function mostrarGiphyBusqueda (gif) {
   imagen.src = gif.images.fixed_height.webp;
   imagen.className = "gifChico";
   document.getElementById("contenedorBusqueda").appendChild(imagen);
+  activarModales()
+
   }
 
 function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
@@ -541,6 +566,8 @@ function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
   imagen.src = gif;
   imagen.className = "gifChico";
   document.getElementById(puntoInsercion).appendChild(imagen);
+  activarModales()
+
   }
   
 function sinResultados() {
