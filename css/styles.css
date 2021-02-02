@@ -303,6 +303,8 @@ input[type="search"]::-webkit-search-cancel-button {
     display: none; 
 }
 
+
+
 /*********MODAL*/
 
 .modal span {
@@ -381,6 +383,55 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 
+.contenedorImagen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.contenedorIconosModal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  background-color: red;
+
+}
+
+.iconoEnOverlayDescargar {
+  position: absolute;
+  background: url(/images/icon_download.svg) 0 0 no-repeat;
+  width: 35px;
+  height: 35px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.iconoEnOverlayFavorito {
+    background: url(/images/icon_fav.svg) 0 0 no-repeat;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .iconoEnOverlayPantallaCompleta {
+    background: url(/images/icon_max.svg) 0 0 no-repeat;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 /*
 ***********************************************
 4-CAPTURAR GIF
@@ -452,7 +503,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .gifChico {
     width: 150px;
     height: 150px;
-    padding: 0 2%;
+    padding: 0;
 }
 
 
@@ -663,19 +714,31 @@ input[type="search"]::-webkit-search-cancel-button {
         margin-right: 20px;
     }
 
-    .gifChico:hover span {
+
+    .gifChico {
+        opacity: 1;
         display: block;
+        transition: .5s ease;
     }
 
-    .gifChico::before {
-        content: "";
-        width: 200px;
-        height: 200px;
-        opacity: 0.7;
+    .modalito {
+        /* position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
         background: #572EE5;
-        position: relative;
-        left: 0;
-        top: 0;
+        opacity: 1;
+    }
+
+    .modalito p {
+        width: 100%;
+        height: 100%;
+        background: #572EE5;
+        color: #572EE5;
 
     }
+
+   
+
 }    
+

@@ -187,15 +187,23 @@ fetch(urlGIFTrending)
   .then(({ data }) => data.map(mostrarTrending))
 
 function mostrarTrending (gif) {
+  let contenedorImagen = document.createElement("DIV");
+  contenedorImagen.className = "contenedorImagen"
   let imagen = document.createElement("IMG");
   imagen.src = gif.images.fixed_height.webp;
   imagen.data_url = gif.images.original.url;
   imagen.data_titulo = gif.title;
   imagen.data_usuario = gif.username;
   imagen.className = "gifChico";
-  imagen.append(document.createElement("SPAN"))
-  imagen.id = gif.id
-  document.getElementById("contenedorTrending").appendChild(imagen);
+  imagen.id = gif.id;
+  // let modalito = document.createElement("DIV");
+  // modalito.className = "modalito";
+  // let textoModalito = document.createElement("P");
+  // textoModalito.innerText = "Laralarala"
+  // modalito.append(textoModalito);
+  // imagen.append(modalito);
+  contenedorImagen.append(imagen);
+  document.getElementById("contenedorTrending").appendChild(contenedorImagen);
   activarModales()
 }
 
@@ -206,7 +214,7 @@ function mostrarTrending (gif) {
 
 let contenedor = document.getElementById('contenedorTrending');
 let corredor = 0;
-let calesitaGirando = setInterval(clicDerecho, 2000);
+let calesitaGirando = setInterval(clicDerecho, 20000); //********************** */
 
 document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
 
@@ -238,17 +246,70 @@ let usuarioActivo = "";
 
 function activarModales() {
   const gifs = document.querySelectorAll(".gifChico")
-  for (let gif of gifs) { gif.addEventListener("click", modalGif) };
+  for (let gif of gifs) { 
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      gif.addEventListener("click", modalGifMob)
+    } else {
+    gif.addEventListener("click", modalGifDesk); //pasar a mosueover
+    gif.addEventListener("", cerrarModalGifDesk); //mouseout
+    }
+  } 
  }
   
-function modalGif() {
+function modalGifDesk() {
+
   idActivo = this.id;
   urlActivo = this.src;
   enlaceActivo = this.data_url;
   usuarioActivo = this.data_usuario;
   tituloActivo = this.data_titulo;
-  console.log(tituloActivo)
 
+  let imagen = document.getElementById(this.id)
+  imagen.parentNode.style.background = "rgba(255,0,0,0.4)"
+  imagen.style.opacity = "0.3"
+  
+  let contenedorIconosModal = document.createElement("DIV");
+  contenedorIconosModal.className = "contenedorIconosModal"
+
+  let descargar = document.createElement("A");
+  descargar.setAttribute("href", "javascript:void(0)");
+  descargar.className = "iconoEnOverlayDescargar";
+  descargar.addEventListener("click", DescargarGif) 
+
+  let favorito = document.createElement("A");
+  favorito.setAttribute("href", "javascript:void(0)");
+  favorito.className = "iconoEnOverlayFavorito";
+  favorito.addEventListener("click", GuardarGif) 
+  
+  let pantallaCompleta = document.createElement("A");
+  pantallaCompleta.setAttribute("href", "javascript:void(0)");
+  pantallaCompleta.className = "iconoEnOverlayPantallaCompleta";
+  pantallaCompleta.addEventListener("click", modalGifMobDisplay) 
+
+  
+  imagen.parentNode.append(descargar, favorito, pantallaCompleta);
+  imagen.append(contenedorIconosModal)
+}
+
+
+function cerrarModalGifDesk() {
+  let imagen = document.getElementById(this.id)
+  this.parentNode.style.background = "initial"
+  this.style.opacity = "1"
+  imagen.innerHTML = "";
+}
+
+function modalGifMob() {
+  idActivo = this.id;
+  urlActivo = this.src;
+  enlaceActivo = this.data_url;
+  usuarioActivo = this.data_usuario;
+  tituloActivo = this.data_titulo;
+  clearInterval(calesitaGirando)
+  modalGifMobDisplay()
+}
+
+  function modalGifMobDisplay() {
   let imagenModal = document.createElement("IMG");
   imagenModal.src = urlActivo;
   imagenModal.className = "modalGifImagen";
@@ -271,8 +332,6 @@ function modalGif() {
   document.getElementById("cerrarModal").style.display = "initial";
   document.getElementById("guardarGif").style.display = "initial";
   document.getElementById("descargarGif").style.display = "initial";
-
-  clearInterval(calesitaGirando)
 }
 
 document.getElementById("cerrarModal").addEventListener("click", cerrarModalGif);
