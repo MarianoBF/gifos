@@ -59,7 +59,7 @@
 
     <section id="resultadosBusqueda">
         <h2 id="tituloBusqueda">Query</h2>
-        <div id="contenedorBusqueda">
+        <div id="contenedorBusqueda" class="contenedorTresBandas">
         </div>
         <div id="botonVerMasContenedor">
         <button id="verMasGif" class="botonRedondeado">VER MÁS</button>
@@ -69,12 +69,12 @@
     <section id="favoritos">
         <img src="./images/icon_favoritos.svg" class="centradoMargin">
         <h2>Favoritos</h2>
-            <div id="contenedorFavoritos">
+            <div id="contenedorFavoritos" class="contenedorTresBandas">
         </section>
 
     <section id="misGifos">
         <h2>Mis GIFOS</h2>
-            <div id="contenedorMisGifos">
+            <div id="contenedorMisGifos" class="contenedorTresBandas">
         </div>
     </section>
 
@@ -88,6 +88,11 @@
                     <p class="textoNegro">¡Crea tu GIFO en sólo 3 pasos!</p>
                     <p class="textoNegro">(sólo necesitas una cámara para grabar un video)</p>  
                     </div>
+                    <div id="permisoCaptura">
+                        <p class="textoVioletaTitulo">¿Nos das acceso a tu cámara?</p>
+                        <p class="textoNegro">El acceso a tu camara será válido sólo</p>
+                        <p class="textoNegro">por el tiempo en el que estés creando el GIFO.</p>  
+                    </div>
                     <video id="video"></video>
                     <div id="marcoRecortado">
                         <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin slice">
@@ -100,14 +105,19 @@
                 </div>
                 </div>
                 </div>
-                <a id="cintaCaptura"><a>
+                <p id="cronometro" class="textoVioletaNegrita"><span id="minutos">00</span>:<span id=segundos>00</span></p>
+                <a id="cintaCaptura"></a>
+                    <div id="pasos">
                 <img id="paso1" class="centradoMargin" src="./images/captura/paso_1.svg">
                 <img id="paso2" class="centradoMargin" src="./images/captura/paso_2.svg">
                 <img id="paso3" class="centradoMargin" src="./images/captura/paso_3.svg">
+                    </div>
                 <hr class="barraGruesa" />
                 <button id="comenzarCaptura" class="botonRedondeado">COMENZAR</button>
-                <button id="iniciarCaptura" class="botonRedondeado">Grabar GIF</button>
-                <button id="finalizarCaptura" class="botonRedondeado">Finalizar captura Gif</button>
+                <button id="iniciarCaptura" class="botonRedondeado">GRABAR</button>
+                <button id="finalizarCaptura" class="botonRedondeado">FINALIZAR</button>
+                <button id="subirCaptura" class="botonRedondeado">SUBIR GIFO</button>
+
             </div>
     </section>
 
@@ -120,7 +130,7 @@
 
 
 
-    <section id="trendingGIFOS" class="fondoOscurito">
+    <section id="trendingGifos" class="fondoOscurito">
         <h2>Trending GIFOS</h2>
             <p class="textoNegro">Mira los últimos</p>
             <p class="textoNegro"> GIFOS de nuestra comunidad.</p>                   
@@ -131,8 +141,8 @@
                 </div>
             </div>
         </div>
-        <a class="flecha" id="flechaIzquierda"><img src="./images/button_slider_left.svg"></a>
-        <a class="flecha" id="flechaDerecha"><img src="./images/button_slider_right.svg"></a>
+        <a class="flecha" id="flechaIzquierda"></a>
+        <a class="flecha" id="flechaDerecha"></a>
         </div>
     </section>
 
