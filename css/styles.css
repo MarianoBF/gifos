@@ -340,14 +340,15 @@ input[type="search"]::-webkit-search-cancel-button {
     background: url(/images/icon_fav_hover.svg) 0 0 no-repeat;
 }
 
-#descargarGif {
+/* #descargarGif {
     display: none;
     position: absolute;
     bottom: 40px;
     right: 5vw;
-    background: url(/images/icon_download.svg) 0 0 no-repeat;
+    background: url(/images/icon_download.svg) 0 0 no-repeat; 
+}*/
 
-}
+
 
 .modalGifImagen {
     position: absolute;
@@ -452,6 +453,28 @@ input[type="search"]::-webkit-search-cancel-button {
     background: url(/images/icon_max_hover.svg) 0 0 no-repeat;
   }
 
+
+#descargarGifSubido {
+    top: 30%;
+    left: 60%;
+    z-index:10;
+
+}
+
+.iconoEnOverlayEnlazar {
+    background: url(/images/icon_link.svg) 0 0 no-repeat;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 30%;
+    left: 70%;
+    z-index:10;
+  }
+
+.iconoEnOverlayEnlazar:hover {
+    background: url(/images/icon_link_hover.svg) 0 0 no-repeat;
+}
+  
 /*
 ***********************************************
 4-CAPTURAR GIF
@@ -474,7 +497,7 @@ input[type="search"]::-webkit-search-cancel-button {
     position: relative;
 }
 
-#video, #permisoCaptura, #iniciarCaptura, #finalizarCaptura {
+#video, #permisoCaptura, #iniciarCaptura, #finalizarCaptura, #statusSubida, #textoSubida {
     display: none;
 }
 
@@ -500,21 +523,68 @@ input[type="search"]::-webkit-search-cancel-button {
 
 #marcoRecortado {
     position: absolute;
-    top: 5%;
-    width: 90%;
-    height: 90%;
+    top: 2.5%;
+    left: 2.5%;
+    width: 95%;
+    height: 95%;
 }
 
 #marcoRecortado svg {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+
 }
 
 #pasos {
-    margin: 0 30%;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    max-width: 430px;
+}
+
+#paso1 {
+    padding-left: 50px;
+}
+
+#paso3 {
+    padding-right: 50px;
+}
+
+#cronometro {
+    justify-self: right;
+    white-space: nowrap;
+}
+
+#contenedorVideo {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    max-width: 480px;
+}
+
+video {
+    max-width: 480px;
+    max-height: 320px;
+    margin: 0 auto;
+}
+
+#textoSubida {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+}
+
+#statusSubida {
+    margin: 0 auto;
+    min-width: 30px;
+    max-width: 50px;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+    z-index: 10;
 }
 
 /*
@@ -554,7 +624,7 @@ input[type="search"]::-webkit-search-cancel-button {
     font-weight: 500;
 }
 
-#resultadosBusqueda, #favoritos, #misGifos, #captura, #cronometro, #subirCaptura{
+#resultadosBusqueda, #favoritos, #misGifos, #captura, #cronometro, #subirCaptura, #iconosSubida{
     display: none;
     text-align: center;
 }
@@ -591,6 +661,7 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 110px;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .botonRedondeado:hover {
@@ -638,6 +709,10 @@ input[type="search"]::-webkit-search-cancel-button {
     color: #572EE5;
 }
 
+#repetirCaptura:hover {
+    border-bottom: 2px solid #50E3C2;
+}
+
 .textoVerde {
     color: #50E3C2;
 }
@@ -650,6 +725,12 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .textoNegro {
     color: #000000
+}
+
+.textoBlanco {
+    font-size: 15px;
+    color: #FFF;
+    font-weight: bold;
 }
 
 .mensajeResultadosGrid {
@@ -793,7 +874,34 @@ input[type="search"]::-webkit-search-cancel-button {
 
     }
 
-   
+    footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        }
+
+    footer div {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        margin-left: 10%;
+        white-space: nowrap;
+        }
+
+    footer p:nth-of-type(1) {
+        margin-right: 10%
+        }
+
+    footer ul {
+        padding-left: 0px;
+        padding: 0 20px;
+        margin-bottom: 0;
+        }
+
+    footer ul li {
+        float: none;
+        padding: 0 10px;
+    }
 
 }    
 

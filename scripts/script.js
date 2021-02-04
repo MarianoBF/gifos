@@ -1,9 +1,5 @@
 
 "use strict";
-
-window.onresize = function(){ location.reload(); }
-
-
 /*
 1-MENÚ DESPLEGABLE
 2-BARRA BÚSQUEDA (SUGERENCIAS Y RESULTADOS)
@@ -307,14 +303,14 @@ function modalGifDesk() {
 
 function cerrarModalGifDesk() {
   let imagen = document.getElementById(this.firstChild.id)
-  let container = (this);
-  container.style.background = "none"
+  let contenedor = (this);
+  contenedor.style.background = "none"
   imagen.style.opacity = "1"
-  let subcontainer = document.getElementsByClassName("contenedorIconosModal")
+  let subcontenedor = document.getElementsByClassName("contenedorIconosModal")
   imagen.firstChild.remove()
-  let iconosObsoletos = container.getElementsByTagName("A")
+  let iconosObsoletos = contenedor.getElementsByTagName("A")
      for (let i = iconosObsoletos.length - 1 ; i >= 0; i--) {
-      container.removeChild(iconosObsoletos[i]); }
+      contenedor.removeChild(iconosObsoletos[i]); }
   } 
 
 function modalGifMob() {
@@ -364,15 +360,9 @@ function cerrarModalGif() {
 document.getElementById("guardarGif").addEventListener("click", guardarGifFavorito);
 
 function guardarGifFavorito() {
-  localStorage.setItem("gifFavorito"+Id(), idActivo)
+  localStorage.getItem("gifFavorito"+idActivo) ? null : localStorage.setItem("gifFavorito"+idActivo, idActivo)
 }
 
-
-const Id = generarId()
-function generarId() {
-    let i = 0; 
-    return function GenerarIdAux(){ return i++}
-}
 
 document.getElementById("descargarGif").addEventListener("click", descargarGif);
 
@@ -489,6 +479,10 @@ function cerrarNav() {
 *******************/
 {
 let video = document.getElementById("video")
+let archivo;
+let recorder;
+let blobGrabado;
+
 
 document.getElementById("comenzarCaptura").addEventListener("click", mostrarVideo)
 
@@ -498,10 +492,9 @@ document.getElementById("comenzarCaptura").addEventListener("click", mostrarVide
     document.getElementById("permisoCaptura").style.display = "initial";
     document.getElementById("paso1").setAttribute("src", "./images/captura/paso_1_active.svg")
     document.getElementById("iniciarCaptura").style.display = "none";
-    document.getElementById("video").style.display = "none";
     document.getElementById("textoCaptura").style.display = "none";
-
-    setTimeout(empezarCaptura , 1000) //Aca algún tipo de chequeo del permiso?
+    empezarCaptura()
+    
       
     function empezarCaptura() {
     
@@ -536,14 +529,11 @@ function captureCamera(callback) {
 }
 
 function stopRecordingCallback() {
-  video.src = URL.createObjectURL(recorder.getBlob());
+  //video.src = URL.createObjectURL(recorder.getBlob());
   recorder.camera.stop();
   // blob = new Blob(recorder.getBlob()) //arreglar
-  // recorder.destroy();
-  // recorder = null;
 }
 
-let recorder;
 
 document.getElementById("iniciarCaptura").addEventListener("click", aGrabar)
 
@@ -568,8 +558,7 @@ contador()
 document.getElementById("iniciarCaptura").style.display = "none";
 document.getElementById("finalizarCaptura").style.display = "block";
 document.getElementById("cronometro").style.display = "initial";
-
-
+document.getElementById("repetirCaptura").style.display = "none";
 
 };
 
@@ -582,18 +571,40 @@ function finalizarCaptura() {
   recorder.stopRecording(stopRecordingCallback);
   document.getElementById("finalizarCaptura").style.display = "none";
   document.getElementById("subirCaptura").style.display = "block";
+  document.getElementById("minutos").style.display = "none";
+  document.getElementById("segundos").style.display = "none";
+  document.getElementById("separadorReloj").style.display = "none";
+  document.getElementById("repetirCaptura").style.display = "initial";
 }
+
+document.getElementById("repetirCaptura").addEventListener("click", RepetirCaptura)
+
+function RepetirCaptura() {
+  document.getElementById("subirCaptura").style.display = "none";
+  document.getElementById("minutos").style.display = "initial";
+  document.getElementById("separadorReloj").style.display = "initial";
+  document.getElementById("segundos").style.display = "initial";
+  aGrabar()
+
+}
+
 
 document.getElementById("subirCaptura").addEventListener("click", subirGif) 
 
 
 
 function subirGif() {
+document.getElementById("repetirCaptura").style.display = "none";
+document.getElementById("contenedorVideo").style.background = "rgba(87, 46, 229, 0.8)";
+document.getElementById("textoSubida").style.display = "initial";
+document.getElementById("video").style.opacity = "0.5";
 document.getElementById("subirCaptura").style.display = "none";
 document.getElementById("paso2").setAttribute("src", "./images/captura/paso_2.svg")
 document.getElementById("paso3").setAttribute("src", "./images/captura/paso_3_active.svg")
+document.getElementById("statusSubida").style.display = "initial";
 
-let archivo = new FormData();
+blobGrabado = recorder.getBlob()
+archivo = new FormData();
 archivo.append("file", recorder.getBlob(), "gifParaSubir.gif");
 
 let urlSubir = "https://upload.giphy.com/v1/gifs" 
@@ -604,23 +615,52 @@ fetch(urlSubir, {
   body: archivo,
 })
   .then(res => res.json())
-  .then(({ data }) => guardarGifSubido(data))
   .catch(error => console.log(error))
+  .then(({ data }) => guardarGifSubidoYLimpiar(data))
+
+
 
 }
 
-function guardarGifSubido(data) {
-  localStorage.setItem("gifSubido"+Id2(), data.id)
+function guardarGifSubidoYLimpiar(data) {
+  localStorage.getItem("gifSubido"+data.id) ? null : localStorage.setItem("gifSubido"+data.id, data.id)
+  document.getElementById("textoSubida").innerText = "GIFO subido con éxito";
+  document.getElementById("statusSubida").setAttribute("src", "./images/ok.svg");
+  recorder.destroy();
+  recorder = null;
+  document.getElementById("contenedorVideo").addEventListener("mouseenter", mostrarIconosSubida) 
+  document.getElementById("descargarGifSubido").addEventListener("click", descargarGifSubido) 
+  document.getElementById("enlazarGifSubido").addEventListener("click", enlazarGifSubido) 
+  console.log(data.id)
+
+  function mostrarIconosSubida() {
+    document.getElementById("iconosSubida").style.display = "initial"
+  }
+
+  function descargarGifSubido() {
+    invokeSaveAsDialog(blobGrabado, "MiGifo.gif");
+  }
+
+  function enlazarGifSubido() {
+    alert(`http://www.giphy.com/gifs/${data.id}`)
+  }
+
+  //  fetch(urlActivo)
+  //     .then((response) => response.blob())
+  //     .then((blob) => {
+  //       const urlAux = window.URL.createObjectURL(new Blob([blob]));
+  //       const AAux = document.createElement("A");
+  //       AAux.href = urlAux;
+  //       AAux.setAttribute("download", "GifBajado.gif");
+  //       document.body.appendChild(AAux);
+  //       AAux.click();
+  //       AAux.parentNode.removeChild(AAux);
+  //     })
+
+  }
 }
 
-const Id2 = generarId()
-function generarId() {
-    let i = 0; 
-    return function GenerarIdAux(){ return i++}
-}
 
-
-}
 /********************
 7-FUNCIONES AUXILIARES Y OTROS
 *******************/
