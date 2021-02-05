@@ -19,8 +19,8 @@
             <a id="logo" href="#" class="logo">&nbsp;</a>
         </div>
         <div>
-            <img id="abrirMenu" src="./images/burger.svg">
-            <img id="cerrarMenu" src="./images/close.svg">
+            <img id="abrirMenu" src="./images/burger.svg" alt="icono abrir menu">
+            <img id="cerrarMenu" src="./images/close.svg" alt="icono cerrar menu">
         <nav id="menu" class="desplegable">             
             <div class="desplegable-opciones">
                 <a href="#" id="modoOscuro">Modo Nocturno</a>
@@ -40,9 +40,9 @@
         <h1>Inspírate, busca, guarda y crea los mejores <span class="textoVerde">GIFOS</span></h1>
 
         <div>
-            <img src="images/ilustra_header.svg">
+            <img src="images/ilustra_header.svg" alt="ilustracion personas sobre barra de busqueda">
             <form method="GET" id="formulario" name="formulario">
-                <input id="barraBusqueda" type="search" class="busqueda" list="busquedasSugeridas" placeholder="Busca GIFOS y más" autocomplete="off" required>
+                <input id="barraBusqueda" type="search" class="busqueda" placeholder="Busca GIFOS y más" autocomplete="off" required>
                 <input type="submit" id="iconoBusqueda" class="iconoBusqueda" value="">
                 <hr />
                 <ul id="busquedasSugeridas">
@@ -67,9 +67,9 @@
     </section>
 
     <section id="favoritos">
-        <img src="./images/icon_favoritos.svg" class="centradoMargin">
+        <img src="./images/icon_favoritos.svg" class="centradoMargin" alt="icono favoritos">
         <h2>Favoritos</h2>
-            <div id="contenedorFavoritos" class="contenedorTresBandas">
+            <div id="contenedorFavoritos" class="contenedorTresBandas"></div>
         </section>
 
     <section id="misGifos">
@@ -81,15 +81,15 @@
     <section id="captura">
         
             <div id="contenedorCaptura">
-                <img id="camaraCaptura" src="images/captura/camara_luz.svg">
+                <img id="camaraCaptura" src="images/captura/camara_luz.svg" alt="icono cámara">
                 <div id="contenedorVioleta" class="centradoMargin">
                     <div id="iconosSubida">
                         <span class="iconoEnOverlayDescargar" id="descargarGifSubido">&nbsp;</span>
                         <span class="iconoEnOverlayEnlazar" id="enlazarGifSubido">&nbsp;</span>
                     </div>
-                    <img id="statusSubida" src="images/loader.svg">
+                    <img id="statusSubida" src="images/loader.svg" alt="icono status de gif subido">
                     <div id="textoCaptura">
-                        <p class="textoVioletaTitulo">Aquí podrás crear tus propios <span class="textoVerde">GIFOS</span></p>
+                        <h2 class="textoVioletaTitulo">Aquí podrás crear tus propios <span class="textoVerde">GIFOS</span></h2>
                         <p class="textoNegro">¡Crea tu GIFO en sólo 3 pasos!</p>
                         <p class="textoNegro">(sólo necesitas una cámara para grabar un video)</p>  
                     </div>
@@ -112,12 +112,12 @@
                     </div>
                     
                 </div>
-                </div>
+                <!-- </div> -->
                 <a id="cintaCaptura"></a>
                     <div id="pasos">
-                <img id="paso1" class="centradoMargin" src="./images/captura/paso_1.svg">
-                <img id="paso2" class="centradoMargin" src="./images/captura/paso_2.svg">
-                <img id="paso3" class="centradoMargin" src="./images/captura/paso_3.svg">
+                <img id="paso1" class="centradoMargin" src="./images/captura/paso_1.svg" alt="imagen indicador paso 1">
+                <img id="paso2" class="centradoMargin" src="./images/captura/paso_2.svg" alt="imagen indicador paso 2">
+                <img id="paso3" class="centradoMargin" src="./images/captura/paso_3.svg" alt="imagen indicador paso 3">
                 <p id="cronometro" class="textoVioletaNegrita"><span id="minutos">00</span><span id="separadorReloj">:</span><span id=segundos>00</span><span id="repetirCaptura">REPETIR CAPTURA</span></p>
                     </div>
                 <hr class="barraGruesa" />
@@ -129,12 +129,12 @@
             </div>
     </section>
 
-    <section id="modal" class="modal">
+    <div id="modal" class="modal">
     <span class="cerrarModal" id="cerrarModal">&nbsp;</span>
     <span class="descargarGif" id="descargarGif">&nbsp;</span>
     <span class="guardarGif" id="guardarGif">&nbsp;</span>
 
-    </section>
+    </div>
 
 
 
