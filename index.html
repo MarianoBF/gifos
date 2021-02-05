@@ -29,7 +29,7 @@
                 <hr />
                 <a id="enlaceMisGifos" href="#misGifos">Mis GIFOS</a>
                 <hr />
-                <a id="enlaceCaptura" href="#captura"></a> 
+                <a id="enlaceCaptura" class="enlaceCaptura" href="#captura"></a> 
             </div>
         </nav>
         </div>
@@ -59,7 +59,7 @@
 
     <section id="resultadosBusqueda">
         <h2 id="tituloBusqueda">Query</h2>
-        <div id="contenedorBusqueda" class="contenedorTresBandas">
+        <div id="contenedorBusqueda" class="contenedorEnBandas">
         </div>
         <div id="botonVerMasContenedor">
         <button id="verMasGif" class="botonRedondeado">VER MÁS</button>
@@ -69,12 +69,13 @@
     <section id="favoritos">
         <img src="./images/icon_favoritos.svg" class="centradoMargin" alt="icono favoritos">
         <h2>Favoritos</h2>
-            <div id="contenedorFavoritos" class="contenedorTresBandas"></div>
+            <div id="contenedorFavoritos" class="contenedorEnBandas"></div>
         </section>
 
     <section id="misGifos">
+        <img src="./images/icon_mis_gifos.svg" class="centradoMargin" alt="icono favoritos">
         <h2>Mis GIFOS</h2>
-            <div id="contenedorMisGifos" class="contenedorTresBandas">
+            <div id="contenedorMisGifos" class="contenedorEnBandas">
         </div>
     </section>
 
@@ -112,7 +113,6 @@
                     </div>
                     
                 </div>
-                <!-- </div> -->
                 <a id="cintaCaptura"></a>
                     <div id="pasos">
                 <img id="paso1" class="centradoMargin" src="./images/captura/paso_1.svg" alt="imagen indicador paso 1">
@@ -140,8 +140,7 @@
 
     <section id="trendingGifos" class="fondoOscurito">
         <h2>Trending GIFOS</h2>
-            <p class="textoNegro">Mira los últimos</p>
-            <p class="textoNegro"> GIFOS de nuestra comunidad.</p>                   
+            <p class="textoNegro">Mira los últimos GIFOS de nuestra comunidad.</p>
         <div id="calesitaCompleta">
             <div id="calesita">
             <div id="imagenesCalesita">
@@ -149,8 +148,8 @@
                 </div>
             </div>
         </div>
-        <a class="flecha" id="flechaIzquierda"></a>
-        <a class="flecha" id="flechaDerecha"></a>
+        <a class="flecha flechaIzquierda" id="flechaIzquierda"></a>
+        <a class="flecha flechaDerecha" id="flechaDerecha"></a>
         </div>
     </section>
 

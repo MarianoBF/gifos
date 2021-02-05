@@ -8,12 +8,12 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="60"
-   height="60"
-   viewBox="0 0 60 60"
+   width="40px"
+   height="40px"
+   viewBox="0 0 40 40"
    version="1.1"
    id="svg17"
-   sodipodi:docname="button_crear_gifo_noct.svg"
+   sodipodi:docname="button_slider_left_noct_hover.svg"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <metadata
      id="metadata21">
@@ -23,7 +23,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>CTA-crar-gifo-modo-noc</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -40,60 +39,58 @@
      inkscape:window-height="1023"
      id="namedview19"
      showgrid="false"
-     inkscape:zoom="4.3703704"
-     inkscape:cx="-67.5"
-     inkscape:cy="27"
+     inkscape:zoom="5.9"
+     inkscape:cx="-15"
+     inkscape:cy="20"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="GIFOS" />
+     inkscape:current-layer="svg17" />
   <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
   <title
-     id="title2">CTA-crar-gifo-modo-noc</title>
+     id="title2">button-slider-left-hover</title>
   <desc
      id="desc4">Created with Sketch.</desc>
   <defs
      id="defs7">
     <path
-       d="m 27,19 c 0.552285,0 1,0.447715 1,1 v 0 6 h 6 c 0.512836,0 0.935507,0.38604 0.993272,0.883379 L 35,27 c 0,0.552285 -0.447715,1 -1,1 v 0 h -6 v 6 c 0,0.512836 -0.38604,0.935507 -0.883379,0.993272 L 27,35 c -0.552285,0 -1,-0.447715 -1,-1 v 0 -6 h -6 c -0.512836,0 -0.935507,-0.38604 -0.993272,-0.883379 L 19,27 c 0,-0.552285 0.447715,-1 1,-1 v 0 h 6 v -6 c 0,-0.512836 0.38604,-0.935507 0.883379,-0.993272 z"
-       id="path-1"
-       inkscape:connector-curvature="0" />
+       d="M18.4142136,20 L23.7071068,14.7071068 C24.0976311,14.3165825 24.0976311,13.6834175 23.7071068,13.2928932 C23.3165825,12.9023689 22.6834175,12.9023689 22.2928932,13.2928932 L16.2928932,19.2928932 C15.9023689,19.6834175 15.9023689,20.3165825 16.2928932,20.7071068 L22.2928932,26.7071068 C22.6834175,27.0976311 23.3165825,27.0976311 23.7071068,26.7071068 C24.0976311,26.3165825 24.0976311,25.6834175 23.7071068,25.2928932 L18.4142136,20 Z"
+       id="path-1" />
   </defs>
   <g
      id="GIFOS"
-     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
-     transform="translate(0,6)">
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd">
     <g
-       id="16-UI-Kit-Modo-Nocturno"
-       transform="translate(-1227,-505)">
+       id="00-UI-Kit"
+       transform="translate(-357.000000, -2965.000000)">
       <g
-         id="CTA-crar-gifo-modo-noc"
-         transform="translate(1230,502)">
-        <circle
-           id="Oval-3-Copy"
-           cx="27"
-           cy="27"
-           r="27"
-           style="fill:#37383c;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1" />
+         id="button-slider-left-hover"
+         transform="translate(357.000000, 2965.000000)">
+        <rect
+           id="Rectangle-Copy-8"
+           fill="#572EE5"
+           fill-rule="nonzero"
+           x="0"
+           y="0"
+           width="40"
+           height="40"
+           style="fill:#ffffff;fill-opacity:1" />
         <mask
            id="mask-2"
            fill="white">
           <use
              xlink:href="#path-1"
-             id="use10"
-             x="0"
-             y="0"
-             width="100%"
-             height="100%" />
+             id="use10" />
         </mask>
         <use
-           id="Combined-Shape"
+           id="button-left-hover"
+           fill="#FFFFFF"
+           fill-rule="nonzero"
            xlink:href="#path-1"
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero"
-           x="0"
-           y="0"
-           width="100%"
-           height="100%" />
+           style="fill:#000000;fill-opacity:1" />
       </g>
     </g>
   </g>

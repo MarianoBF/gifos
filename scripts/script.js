@@ -57,6 +57,13 @@ function cargadorOscurizador() {
   document.getElementById("formulario").classList.toggle("formNocturno");
   document.getElementById("iconoBusqueda").classList.toggle("iconoBusquedaNocturno");
   document.getElementById("logo").classList.toggle("logoNocturno")
+  document.getElementById("menu").classList.toggle("desplegableNocturno")
+  document.getElementById("enlaceCaptura").classList.toggle("enlaceCapturaNocturno")
+  document.getElementById("flechaIzquierda").classList.toggle("flechaIzquierdaNocturna")
+  document.getElementById("flechaDerecha").classList.toggle("flechaDerechaNocturna")
+
+
+
   
   let burger = document.getElementById("abrirMenu"); let burgeraux = burger.getAttribute("src")
   burgeraux === "./images/burger.svg" ? burger.setAttribute("src", "./images/burger_noct.svg") : burger.setAttribute("src", "./images/burger.svg")
@@ -129,7 +136,7 @@ function buscarBarra(e) {
   e.preventDefault() //Para prevenir reload
   let busqueda = document.getElementById("barraBusqueda").value;
   localStorage.setItem("busqueda", busqueda) 
-  b(busqueda, 12)
+  buscar(busqueda, 12)
   localStorage.setItem("limite", 12)
   }
 
@@ -140,7 +147,7 @@ document.getElementById("verMasGif").addEventListener("click", ExpandirLimite);
     limite += 12;
     localStorage.setItem("limite", limite);
     e.preventDefault() //Para prevenir reload
-    busqueda = localStorage.getItem("busqueda") 
+    let busqueda = localStorage.getItem("busqueda") 
     buscar(busqueda, limite)
     }
 }
@@ -183,7 +190,6 @@ let urlGIFTrending = "https://api.giphy.com/v1/gifs/trending?"
 
 fetch(urlGIFTrending)
   .then(res => res.json())
-  //.then(({ data }) => console.log(data))
   .then(({ data }) => data.map(mostrarTrending))
 
 function mostrarTrending (gif) {
@@ -191,8 +197,7 @@ function mostrarTrending (gif) {
   contenedorImagen.className = "contenedorImagenTrending"
 
   let imagen = document.createElement("IMG");
-  imagen.src = gif.images.fixed_height.webp;
-  imagen.data_url = gif.images.original.url;
+  imagen.src = gif.images.original.url;
   imagen.data_titulo = gif.title;
   imagen.data_usuario = gif.username;
   imagen.className = "gifTrending";
@@ -210,14 +215,16 @@ function mostrarTrending (gif) {
 
 let contenedor = document.getElementById("contenedorTrending");
 let corredor = 0;
-let calesitaGirando = setInterval(clicDerecho, 20000); //***********AJUSTAR*********** */
+let calesitaGirando = setInterval(clicDerecho, 2000)
+let valorAjuste = "";
+(window.matchMedia("(max-width: 767px)").matches) ? valorAjuste = 164 : valorAjuste = 378
 
 document.getElementById("flechaIzquierda").addEventListener("click", clicIzquierdo);
 
 let corredor2;
 
 function clicIzquierdo(){
-    corredor += 164;
+    corredor += valorAjuste;
     corredor <= 0 ? corredor2 = corredor + "px" : corredor2 = corredor = 0;
     corredor2 = corredor + "px"
     contenedor.style.marginLeft = corredor2;
@@ -226,15 +233,14 @@ function clicIzquierdo(){
 document.getElementById("flechaDerecha").addEventListener("click", clicDerecho);
 
 function clicDerecho(){
-    corredor -= 164;
-    corredor >= -1640 ? corredor2 = corredor + "px" : corredor2 = corredor = 0;
+    corredor -= valorAjuste;
+    corredor >= -valorAjuste*10 ? corredor2 = corredor + "px" : corredor2 = corredor = 0;
     contenedor.style.marginLeft = corredor2;
 }
 
 
 let idActivo = "";
 let urlActivo = "";
-let enlaceActivo = "";
 let tituloActivo = "";
 let usuarioActivo = "";
 
@@ -268,7 +274,6 @@ function modalGifDesk() {
 
   idActivo = this.firstChild.id;
   urlActivo = this.firstChild.src;
-  enlaceActivo = this.firstChild.data_url;
   usuarioActivo = this.firstChild.data_usuario;
   tituloActivo = this.firstChild.data_titulo;
 
@@ -316,7 +321,6 @@ function cerrarModalGifDesk() {
 function modalGifMob() {
   idActivo = this.id;
   urlActivo = this.src;
-  enlaceActivo = this.data_url;
   usuarioActivo = this.data_usuario;
   tituloActivo = this.data_titulo;
   clearInterval(calesitaGirando)
@@ -507,9 +511,10 @@ document.getElementById("comenzarCaptura").addEventListener("click", mostrarVide
      .then(function(stream) {
       video.srcObject = stream;
       video.play()
+      document.getElementById("permisoCaptura").style.display = "none";
+
      })
 
-     document.getElementById("permisoCaptura").style.display = "none";
      document.getElementById("iniciarCaptura").style.display = "block";
      document.getElementById("video").style.display = "initial";
      document.getElementById("paso1").setAttribute("src", "./images/captura/paso_1.svg")
@@ -529,9 +534,7 @@ function captureCamera(callback) {
 }
 
 function stopRecordingCallback() {
-  //video.src = URL.createObjectURL(recorder.getBlob());
   recorder.camera.stop();
-  // blob = new Blob(recorder.getBlob()) //arreglar
 }
 
 
@@ -602,6 +605,8 @@ document.getElementById("subirCaptura").style.display = "none";
 document.getElementById("paso2").setAttribute("src", "./images/captura/paso_2.svg")
 document.getElementById("paso3").setAttribute("src", "./images/captura/paso_3_active.svg")
 document.getElementById("statusSubida").style.display = "initial";
+document.getElementById("cintaCaptura").style.animationName = "moverCinta"
+
 
 blobGrabado = recorder.getBlob()
 archivo = new FormData();
@@ -626,8 +631,10 @@ function guardarGifSubidoYLimpiar(data) {
   localStorage.getItem("gifSubido"+data.id) ? null : localStorage.setItem("gifSubido"+data.id, data.id)
   document.getElementById("textoSubida").innerText = "GIFO subido con éxito";
   document.getElementById("statusSubida").setAttribute("src", "./images/ok.svg");
+
   recorder.destroy();
   recorder = null;
+
   document.getElementById("contenedorVideo").addEventListener("mouseenter", mostrarIconosSubida) 
   document.getElementById("descargarGifSubido").addEventListener("click", descargarGifSubido) 
   document.getElementById("enlazarGifSubido").addEventListener("click", enlazarGifSubido) 
@@ -644,18 +651,6 @@ function guardarGifSubidoYLimpiar(data) {
   function enlazarGifSubido() {
     alert(`http://www.giphy.com/gifs/${data.id}`)
   }
-
-  //  fetch(urlActivo)
-  //     .then((response) => response.blob())
-  //     .then((blob) => {
-  //       const urlAux = window.URL.createObjectURL(new Blob([blob]));
-  //       const AAux = document.createElement("A");
-  //       AAux.href = urlAux;
-  //       AAux.setAttribute("download", "GifBajado.gif");
-  //       document.body.appendChild(AAux);
-  //       AAux.click();
-  //       AAux.parentNode.removeChild(AAux);
-  //     })
 
   }
 }
@@ -711,8 +706,7 @@ function mostrarGiphyBusqueda (gif) {
   contenedorImagen.className = "contenedorImagen"
 
   let imagen = document.createElement("IMG");
-  imagen.src = gif.images.fixed_height.webp;
-  imagen.data_url = gif.images.original.url;
+  imagen.src = gif.images.original.url;
   imagen.data_titulo = gif.title;
   imagen.data_usuario = gif.username;
   imagen.id = gif.id;
@@ -739,8 +733,7 @@ function mostrarGiphyNoBusquedaAux(gif2) {
   contenedorImagen.className = "contenedorImagen"
 
   let imagen = document.createElement("IMG");
-  imagen.src = gif2.images.fixed_height.webp;
-  imagen.data_url = gif2.images.original.url;
+  imagen.src = gif2.images.original.url;
   imagen.data_titulo = gif2.title;
   imagen.data_usuario = gif2.username;
   imagen.id = gif2.id;
@@ -757,7 +750,8 @@ function mostrarGiphyNoBusquedaAux(gif2) {
 function sinResultados() {
   let imagen = document.createElement("IMG");
   imagen.src = "./images/icon_busqueda_sin_resultados.svg";
-  imagen.className = "mensajeResultadosGrid";
+  imagen.classList.add("mensajeResultadosGrid", "centradoMargin")
+
   let texto = document.createElement("P");
   texto.innerText = "Intenta con otra búsqueda.";
   texto.className = "mensajeResultadosGrid";
@@ -770,9 +764,11 @@ function sinResultados() {
 function sinFavoritos() {
   let imagen = document.createElement("IMG");
   imagen.src = "./images/icon_favoritos_sin_contenido.svg";
+  imagen.classList.add("mensajeResultadosGrid", "centradoMargin")
+
   let texto = document.createElement("P");
   texto.innerText = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!";
-  texto.className = "mensajeResultadosSinGrid";
+  texto.className = "mensajeResultadosGrid";
   texto.classList.add("textoVerdeResultados");
   document.getElementById("contenedorFavoritos").append(imagen, texto);
 
@@ -781,9 +777,11 @@ function sinFavoritos() {
 function sinMisGifos() {
   let imagen = document.createElement("IMG");
   imagen.src = "./images/icon_mis_gifos_sin_contenido.svg";
+  imagen.classList.add("mensajeResultadosGrid", "centradoMargin")
+
   let texto = document.createElement("P");
   texto.innerText = "¡Anímate a crear tu primer GIFO!";
-  texto.className = "mensajeResultadosSinGrid";
+  texto.className = "mensajeResultadosGrid";
   texto.classList.add("textoVerdeResultados");
   document.getElementById("contenedorMisGifos").append(imagen, texto);
 

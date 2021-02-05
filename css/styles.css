@@ -57,7 +57,6 @@ h1 {
   }
   
   .desplegable a {
-    padding: 8px;
     text-decoration: none;
     font-size: 15px;
     font-weight: 700;
@@ -83,7 +82,7 @@ header {
     width: 75px;
     height: 75px;
     cursor: pointer;
-    background: url(./images/logo_mobile.svg) 0 0 no-repeat
+    background: url("/images/logo_mobile.svg") 0 0 no-repeat
 }
 
 footer {
@@ -128,42 +127,42 @@ footer a {
 }
 
 .iconoFB {
-    background: url(/images/footer/icon_facebook.svg) 0 0 no-repeat;
+    background: url("/images/footer/icon_facebook.svg") 0 0 no-repeat;
 }
 
 .iconoFB:hover {
-    background: url(/images/footer/icon_facebook_hover.svg) 0 0 no-repeat;
+    background: url("/images/footer/icon_facebook_hover.svg") 0 0 no-repeat;
 }
 
 .iconoTW {
-    background: url(/images/footer/icon_twitter.svg) 0 0 no-repeat;
+    background: url("/images/footer/icon_twitter.svg") 0 0 no-repeat;
 }
 
 .iconoTW:hover {
-    background: url(/images/footer/icon_twitter_hover.svg) 0 0 no-repeat;
+    background: url("/images/footer/icon_twitter_hover.svg") 0 0 no-repeat;
 }
 
 .iconoIG {
-    background: url(/images/footer/icon_instagram.svg) 0 0 no-repeat;
+    background: url("/images/footer/icon_instagram.svg") 0 0 no-repeat;
 }
 
 .iconoIG:hover {
-    background: url(/images/footer/icon_instagram_hover.svg) 0 0 no-repeat;
+    background: url("/images/footer/icon_instagram_hover.svg") 0 0 no-repeat;
 }
 
-#enlaceCaptura {
-    background: url(/images/captura/button_crear_gifo.svg) 0 0 no-repeat;
-    width: 40px;
-    height: 40px;
+.enlaceCaptura {
+    background: url("/images/captura/button_crear_gifo.svg") 0 0 no-repeat;
+    width: 70px;
+    height: 70px;
     display: none;
 }
 
-#enlaceCaptura:hover {
-    background: url(/images/captura/button_crear_gifo_hover.svg) 0 0 no-repeat;
+.enlaceCaptura:hover {
+    background: url("/images/captura/button_crear_gifo_hover.svg") 0 0 no-repeat;
 }
 
-#enlaceCaptura:active {
-    background: url(/images/captura/button_crear_gifo_active.svg) 0 0 no-repeat;
+.enlaceCaptura:active {
+    background: url("/images/captura/button_crear_gifo_active.svg") 0 0 no-repeat;
 }
 
 
@@ -213,14 +212,14 @@ form ul {
 }
 
 #busqueda input[type="search"]:valid + input:nth-of-type(2) {
-    background: url(/images/search_grey.svg) 0 0 no-repeat;
+    background: url("/images/search_grey.svg") 0 0 no-repeat;
     right: 0;
     left: 30px;
     padding: 0;
 }
 
 .iconoBusqueda {
-    background: url(/images/search.svg) 0 0 no-repeat;
+    background: url("/images/search.svg") 0 0 no-repeat;
     height: 21px;
     padding: 12px;
     position: absolute;
@@ -237,7 +236,7 @@ form ul {
 }
 
 .opcionesBusquedasSugeridas {
-    background: url(/images/search_grey.svg) 0 0 no-repeat;
+    background: url("/images/search_grey.svg") 0 0 no-repeat;
     padding-left: 30px;
     list-style: none;
     line-height: 30px;
@@ -254,7 +253,7 @@ input[type="search"]::-webkit-search-cancel-button {
     -moz-appearance: none;
     height: 35px;
     width: 35px;
-    background: url(/images/close.svg) 0 0 no-repeat;
+    background: url("/images/close.svg") 0 0 no-repeat;
 } 
 
 #barraBusqueda::placeholder {
@@ -318,9 +317,9 @@ input[type="search"]::-webkit-search-cancel-button {
 #cerrarModal {
     display: none;
     position: absolute;
-    top: 20px;
+    top: 5vh;
     right: 5vw;
-    background: url(/images/icon_close.svg) 0 0 no-repeat;
+    background: url("/images/icon_close.svg") 0 0 no-repeat;
 
 }
 
@@ -330,26 +329,30 @@ input[type="search"]::-webkit-search-cancel-button {
     bottom: 40px;
     right: 20vw;
     padding: 0 20px;
-    background: url(/images/icon_fav.svg) 0 0 no-repeat;
-}
-
-#guardarGif:active {
-    background: url(/images/icon_fav_active.svg) 0 0 no-repeat;
+    background: url("/images/icon_fav.svg") 0 0 no-repeat;
 }
 
 #guardarGif:hover {
-    background: url(/images/icon_fav_hover.svg) 0 0 no-repeat;
+    background: url("/images/icon_fav_hover.svg") 0 0 no-repeat;
 }
 
-/* #descargarGif {
+
+#guardarGif:active {
+    background: url("/images/icon_fav_active.svg") 0 0 no-repeat;
+}
+
+
+#descargarGif {
     display: none;
     position: absolute;
     bottom: 40px;
     right: 5vw;
-    background: url(/images/icon_download.svg) 0 0 no-repeat; 
-}*/
+    background: url("/images/icon_download.svg") 0 0 no-repeat; 
+}
 
-
+#guardarGif:hover {
+    background: url("/images/icon_visited_hover.svg") 0 0 no-repeat;
+}
 
 .modalGifImagen {
     position: absolute;
@@ -377,13 +380,13 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .epigrafeModal {
     position: absolute;
-    bottom: 100px;
+    bottom: 5vh;
     left: 10vw;
     font-weight: bold;
 }
 
 .epigrafeModal:nth-of-type(2) {
-    bottom: 40px;
+    bottom: 10vh;
 }
 
 
@@ -391,6 +394,7 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 100%;
     height: 100%;
     position: relative;
+    margin-right: 8%;
 }
 
 .contenedorImagen {
@@ -413,7 +417,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .iconoEnOverlayDescargar {
   position: absolute;
-  background: url(/images/icon_download.svg) 0 0 no-repeat;
+  background: url("/images/icon_download.svg") 0 0 no-repeat;
   width: 35px;
   height: 35px;
   top: 5%;
@@ -421,11 +425,11 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .iconoEnOverlayDescargar:hover {
-    background: url(/images/icon_download_hover.svg) 0 0 no-repeat;
+    background: url("/images/icon_download_hover.svg") 0 0 no-repeat;
   }
 
 .iconoEnOverlayFavorito {
-    background: url(/images/icon_fav.svg) 0 0 no-repeat;
+    background: url("/images/icon_fav.svg") 0 0 no-repeat;
     position: absolute;
     width: 35px;
     height: 35px;
@@ -434,15 +438,15 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
 .iconoEnOverlayFavorito:hover {
-    background: url(/images/icon_fav_hover.svg) 0 0 no-repeat;
+    background: url("/images/icon_fav_hover.svg") 0 0 no-repeat;
 }
 
   .iconoEnOverlayFavorito:active {
-    background: url(/images/icon_fav_active.svg) 0 0 no-repeat;
+    background: url("/images/icon_fav_active.svg") 0 0 no-repeat;
 }
 
   .iconoEnOverlayPantallaCompleta {
-    background: url(/images/icon_max.svg) 0 0 no-repeat;
+    background: url("/images/icon_max.svg") 0 0 no-repeat;
     position: absolute;
     width: 35px;
     height: 35px;
@@ -451,7 +455,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .iconoEnOverlayPantallaCompleta:hover {
-    background: url(/images/icon_max_hover.svg) 0 0 no-repeat;
+    background: url("/images/icon_max_hover.svg") 0 0 no-repeat;
   }
 
 
@@ -463,7 +467,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .iconoEnOverlayEnlazar {
-    background: url(/images/icon_link.svg) 0 0 no-repeat;
+    background: url("/images/icon_link.svg") 0 0 no-repeat;
     position: absolute;
     width: 35px;
     height: 35px;
@@ -473,7 +477,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
 .iconoEnOverlayEnlazar:hover {
-    background: url(/images/icon_link_hover.svg) 0 0 no-repeat;
+    background: url("/images/icon_link_hover.svg") 0 0 no-repeat;
 }
   
 /*
@@ -508,22 +512,25 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 #cintaCaptura {
-    background: url(/images/captura/pelicula.svg) 0 0 no-repeat;
+    background: url("/images/captura/pelicula.svg") 0 0 no-repeat;
     position: absolute;
     right: 2vw;
     width: 150px;
     height: 150px;
     animation-duration: 5s;
-    animation-name: moverCinta;
 }
 
 @keyframes moverCinta {
-    from { 
-        right: 2vw; 
+    0% { 
+        transform: rotate(0deg); 
+    }
+
+    50% {
+        transform: translateY(-300px) rotate(180deg)
     }
     
-    to   { 
-        right: 80vw;
+    100%   { 
+        transform: rotate(360deg);
     }
 }
 
@@ -642,9 +649,9 @@ video {
     text-align: center;
 }
 
-.contenedorTresBandas {
+.contenedorEnBandas {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 100%;
     justify-content: space-evenly;
 }
@@ -691,7 +698,6 @@ video {
 #trendingGifos {
     text-align: center;
     padding-top: 5%;
-    padding-bottom: 8%;
     margin: 0;
 }
 
@@ -723,7 +729,7 @@ video {
 }
 
 #repetirCaptura:hover {
-    border-bottom: 2px solid #50E3C2;
+    border-bottom: 3px solid #50E3C2;
 }
 
 .textoVerde {
@@ -747,13 +753,7 @@ video {
 }
 
 .mensajeResultadosGrid {
-    grid-column: 1/3
-}
-
-.mensajeResultadosSinGrid {
-    max-width: 70vw;
-    margin: 0 auto;
-
+    grid-column: 1/5
 }
 
 .centradoMargin {
@@ -776,7 +776,7 @@ video {
         }
 
     .logo {
-        background: url(/images/logo_desktop.svg) 0 0 no-repeat
+        background: url("/images/logo_desktop.svg") 0 0 no-repeat
     }
 
     #abrirMenu {
@@ -802,6 +802,7 @@ video {
         align-items: center;
         justify-content: space-between;
         text-transform: uppercase;
+        min-width: 500px;
     }
 
     .desplegable-opciones hr {
@@ -810,26 +811,48 @@ video {
 
     .desplegable a {
         color: #572EE5;
-        ;
-    }
-      
-    header div {
-        width: 50%;
     }
 
+    .desplegable a:hover {
+        border-bottom: 4px solid #50E3C2;
+    }
+
+    .desplegable a:hover:last-of-type {
+        border-bottom: none;
+    }
+
+    .desplegable a:active {
+        color: #9CAFC3 100%;
+    }
+      
     #enlaceCaptura {
         display: initial;
     }
 
     #calesita {
         overflow: hidden;
+        height: 400px;
     }
 
     #calesita p {
         display: initial;
         font-size: 100px;
         z-index: 3000;
+    }
 
+    #imagenesCalesita {
+        width: 500px;
+        height: 350px;
+    }
+
+    .contenedorTrending {
+        width: 350px;
+        height: 275px;
+    }
+    
+    .gifTrending {
+        width: 350px;
+        height: 275px;
     }
 
     .flecha {
@@ -837,30 +860,35 @@ video {
         margin-top: -8%;
     }
 
-    #flechaIzquierda {
+    .flechaIzquierda {
         position: absolute;
         top: 75%;
         left: 2vw;
         width: 50px;
         height: 50px;
-        background: url(/images/button_slider_left.svg) 0 0 no-repeat;
+        background: url("/images/button_slider_left.svg") 0 0 no-repeat;
     }
 
-    #flechaIzquierda:hover {
-        background: url(/images/button_slider_left_hover.svg) 0 0 no-repeat;
+    .flechaIzquierda:hover {
+        background: url("/images/button_slider_left_hover.svg") 0 0 no-repeat;
     }
 
-    #flechaDerecha {
+    .flechaDerecha {
         position: absolute;
         top: 75%;
         right: 2vw;
         width: 50px;
         height: 50px;
-        background: url(/images/button_slider_right.svg) 0 0 no-repeat;
+        background: url("/images/button_slider_right.svg") 0 0 no-repeat;
     }
 
-    #flechaDerecha:hover {
-        background: url(/images/button_slider_right_hover.svg) 0 0 no-repeat;
+    .flechaDerecha:hover {
+        background: url("/images/button_slider_right_hover.svg") 0 0 no-repeat;
+    }
+
+    .contenedorImagen {
+        width: 260px;
+        height: 200px;
     }
 
 
@@ -868,6 +896,8 @@ video {
         opacity: 1;
         display: block;
         transition: .5s ease;
+        width: 260px;
+        height: 200px;
     }
 
     footer {
@@ -898,6 +928,28 @@ video {
         float: none;
         padding: 0 10px;
     }
+
+    #guardarGif {
+
+        bottom: 10vh;
+        right: 20vw;
+        padding: 0 20px;
+    }
+
+    #descargarGif {
+        bottom: 10vh;
+        right: 5vw;
+
+    }
+
+    .contenedorEnBandas {
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20%;
+        height: 100%;
+        justify-content: space-evenly;
+        grid-row-gap: 8%;
+    }
+    
 
 }    
 
