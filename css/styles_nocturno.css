@@ -10,19 +10,19 @@
 }
 
 .logoNocturno {
-    background: url("/images/logo_mobile_noct.svg") 0 0 no-repeat;
+    background: url("../images/logo_mobile_noct.svg") 0 0 no-repeat;
 }
 
 .iconoFBNocturno {
-    background: url("/images/footer/icon_facebook_noct.svg") 0 0 no-repeat;
+    background: url("../images/footer/icon_facebook_noct.svg") 0 0 no-repeat;
 }
 
 .iconoIGNocturno {
-    background: url("/images/footer/icon_instagram_noct.svg") 0 0 no-repeat;
+    background: url("../images/footer/icon_instagram_noct.svg") 0 0 no-repeat;
 }
 
 .iconoTWNocturno {
-    background: url("/images/footer/icon_twitter_noct.svg") 0 0 no-repeat;
+    background: url("../images/footer/icon_twitter_noct.svg") 0 0 no-repeat;
 }
 
 .textoBlanco {
@@ -45,7 +45,7 @@
 }
 
 .iconoBusquedaNocturno {
-    background: url("/images/search_noct.svg") 0 0 no-repeat;
+    background: url("../images/search_noct.svg") 0 0 no-repeat;
 
 }
 
@@ -61,37 +61,45 @@
     border: 1px solid #37383C
 }
 
+.desplegableNocturno {
+    background-color: #000000;
+}
+
 .desplegableNocturno a {
     color: #FFFFFF;
 }
 
 .enlaceCapturaNocturno {
-    background: url("/images/captura/button_crear_gifo_noct.svg") 0 0 no-repeat;
+    background: url("../images/captura/button_crear_gifo_noct.svg") 0 0 no-repeat;
 }
 
 .enlaceCapturaNocturno:hover {
-    background: url("/images/captura/button_crear_gifo_noct_hover.svg") 0 0 no-repeat;
+    background: url("../images/captura/button_crear_gifo_noct_hover.svg") 0 0 no-repeat;
 }
 
 .flechaIzquierdaNocturna {
-    background: url("/images/button_slider_left_noct.svg") 0 0 no-repeat;
+    background: url("../images/button_slider_left_noct.svg") 0 0 no-repeat;
 }
 
 .flechaIzquierdaNocturna:hover {
-    background: url("/images/button_slider_left_noct_hover.svg") 0 0 no-repeat;
+    background: url("../images/button_slider_left_noct_hover.svg") 0 0 no-repeat;
 }
 
 .flechaDerechaNocturna {
-    background: url("/images/button_slider_right_noct.svg") 0 0 no-repeat;
+    background: url("../images/button_slider_right_noct.svg") 0 0 no-repeat;
 }
 
 .flechaDerechaNocturna:hover {
-    background: url("/images/button_slider_right_noct_hover.svg") 0 0 no-repeat;
+    background: url("../images/button_slider_right_noct_hover.svg") 0 0 no-repeat;
 }
 
 @media (min-width: 768px) {
     .logoNocturno {
-        background: url("/images/logo_desktop_noct.svg") 0 0 no-repeat
+        background: url("../images/logo_desktop_noct.svg") 0 0 no-repeat
+    }
+
+    .desplegableNocturno {
+        background: transparent;
     }
 
 }

@@ -62,14 +62,18 @@ function cargadorOscurizador() {
   document.getElementById("flechaIzquierda").classList.toggle("flechaIzquierdaNocturna")
   document.getElementById("flechaDerecha").classList.toggle("flechaDerechaNocturna")
 
+  let burger = document.getElementById("abrirMenu"); let burgerAux = burger.getAttribute("src")
+  burgerAux === "./images/burger.svg" ? burger.setAttribute("src", "./images/burger_noct.svg") : burger.setAttribute("src", "./images/burger.svg")
 
+  let cerrar = document.getElementById("cerrarMenu"); let cerrarAux = cerrar.getAttribute("src")
+  cerrarAux === "./images/close.svg" ? cerrar.setAttribute("src", "./images/close_noct.svg") : cerrar.setAttribute("src", "./images/close.svg")
 
-  
-  let burger = document.getElementById("abrirMenu"); let burgeraux = burger.getAttribute("src")
-  burgeraux === "./images/burger.svg" ? burger.setAttribute("src", "./images/burger_noct.svg") : burger.setAttribute("src", "./images/burger.svg")
+  let camara = document.getElementById("camaraCaptura"); let camaraAux = camara.getAttribute("src")
+  camaraAux === "./images/captura/camara_luz.svg" ? camara.setAttribute("src", "./images/captura/camara_luz_noct.svg") : camara.setAttribute("src", "./images/captura/camara_luz.svg")
 
-  let cerrar = document.getElementById("cerrarMenu"); let cerraraux = cerrar.getAttribute("src")
-  cerraraux === "./images/close.svg" ? cerrar.setAttribute("src", "./images/close_noct.svg") : cerrar.setAttribute("src", "./images/close.svg")
+  let cinta = document.getElementById("cintaCaptura"); let cintaAux = cinta.getAttribute("src")
+  cintaAux === "./images/captura/pelicula.svg" ? cinta.setAttribute("src", "./images/captura/pelicula_noct.svg") : cinta.setAttribute("src", "./images/captura/pelicula.svg")
+
 
   let textosNegros = document.getElementsByClassName("textoNegro")
   for (let t of textosNegros) {
@@ -257,7 +261,7 @@ function activarModalesTrending() {
   } 
  }
 
- function activarModalesOtros() {
+  function activarModalesOtros() {
   const gifs = document.querySelectorAll(".gifChico")
   for (let gif of gifs) { 
     if (window.matchMedia("(max-width: 767px)").matches) {
@@ -289,20 +293,47 @@ function modalGifDesk() {
   descargar.className = "iconoEnOverlayDescargar";
   descargar.addEventListener("click", descargarGif) 
 
-  let favorito = document.createElement("A");
-  favorito.setAttribute("href", "javascript:void(0)");
-  favorito.className = "iconoEnOverlayFavorito";
-  favorito.addEventListener("click", guardarGifFavorito) 
+  let favorito;
+  if (document.getElementById("favoritos").style.display === "initial") {
+      favorito = document.createElement("A");
+      favorito.setAttribute("href", "javascript:void(0)");
+      favorito.className = "iconoEnOverlayBorrar";
+      favorito.addEventListener("click", borrarGifFavorito) 
+    } else {
+      favorito = document.createElement("A");
+      favorito.setAttribute("href", "javascript:void(0)");
+      favorito.className = "iconoEnOverlayFavorito";
+      favorito.addEventListener("click", guardarGifFavorito) 
+  }  
   
   let pantallaCompleta = document.createElement("A");
   pantallaCompleta.setAttribute("href", "javascript:void(0)");
   pantallaCompleta.className = "iconoEnOverlayPantallaCompleta";
-  pantallaCompleta.addEventListener("click", modalGifMobDisplay) 
-
+  pantallaCompleta.addEventListener("click", modalGifMobDisplay)
   
-  imagen.parentNode.append(descargar, favorito, pantallaCompleta);
+  let titulo = document.createElement("P");
+  if (tituloActivo.match(/\s[b|B]y\s[\w|\s|\W]+$/) !== null) {
+    let corte = tituloActivo.match(/\sby\s[\w|\s|\W]+$/).index
+    tituloActivo = tituloActivo.slice(0,corte)
+    }
+  if (tituloActivo.match(/GIF$/) !== null) {
+    let corte = tituloActivo.match(/GIF$/).index
+    tituloActivo = tituloActivo.slice(0,corte)
+    }
+  titulo.append(document.createTextNode(tituloActivo))
+  titulo.classList.add("epigrafeModalDesk")
+  let usuario = document.createElement("P");
+  usuario.append(document.createTextNode(usuarioActivo))
+  usuario.className = "epigrafeModalDesk"
+
+  imagen.parentNode.append(descargar, favorito, pantallaCompleta, usuario, titulo);
   imagen.append(contenedorIconosModal)
   
+}
+
+function borrarGifFavorito() {
+  localStorage.removeItem("gifFavorito"+idActivo)
+  this.parentNode.remove()
 }
 
 
@@ -316,6 +347,9 @@ function cerrarModalGifDesk() {
   let iconosObsoletos = contenedor.getElementsByTagName("A")
      for (let i = iconosObsoletos.length - 1 ; i >= 0; i--) {
       contenedor.removeChild(iconosObsoletos[i]); }
+  let textosObsoletos = contenedor.getElementsByTagName("P")
+  for (let i = textosObsoletos.length - 1 ; i >= 0; i--) {
+    contenedor.removeChild(textosObsoletos[i]); }
   } 
 
 function modalGifMob() {
@@ -333,10 +367,10 @@ function modalGifMob() {
   imagenModal.className = "modalGifImagen";
   imagenModal.id = "modalAbierto"
   let titulo = document.createElement("P");
-  titulo.append(document.createTextNode(usuarioActivo))
+  titulo.append(document.createTextNode(tituloActivo))
   titulo.className = "epigrafeModal"
   let usuario = document.createElement("P");
-  usuario.append(document.createTextNode(tituloActivo))
+  usuario.append(document.createTextNode(usuarioActivo))
   usuario.className = "epigrafeModal"
 
   
@@ -345,7 +379,7 @@ function modalGifMob() {
     for (let i = textoViejo.length - 1 ; i >= 0; i--) {
       contenedorModal.removeChild(textoViejo[i]); }
   contenedorModal.classList.add("modalGifContenedor");
-  contenedorModal.append(imagenModal, usuario, titulo);
+  contenedorModal.append(imagenModal, titulo, usuario);
   document.getElementById("cerrarModal").style.display = "initial";
   document.getElementById("guardarGif").style.display = "initial";
   document.getElementById("descargarGif").style.display = "initial";
@@ -403,18 +437,48 @@ function mostrarFavoritos() {
   document.getElementById("busqueda").style.display = "none";
   document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("trendingGifos").style.display = "none";
+  
+  let limiteFavoritos = 12;
+  let totalFavoritos = 0;
+  let favoritosMostrados = 0;
 
-
-  let cantidadFavoritos = 0
   for (let i = 0; i < localStorage.length; i++) {
     let llave = localStorage.key(i);
     if (llave.match(/gifFavorito/)) {
-    let gifId = localStorage.getItem(llave)
-    mostrarGiphyNoBusqueda(gifId, "contenedorFavoritos")
-    cantidadFavoritos++
+      totalFavoritos++} 
     }
+
+  totalFavoritos === 0 ? sinFavoritos() : null;
+
+  totalFavoritos > limiteFavoritos ? document.getElementById("verMasGifFavs").style.display = "initial" : document.getElementById("verMasGif").style.display = "none";
+  document.getElementById("verMasGifFavs").addEventListener("click", asignarCantidad)
+
+  mostrarFavoritosDisplay()
+
+function mostrarFavoritosDisplay() {
+  totalFavoritos < 12 ? limiteFavoritos = totalFavoritos : null;
+
+  document.getElementById("contenedorFavoritos").innerHTML = "";
+
+
+  for (let i = 0; i < localStorage.length ; i++) {
+      let llave = localStorage.key(i);
+      if (llave.match(/gifFavorito/)) {
+        let gifId = localStorage.getItem(llave);
+        mostrarGiphyNoBusqueda(gifId, "contenedorFavoritos")
+        favoritosMostrados++}
+      if (favoritosMostrados == limiteFavoritos){ break }
   }
-  cantidadFavoritos === 0 ? sinFavoritos() : null;
+}
+
+function asignarCantidad() {
+    totalFavoritos > limiteFavoritos + 12 ? limiteFavoritos +=12 : limiteFavoritos = totalFavoritos;
+    favoritosMostrados = 0; 
+    mostrarFavoritosDisplay()
+    totalFavoritos > limiteFavoritos ? document.getElementById("verMasGifFavs").style.display = "initial" : document.getElementById("verMasGifFavs").style.display = "none";
+  }
+
+
  }
 
 document.getElementById("enlaceMisGifos").addEventListener("click", mostrarMisGifos)
@@ -429,16 +493,43 @@ function mostrarMisGifos() {
   document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("trendingGifos").style.display = "none";
 
-  let cantidadMisGifos = 0 
+  let limiteMisGifos = 12;
+  let totalMisGifos = 0;
+  let misGifosMostrados = 0;
+
   for (let i = 0; i < localStorage.length; i++) {
     let llave = localStorage.key(i);
     if (llave.match(/gifSubido/)) {
-    let src = localStorage.getItem(llave)
-    mostrarGiphyNoBusqueda(src, "contenedorMisGifos")
-    cantidadMisGifos++
+      totalMisGifos++} 
     }
+
+    totalMisGifos === 0 ? sinMisGifos() : null;
+
+  totalMisGifos > limiteMisGifos ? document.getElementById("verMasMisGifos").style.display = "initial" : document.getElementById("verMasMisGifos").style.display = "none";
+  document.getElementById("verMasMisGifos").addEventListener("click", asignarCantidadGifos)
+
+  mostrarMisGifosDisplay()
+
+  function mostrarMisGifosDisplay() {
+    document.getElementById("contenedorMisGifos").innerHTML = "";
+    
+    for (let i = 0; i< localStorage.length; i++) {
+      let llave = localStorage.key(i);
+      if (llave.match(/gifSubido/)) {
+        let gifId = localStorage.getItem(llave);
+        mostrarGiphyNoBusqueda(gifId, "contenedorMisGifos");
+        misGifosMostrados++}
+        if (misGifosMostrados == limiteMisGifos){ break }
+
+      }
   }
-  cantidadMisGifos === 0 ? sinMisGifos() : null;
+
+  function asignarCantidadGifos() {
+    totalMisGifos > limiteMisGifos + 12 ? limiteMisGifos +=12 : limiteMisGifos = totalMisGifos;
+    misGifosMostrados = 0; 
+    mostrarMisGifosDisplay()
+    totalMisGifos > limiteMisGifos ? document.getElementById("verMasMisGifos").style.display = "initial" : document.getElementById("verMasMisGifos").style.display = "none";
+  }
 }
 
 document.getElementById("enlaceCaptura").addEventListener("click", mostrarCaptura)
@@ -466,7 +557,6 @@ function mostrarInicio() {
   document.getElementById("misGifos").style.display = "none";
   document.getElementById("resultadosBusqueda").style.display = "none";
   document.getElementById("captura").style.display = "none";
-
 }
 
 function cerrarNav() {
@@ -474,7 +564,7 @@ function cerrarNav() {
   document.getElementById("menu").style.width = "0%";
   document.getElementById("abrirMenu").style.display = "inline";
   document.getElementById("cerrarMenu").style.display = "none";
-}
+  }
 }
 
 }
@@ -486,6 +576,7 @@ let video = document.getElementById("video")
 let archivo;
 let recorder;
 let blobGrabado;
+let localStream;
 
 
 document.getElementById("comenzarCaptura").addEventListener("click", mostrarVideo)
@@ -493,15 +584,14 @@ document.getElementById("comenzarCaptura").addEventListener("click", mostrarVide
 
   function mostrarVideo () {
     document.getElementById("comenzarCaptura").style.display = "none";
-    document.getElementById("permisoCaptura").style.display = "initial";
     document.getElementById("paso1").setAttribute("src", "./images/captura/paso_1_active.svg")
     document.getElementById("iniciarCaptura").style.display = "none";
     document.getElementById("textoCaptura").style.display = "none";
+    document.getElementById("permisoCaptura").style.display = "initial";
     empezarCaptura()
     
       
     function empezarCaptura() {
-    
     navigator.mediaDevices.getUserMedia({
     audio: false,
     video: {
@@ -510,25 +600,25 @@ document.getElementById("comenzarCaptura").addEventListener("click", mostrarVide
     })
      .then(function(stream) {
       video.srcObject = stream;
+      localStream = stream;
       video.play()
+      document.getElementById("iniciarCaptura").style.display = "block";
       document.getElementById("permisoCaptura").style.display = "none";
-
      })
 
-     document.getElementById("iniciarCaptura").style.display = "block";
      document.getElementById("video").style.display = "initial";
      document.getElementById("paso1").setAttribute("src", "./images/captura/paso_1.svg")
      document.getElementById("paso2").setAttribute("src", "./images/captura/paso_2_active.svg")
-   
+        
+
     }}
 
-
-
+    
 function captureCamera(callback) {
   navigator.mediaDevices.getUserMedia({ video: true }).then(function(camera) {
       callback(camera);
   }).catch(function(error) {
-      alert("Unable to capture your camera. Please check console logs.");
+      alert("Hubo un problema al acceder a la cámara");
       console.error(error);
   });
 }
@@ -541,6 +631,7 @@ function stopRecordingCallback() {
 document.getElementById("iniciarCaptura").addEventListener("click", aGrabar)
 
 function aGrabar() {
+
   captureCamera(function(camera) {
     recorder = RecordRTC(camera, {
     type: "gif",
@@ -597,6 +688,8 @@ document.getElementById("subirCaptura").addEventListener("click", subirGif)
 
 
 function subirGif() {
+  video.pause()
+
 document.getElementById("repetirCaptura").style.display = "none";
 document.getElementById("contenedorVideo").style.background = "rgba(87, 46, 229, 0.8)";
 document.getElementById("textoSubida").style.display = "initial";
@@ -631,17 +724,22 @@ function guardarGifSubidoYLimpiar(data) {
   localStorage.getItem("gifSubido"+data.id) ? null : localStorage.setItem("gifSubido"+data.id, data.id)
   document.getElementById("textoSubida").innerText = "GIFO subido con éxito";
   document.getElementById("statusSubida").setAttribute("src", "./images/ok.svg");
-
+ 
+  recorder.reset();
   recorder.destroy();
   recorder = null;
 
   document.getElementById("contenedorVideo").addEventListener("mouseenter", mostrarIconosSubida) 
   document.getElementById("descargarGifSubido").addEventListener("click", descargarGifSubido) 
   document.getElementById("enlazarGifSubido").addEventListener("click", enlazarGifSubido) 
-  console.log(data.id)
+
+  document.getElementById("cerrarCaptura").style.display = "block";
+  document.getElementById("cerrarCaptura").addEventListener("click", cerrarVideo)  
+
 
   function mostrarIconosSubida() {
-    document.getElementById("iconosSubida").style.display = "initial"
+    document.getElementById("iconosSubida").style.display = "initial";
+
   }
 
   function descargarGifSubido() {
@@ -649,12 +747,25 @@ function guardarGifSubidoYLimpiar(data) {
   }
 
   function enlazarGifSubido() {
-    alert(`http://www.giphy.com/gifs/${data.id}`)
+    alert(`El enlace al GIFO subido es el siguiente: http://www.giphy.com/gifs/${data.id}`)
   }
+
+  }
+
+  function cerrarVideo() {
+    document.getElementById("contenedorVideo").style.height = "320px";
+    document.getElementById("contenedorVideo").style.width = "480px";
+    video.pause();
+    video.src = "";
+    video.srcObject = null;
+    if (localStream)
+       localStream.getTracks().forEach(track => track.stop()); 
+  
+
+    setTimeout(function () { location.reload() }, 500);
 
   }
 }
-
 
 /********************
 7-FUNCIONES AUXILIARES Y OTROS
@@ -662,26 +773,31 @@ function guardarGifSubidoYLimpiar(data) {
 
 function mayusculizar(palabras) {
   palabras = palabras.split(" ");
-  palabras = palabras.map((word, index) => word[0].toUpperCase() + word.slice(1));
+  palabras = palabras.map((word) => word[0].toUpperCase() + word.slice(1));
   palabras = palabras.join(" ")
   return palabras 
 }
 
 function buscar (busqueda, limiteBusqueda) {
   let hayMas = false;
-  let limite = limiteBusqueda;
+  let limite = 12;
+  let desplazamiento = limiteBusqueda - 12; 
   document.getElementById("resultadosBusqueda").style.display = "initial";
   document.getElementById("tituloBusqueda").innerHTML = busqueda
+  if (limiteBusqueda === 12 ) {
   let vaciar = document.getElementById("contenedorBusqueda");
   vaciar.textContent = ""; 
+  }
    
   let urlBusqueda = "https://api.giphy.com/v1/gifs/search?" 
   +"api_key=uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
   +"&q="
   +busqueda
-  +"&lang=es"
+    +"&lang=es"
   +"&limit="
   +limite
+  +"&offset="
+  +desplazamiento
   
   fetch(urlBusqueda)
     .then(resultado => {

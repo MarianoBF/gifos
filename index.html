@@ -61,7 +61,7 @@
         <h2 id="tituloBusqueda">Query</h2>
         <div id="contenedorBusqueda" class="contenedorEnBandas">
         </div>
-        <div id="botonVerMasContenedor">
+        <div id="botonVerMasContenedor" class="VerMasContenedor">
         <button id="verMasGif" class="botonRedondeado">VER MÁS</button>
         </div>
     </section>
@@ -70,19 +70,28 @@
         <img src="./images/icon_favoritos.svg" class="centradoMargin" alt="icono favoritos">
         <h2>Favoritos</h2>
             <div id="contenedorFavoritos" class="contenedorEnBandas"></div>
+            <div id="botonVerMasGifFavsContenedor" class="VerMasContenedor">
+                <button id="verMasGifFavs" class="botonRedondeado">VER MÁS</button>
+            </div>
+        
         </section>
 
     <section id="misGifos">
         <img src="./images/icon_mis_gifos.svg" class="centradoMargin" alt="icono favoritos">
         <h2>Mis GIFOS</h2>
             <div id="contenedorMisGifos" class="contenedorEnBandas">
+            </div>        
+            <div id="botonVerMasMisGifosContenedor" class="VerMasContenedor">
+                <button id="verMasMisGifos" class="botonRedondeado">VER MÁS</button>
         </div>
     </section>
 
     <section id="captura">
         
             <div id="contenedorCaptura">
-                <img id="camaraCaptura" src="images/captura/camara_luz.svg" alt="icono cámara">
+                <img id="camaraCaptura" src="./images/captura/camara_luz.svg" alt="icono cámara">
+                <img id="cintaCaptura" src="./images/captura/pelicula.svg" alt="icono cinta">
+
                 <div id="contenedorVioleta" class="centradoMargin">
                     <div id="iconosSubida">
                         <span class="iconoEnOverlayDescargar" id="descargarGifSubido">&nbsp;</span>
@@ -113,7 +122,6 @@
                     </div>
                     
                 </div>
-                <a id="cintaCaptura"></a>
                     <div id="pasos">
                 <img id="paso1" class="centradoMargin" src="./images/captura/paso_1.svg" alt="imagen indicador paso 1">
                 <img id="paso2" class="centradoMargin" src="./images/captura/paso_2.svg" alt="imagen indicador paso 2">
@@ -125,6 +133,8 @@
                 <button id="iniciarCaptura" class="botonRedondeado">GRABAR</button>
                 <button id="finalizarCaptura" class="botonRedondeado">FINALIZAR</button>
                 <button id="subirCaptura" class="botonRedondeado">SUBIR GIFO</button>
+                <button id="cerrarCaptura" class="botonRedondeado">CERRAR</button>
+
 
             </div>
     </section>
@@ -138,7 +148,7 @@
 
 
 
-    <section id="trendingGifos" class="fondoOscurito">
+    <section id="trendingGifos" class="fondoOscurito trendingGifos">
         <h2>Trending GIFOS</h2>
             <p class="textoNegro">Mira los últimos GIFOS de nuestra comunidad.</p>
         <div id="calesitaCompleta">
