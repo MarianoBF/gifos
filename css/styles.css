@@ -17,7 +17,7 @@ h1 {
 /*
 1-HEADER, NAVEGACIÓN y FOOTER
 2-BARRA BÚSQUEDA
-3-CALESITA
+3-CALESITA Y MODAL
 4-CAPTURAR GIF
 5-RESTO ESTILOS
 6-MEDIA QUERY
@@ -263,7 +263,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /*
 ***********************************************
-3-CALESITA
+3-CALESITA y MODAL
 ***********************************************
 */
 
@@ -275,7 +275,7 @@ input[type="search"]::-webkit-search-cancel-button {
 #calesita {
     position: relative;
     max-width: 70%;
-    height: 200px;
+    height: 300px;
     margin: 0 auto;
     display:flex;
 }
@@ -283,12 +283,13 @@ input[type="search"]::-webkit-search-cancel-button {
 #imagenesCalesita {
     position: absolute;
     width: 450px;
-    height: 150px;
+    height: 200px;
 }
 
+
 .contenedorTrending {
-    width: 350px;
-    height: 150px;
+    width: 400px;
+    height: 200px;
     padding-top: 35px;
     float: left;
     text-align: center;
@@ -304,10 +305,6 @@ input[type="search"]::-webkit-search-cancel-button {
 .flecha {
     display: none; 
 }
-
-
-
-/*********MODAL*/
 
 .modal span {
     min-width: 30px;
@@ -350,8 +347,8 @@ input[type="search"]::-webkit-search-cancel-button {
     background: url("../images/icon_download.svg") 0 0 no-repeat; 
 }
 
-#guardarGif:hover {
-    background: url("../images/icon_visited_hover.svg") 0 0 no-repeat;
+#descargarGif:hover {
+    background: url("../images/icon_download_hover.svg") 0 0 no-repeat;
 }
 
 .modalGifImagen {
@@ -359,7 +356,6 @@ input[type="search"]::-webkit-search-cancel-button {
     top: 20vh;
     left: 5vw;
     width: 90vw;
-    height: 60vh;
 }
 
 .modal {
@@ -380,19 +376,24 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .epigrafeModal {
     position: absolute;
-    bottom: 5vh;
+    bottom: 10vh;
     left: 10vw;
     font-weight: bold;
 }
 
 .epigrafeModal:nth-of-type(2) {
-    bottom: 10vh;
+    bottom: 20vh;
 }
 
+   
+.gifTrending {
+    width: 240px;
+    height: 190px;
+}
 
 .contenedorImagenTrending {
-    width: 100%;
-    height: 100%;
+    width: 240px;
+    height: 190px;
     position: relative;
     margin-right: 8%;
 }
@@ -630,13 +631,6 @@ video {
     padding: 0;
 }
 
-.gifTrending {
-    width: 150px;
-    height: 150px;
-    padding: 0;
-}
-
-
 #trendingTopics {
     margin: 0 20%;
     margin-bottom: 4%;
@@ -662,7 +656,9 @@ video {
 
 .contenedorEnBandas {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 2rem;
     justify-content: space-evenly;
 }
 
@@ -696,8 +692,6 @@ video {
 .botonRedondeado:hover {
     color: #FFF;
     background: #572EE5;
-
-
 }
 
 .fondoOscurito {
@@ -831,7 +825,7 @@ video {
     }
 
     .desplegable a:active {
-        color: #9CAFC3 100%;
+        color: #9CAFC3;
     }
       
     #enlaceCaptura {
@@ -898,7 +892,11 @@ video {
         height: 200px;
     }
 
-
+    .contenedorImagenTrending {
+        width: 350px;
+        height: 275px;
+    }
+    
     .gifChico {
         opacity: 1;
         display: block;
@@ -947,6 +945,21 @@ video {
         bottom: 10vh;
         right: 5vw;
 
+    }
+
+    .modalGifImagen {
+        position: unset;
+        width: 60vw;
+        display: block;
+        margin: 5% auto;
+    }
+
+    .epigrafeModal {
+        bottom: 8vh;
+    }
+
+    .epigrafeModal:nth-of-type(2) {
+        bottom: 16vh;
     }
 
     .epigrafeModalDesk {
