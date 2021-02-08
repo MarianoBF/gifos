@@ -445,32 +445,34 @@ function mostrarFavoritos() {
       totalFavoritos++} 
     }
 
-  totalFavoritos === 0 ? sinFavoritos() : null;
+  if (totalFavoritos === 0) {sinFavoritos()
+  } else {
 
-  totalFavoritos > limiteFavoritos ? document.getElementById("verMasGifFavs").style.display = "initial" : document.getElementById("verMasGif").style.display = "none";
-  document.getElementById("verMasGifFavs").addEventListener("click", asignarCantidad)
+    totalFavoritos > limiteFavoritos ? document.getElementById("verMasGifFavs").style.display = "initial" : document.getElementById("verMasGif").style.display = "none";
+    document.getElementById("verMasGifFavs").addEventListener("click", asignarCantidad)
 
-  mostrarFavoritosDisplay()
-
-  function mostrarFavoritosDisplay() {
-    totalFavoritos < 12 ? limiteFavoritos = totalFavoritos : null;
-    document.getElementById("contenedorFavoritos").innerHTML = "";
-
-    for (let i = 0; i < localStorage.length ; i++) {
-      let llave = localStorage.key(i);
-        if (llave.match(/gifFavorito/)) {
-          let gifId = localStorage.getItem(llave);
-          mostrarGiphyNoBusqueda(gifId, "contenedorFavoritos")
-          favoritosMostrados++}
-        if (favoritosMostrados == limiteFavoritos){ break }
-    }
-  }
-
-  function asignarCantidad() {
-    totalFavoritos > limiteFavoritos + 12 ? limiteFavoritos +=12 : limiteFavoritos = totalFavoritos;
-    favoritosMostrados = 0; 
     mostrarFavoritosDisplay()
-    totalFavoritos > limiteFavoritos ? document.getElementById("verMasGifFavs").style.display = "initial" : document.getElementById("verMasGifFavs").style.display = "none";
+
+    function mostrarFavoritosDisplay() {
+      totalFavoritos < 12 ? limiteFavoritos = totalFavoritos : null;
+      document.getElementById("contenedorFavoritos").innerHTML = "";
+
+      for (let i = 0; i < localStorage.length ; i++) {
+        let llave = localStorage.key(i);
+          if (llave.match(/gifFavorito/)) {
+            let gifId = localStorage.getItem(llave);
+            mostrarGiphyNoBusqueda(gifId, "contenedorFavoritos")
+            favoritosMostrados++}
+          if (favoritosMostrados == limiteFavoritos){ break }
+      }
+    }
+
+    function asignarCantidad() {
+      totalFavoritos > limiteFavoritos + 12 ? limiteFavoritos +=12 : limiteFavoritos = totalFavoritos;
+      favoritosMostrados = 0; 
+      mostrarFavoritosDisplay()
+      totalFavoritos > limiteFavoritos ? document.getElementById("verMasGifFavs").style.display = "initial" : document.getElementById("verMasGifFavs").style.display = "none";
+    }
   }
 }
 
@@ -496,31 +498,33 @@ function mostrarMisGifos() {
       totalMisGifos++} 
     }
 
-    totalMisGifos === 0 ? sinMisGifos() : null;
+  if (totalMisGifos === 0) {sinMisGifos()
+    } else { 
 
-  totalMisGifos > limiteMisGifos ? document.getElementById("verMasMisGifos").style.display = "initial" : document.getElementById("verMasMisGifos").style.display = "none";
-  document.getElementById("verMasMisGifos").addEventListener("click", asignarCantidadGifos)
-
-  mostrarMisGifosDisplay()
-
-  function mostrarMisGifosDisplay() {
-    document.getElementById("contenedorMisGifos").innerHTML = "";
-  
-    for (let i = 0; i< localStorage.length; i++) {
-      let llave = localStorage.key(i);
-      if (llave.match(/gifSubido/)) {
-        let gifId = localStorage.getItem(llave);
-        mostrarGiphyNoBusqueda(gifId, "contenedorMisGifos");
-        misGifosMostrados++}
-        if (misGifosMostrados == limiteMisGifos){ break }
-      }
-  }
-
-  function asignarCantidadGifos() {
-    totalMisGifos > limiteMisGifos + 12 ? limiteMisGifos +=12 : limiteMisGifos = totalMisGifos;
-    misGifosMostrados = 0; 
-    mostrarMisGifosDisplay()
     totalMisGifos > limiteMisGifos ? document.getElementById("verMasMisGifos").style.display = "initial" : document.getElementById("verMasMisGifos").style.display = "none";
+    document.getElementById("verMasMisGifos").addEventListener("click", asignarCantidadGifos)
+
+    mostrarMisGifosDisplay()
+
+    function mostrarMisGifosDisplay() {
+      document.getElementById("contenedorMisGifos").innerHTML = "";
+    
+      for (let i = 0; i< localStorage.length; i++) {
+        let llave = localStorage.key(i);
+        if (llave.match(/gifSubido/)) {
+          let gifId = localStorage.getItem(llave);
+          mostrarGiphyNoBusqueda(gifId, "contenedorMisGifos");
+          misGifosMostrados++}
+          if (misGifosMostrados == limiteMisGifos){ break }
+        }
+    }
+
+    function asignarCantidadGifos() {
+      totalMisGifos > limiteMisGifos + 12 ? limiteMisGifos +=12 : limiteMisGifos = totalMisGifos;
+      misGifosMostrados = 0; 
+      mostrarMisGifosDisplay()
+      totalMisGifos > limiteMisGifos ? document.getElementById("verMasMisGifos").style.display = "initial" : document.getElementById("verMasMisGifos").style.display = "none";
+    }
   }
 }
 

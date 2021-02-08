@@ -847,6 +847,7 @@ video {
     #imagenesCalesita {
         width: 500px;
         height: 350px;
+        overflow-x: unset;
     }
 
     .contenedorTrending {
