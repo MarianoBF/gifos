@@ -330,11 +330,6 @@ function modalGifDesk() {
   imagen.append(contenedorIconosModal);
 }
 
-function borrarGifFavorito() {
-  localStorage.removeItem("gifFavorito"+idActivo);
-  this.parentNode.remove();
-}
-
 function cerrarModalGifDesk() {
   let imagen = document.getElementById(this.firstChild.id);
   let contenedor = (this);
@@ -383,8 +378,13 @@ function modalGifMobDisplay() {
   contenedorModal.classList.add("modalGifContenedor");
   contenedorModal.append(imagenModal, titulo, usuario);
   document.getElementById("cerrarModal").style.display = "initial";
+  document.getElementById("borrarGif").style.display = "none";
   document.getElementById("guardarGif").style.display = "initial";
   document.getElementById("descargarGif").style.display = "initial";
+  if (document.getElementById("favoritos").style.display === "initial") {
+    document.getElementById("guardarGif").style.display = "none";
+    document.getElementById("borrarGif").style.display = "initial";
+  }
 }
 
 document.getElementById("cerrarModal").addEventListener("click", cerrarModalGif);
@@ -401,6 +401,19 @@ document.getElementById("guardarGif").addEventListener("click", guardarGifFavori
 
 function guardarGifFavorito() {
   localStorage.getItem("gifFavorito"+idActivo) ? null : localStorage.setItem("gifFavorito"+idActivo, idActivo)
+}
+
+document.getElementById("borrarGif").addEventListener("click", borrarGifFavoritoMob);
+
+function borrarGifFavorito() {
+  localStorage.removeItem("gifFavorito"+idActivo);
+  this.parentNode.remove();
+}
+
+function borrarGifFavoritoMob() {
+  localStorage.removeItem("gifFavorito"+idActivo);
+  cerrarModalGif()
+  mostrarFavoritos();
 }
 
 document.getElementById("descargarGif").addEventListener("click", descargarGif);
@@ -422,7 +435,7 @@ function descargarGif() {
 /*********************************
 5- ENLACES A SECCIONES
 *********************************/
-{
+
 document.getElementById("enlaceFavoritos").addEventListener("click", mostrarFavoritos)
 
 function mostrarFavoritos() {
@@ -560,7 +573,7 @@ function cerrarNav() {
   document.getElementById("cerrarMenu").style.display = "none";
   }
 }
-}
+
 /********************
 6-CAPTURAR GIF
 *******************/

@@ -458,6 +458,15 @@ input[type="search"]::-webkit-search-cancel-button {
     left: 20%;
   }
 
+.iconoEnOverlayBorrarMob {
+    top: unset;
+    left: unset;
+    bottom: 40px;
+    right: 30vw;
+    }
+
+
+
   .iconoEnOverlayBorrar:hover {
     background: url("../images/icon_trash_hover.svg") 0 0 no-repeat;
 }
@@ -954,6 +963,7 @@ video {
     .modalGifImagen {
         position: unset;
         width: 60vw;
+        max-height: 60vh;
         display: block;
         margin: 5% auto;
     }
