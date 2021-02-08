@@ -26,7 +26,7 @@
 }
 
 .textoBlanco {
-    color: #FFFFFF;
+    color: #FFF;
 }
 
 .textoBlancoResultados {
@@ -37,11 +37,15 @@
 
 .barraNocturna {
     background: #37383C;
+    color: #FFF;
+}
+
+.barraNocturna::placeholder {
     color: #6B7989;
 }
 
 .formNocturno {
-    border: 1px solid #FFFFFF;
+    border: 1px solid #FFF;
 }
 
 .iconoBusquedaNocturno {
@@ -50,14 +54,14 @@
 }
 
 .botonRedondeadoNocturno {
-    color: #FFFFFF;
+    color: #FFF;
     background: #37383C;
     border: 1px solid #FFF;
 }
 
 .botonRedondeadoNocturno:hover {
     color: #37383C;
-    background: #FFFFFF;
+    background: #FFF;
     border: 1px solid #37383C
 }
 
@@ -66,7 +70,7 @@
 }
 
 .desplegableNocturno a {
-    color: #FFFFFF;
+    color: #FFF;
 }
 
 .enlaceCapturaNocturno {
