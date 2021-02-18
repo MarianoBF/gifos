@@ -318,6 +318,7 @@ input[type="search"]::-webkit-search-cancel-button {
 #cerrarModal {
     display: none;
     position: absolute;
+    cursor: pointer;
     top: 5vh;
     right: 5vw;
     background: url("../images/icon_close.svg") 0 0 no-repeat;
@@ -326,6 +327,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 #guardarGif {
     display: none;
+    cursor: pointer;
     position: absolute;
     bottom: 40px;
     right: 20vw;
@@ -345,6 +347,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 #descargarGif {
     display: none;
+    cursor: pointer;
     position: absolute;
     bottom: 40px;
     right: 5vw;
@@ -398,7 +401,7 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 240px;
     height: 190px;
     position: relative;
-    margin-right: 8%;
+    margin-right: 32px;
 }
 
 .contenedorImagen {
@@ -421,6 +424,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .iconoEnOverlayDescargar {
   position: absolute;
+  cursor: pointer;
   background: url("../images/icon_download.svg") 0 0 no-repeat;
   width: 35px;
   height: 35px;
@@ -434,6 +438,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .iconoEnOverlayFavorito {
     background: url("../images/icon_fav.svg") 0 0 no-repeat;
+    cursor: pointer;
     position: absolute;
     width: 35px;
     height: 35px;
@@ -451,6 +456,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .iconoEnOverlayBorrar {
     background: url("../images/icon_trash.svg") 0 0 no-repeat;
+    cursor: pointer;
     position: absolute;
     width: 35px;
     height: 35px;
@@ -465,8 +471,6 @@ input[type="search"]::-webkit-search-cancel-button {
     right: 30vw;
     }
 
-
-
   .iconoEnOverlayBorrar:hover {
     background: url("../images/icon_trash_hover.svg") 0 0 no-repeat;
 }
@@ -474,6 +478,7 @@ input[type="search"]::-webkit-search-cancel-button {
   .iconoEnOverlayPantallaCompleta {
     background: url("../images/icon_max.svg") 0 0 no-repeat;
     position: absolute;
+    cursor: pointer;
     width: 35px;
     height: 35px;
     top: 5%;
@@ -952,6 +957,10 @@ video {
         bottom: 10vh;
         right: 20vw;
         padding: 0 20px;
+    }
+
+    .iconoEnOverlayBorrarMob {
+        bottom: 10vh;
     }
 
     #descargarGif {
