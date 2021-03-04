@@ -1,6 +1,6 @@
 "use strict";
 
-{document.getElementById("barraBusqueda").addEventListener("keyup", sugerencias);
+document.getElementById("barraBusqueda").addEventListener("keyup", sugerencias);
     
     function sugerencias() {
       let sugerencia = document.getElementById("barraBusqueda").value; 
@@ -88,14 +88,11 @@ function buscarTrending() {
   localStorage.setItem("limite", 12)
 }
 
-let urlGifTrending = "https://api.giphy.com/v1/gifs/trending?" 
-+"api_key="
-+APIKEY
-+"&limit=12"
-
-fetch(urlGifTrending)
-  .then(res => res.json())
-  .then(({ data }) => data.map(mostrarTrending))
+async function getTrending(urlGifTrending) {
+  let resultado = await fetch(urlGifTrending)
+  let datos = await resultado.json()
+  return datos.data
+}
 
 function mostrarTrending (gif) {
   let contenedorImagen = document.createElement("DIV");
@@ -112,4 +109,6 @@ function mostrarTrending (gif) {
   document.getElementById("contenedorTrending").appendChild(contenedorImagen);
   activarModalesTrending()
 }
-}
+
+getTrending(urlGifTrending).then(gifs => gifs.forEach(gif => mostrarTrending(gif)));
+

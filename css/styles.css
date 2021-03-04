@@ -310,6 +310,35 @@ input[type="search"]::-webkit-search-cancel-button {
     display: none; 
 }
 
+#flechaIzquierdaModal {
+    display: inline-block;
+    position: absolute;
+    bottom: 30vh;
+    left: 10vw;
+    width: 50px;
+    height: 50px;
+    background: url("../images/button_slider_left.svg") 0 0 no-repeat;
+}
+
+#flechaIzquierdaModal:hover {
+    background: url("../images/button_slider_left_hover.svg") 0 0 no-repeat;
+}
+
+#flechaDerechaModal {
+    display: inline-block;
+    position: absolute;
+    bottom: 30vh;
+    right: 10vw;
+    width: 50px;
+    height: 50px;
+    background: url("../images/button_slider_right.svg") 0 0 no-repeat;
+}
+
+.flechaDerecha:hover {
+    background: url("../images/button_slider_right_hover.svg") 0 0 no-repeat;
+}
+
+
 .modal span {
     min-width: 30px;
     min-height: 30px;
@@ -363,6 +392,8 @@ input[type="search"]::-webkit-search-cancel-button {
     top: 20vh;
     left: 5vw;
     width: 90vw;
+    min-height: 260px;
+    max-height: 300px;
 }
 
 .modal {
@@ -877,6 +908,18 @@ video {
     .flecha {
         display: inline-blocK;
         margin-top: -8%;
+    }
+
+    #flechaIzquierdaModal {
+        position: absolute;
+        top: 40%;
+        right: 2vw;
+    }
+    
+    #flechaDerechaModal {
+        position: absolute;
+        top: 40%;
+        right: 2vw;
     }
 
     .flechaIzquierda {

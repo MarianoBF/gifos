@@ -1,5 +1,6 @@
 "use strict";
-const APIKEY = "uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
+let gifsEnDisplay;
+
 
 
 function mayusculizar(palabras) {
