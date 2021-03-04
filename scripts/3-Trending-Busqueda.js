@@ -110,5 +110,8 @@ function mostrarTrending (gif) {
   activarModalesTrending()
 }
 
-getTrending(urlGifTrending).then(gifs => gifs.forEach(gif => mostrarTrending(gif)));
+getTrending(urlGifTrending).then(gifs => {
+  gifs.forEach(gif => mostrarTrending(gif));
+  gifsEnDisplay = gifs.map(gif => gif.images.original.url)
+});
 

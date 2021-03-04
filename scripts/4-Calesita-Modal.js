@@ -31,6 +31,7 @@ let idActivo = "";
 let urlActivo = "";
 let tituloActivo = "";
 let usuarioActivo = "";
+let posicion;
 
 function activarModalesTrending() { //Activa modales y el overlay con íconos y nombre
   const gifs = document.querySelectorAll(".gifTrending")
@@ -63,6 +64,7 @@ function modalGifDesk() {
   urlActivo = this.firstChild.src;
   usuarioActivo = this.firstChild.data_usuario;
   tituloActivo = this.firstChild.data_titulo;
+  posicion = gifsEnDisplay.indexOf(urlActivo)
 
   let imagen = document.getElementById(this.firstChild.id)
   imagen.parentNode.style.background = "rgba(87, 46, 229, 0.5)"
@@ -138,12 +140,19 @@ function modalGifMob() {
   usuarioActivo = this.data_usuario;
   tituloActivo = this.data_titulo;
   clearInterval(calesitaGirando)
+  posicion = gifsEnDisplay.indexOf(urlActivo)
   modalGifMobDisplay()
 }
 
+let subContenedor;
+
 function modalGifMobDisplay() {
+
+  subContenedor = document.createElement("DIV");
+  subContenedor.innerHTML = " "
+
   let imagenModal = document.createElement("IMG");
-  imagenModal.src = urlActivo;
+  imagenModal.src = gifsEnDisplay[posicion];
   imagenModal.className = "modalGifImagen";
   imagenModal.id = "modalAbierto"
 
@@ -154,15 +163,31 @@ function modalGifMobDisplay() {
   let usuario = document.createElement("P");
   usuario.append(document.createTextNode(usuarioActivo))
   usuario.className = "epigrafeModal"
-  
+
+  let flechaIzq = document.createElement("A");
+  flechaIzq.id = "flechaIzquierdaModal"
+  flechaIzq.className = "flecha flechaIzquierda"
+  flechaIzq.addEventListener("click", modalIzquierda);
+
+
+  let flechaDer = document.createElement("A");
+  flechaDer.id = "flechaDerechaModal"
+  flechaDer.className = "flecha flechaDerecha"
+  flechaDer.addEventListener("click", modalDerecha)
+
   let contenedorModal = document.getElementById("modal");
 
-  let textoViejo = contenedorModal.getElementsByTagName("p");
+
+  let textoViejo = subContenedor.getElementsByTagName("p");
     for (let i = textoViejo.length - 1 ; i >= 0; i--) {
-      contenedorModal.removeChild(textoViejo[i]); }
+      subContenedor.removeChild(textoViejo[i]); }
   
+
+  subContenedor.append(imagenModal, titulo, usuario,)
+  contenedorModal.append(subContenedor, flechaDer, flechaIzq);
+
+
   contenedorModal.classList.add("modalGifContenedor");
-  contenedorModal.append(imagenModal, titulo, usuario);
   document.getElementById("cerrarModal").style.display = "initial";
   document.getElementById("borrarGif").style.display = "none";
   document.getElementById("guardarGif").style.display = "initial";
@@ -171,6 +196,18 @@ function modalGifMobDisplay() {
     document.getElementById("guardarGif").style.display = "none";
     document.getElementById("borrarGif").style.display = "initial";
   }
+}
+
+function modalIzquierda() {
+  posicion >= 1 ? posicion-- : posicion = 0;
+  subContenedor.innerHTML = ""
+  modalGifMobDisplay()
+}
+
+function modalDerecha() {
+  posicion <= 10 ? posicion++ : posicion = 11;
+  subContenedor.innerHTML = ""
+  modalGifMobDisplay()
 }
 
 document.getElementById("cerrarModal").addEventListener("click", cerrarModalGif);
