@@ -1017,7 +1017,7 @@ video {
 
     .modalGifImagen {
         position: unset;
-        width: 60vw;
+        max-width: 60vw;
         max-height: 60vh;
         display: block;
         margin: 5% auto;
