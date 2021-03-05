@@ -115,7 +115,7 @@ function mostrarTrending (gif) {
 getTrending(urlGifTrending).then(gifs => {
   gifs.forEach(gif => mostrarTrending(gif));
 
-  gifsEnDisplayTrending = gifs.map(gif => gif.images.original.url)
+  gifsEnDisplayTrending = gifs //  gifs.map(gif => gif.images.original.url)
   gifsEnDisplay = gifsEnDisplayTrending
 });
 

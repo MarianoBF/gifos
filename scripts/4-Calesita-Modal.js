@@ -60,11 +60,13 @@ function activarModalesOtros() { //Activa modales y el overlay con íconos y nom
   
 function modalGifDesk() {
 
-  idActivo = this.firstChild.id;
   urlActivo = this.firstChild.src;
-  usuarioActivo = this.firstChild.data_usuario;
-  tituloActivo = this.firstChild.data_titulo;
-  posicion = gifsEnDisplay.indexOf(urlActivo)
+
+  posicion = (gifsEnDisplay.findIndex(item => item.images.original.url === urlActivo))
+
+  idActivo = gifsEnDisplay[posicion].id;
+  usuarioActivo = gifsEnDisplay[posicion].username;
+  tituloActivo = gifsEnDisplay[posicion].title;
 
   let imagen = document.getElementById(this.firstChild.id)
   imagen.parentNode.style.background = "rgba(87, 46, 229, 0.5)"
@@ -135,34 +137,49 @@ function cerrarModalGifDesk() {
 } 
 
 function modalGifMob() {
-  console.log("a")
-  idActivo = this.id;
-  urlActivo = this.src;
-  usuarioActivo = this.data_usuario;
-  tituloActivo = this.data_titulo;
-  clearInterval(calesitaGirando)
-  posicion = gifsEnDisplay.indexOf(urlActivo)
+   clearInterval(calesitaGirando)
+   urlActivo = this.src;
+  posicion = (gifsEnDisplay.findIndex(item => item.images.original.url === urlActivo))
+  idActivo = gifsEnDisplay[posicion].id;
+  // urlActivo = this.src;
+  usuarioActivo = gifsEnDisplay[posicion].username;
+  tituloActivo = gifsEnDisplay[posicion].title;
+
   modalGifMobDisplay()
 }
 
 let subContenedor;
 
-function modalGifMobDisplay(pos) {
+function modalGifMobDisplay() {
+
+  document.getElementById("subcontenedorModal").remove();
 
   subContenedor = document.createElement("DIV");
-  subContenedor.innerHTML = " "
+  subContenedor.id = "subcontenedorModal"
 
   let imagenModal = document.createElement("IMG");
-  imagenModal.src = gifsEnDisplay[posicion]||pos;
+  imagenModal.src = gifsEnDisplay[posicion].images.original.url;
   imagenModal.className = "modalGifImagen";
   imagenModal.id = "modalAbierto"
 
   let titulo = document.createElement("P");
-  titulo.append(document.createTextNode(tituloActivo))
+  
+  let tituloAux = gifsEnDisplay[posicion].title
+  
+  if (tituloAux.match(/\s[b|B]y\s[\w|\s|\W]+$/) !== null) {
+    let corte = tituloAux.match(/\sby\s[\w|\s|\W]+$/).index;
+    tituloAux = tituloAux.slice(0,corte);
+    }
+  if (tituloAux.match(/GIF$/) !== null) {
+    let corte = tituloAux.match(/GIF$/).index;
+    tituloAux = tituloAux.slice(0,corte);
+    }
+
+  titulo.append(document.createTextNode(tituloAux))
   titulo.className = "epigrafeModal"
 
   let usuario = document.createElement("P");
-  usuario.append(document.createTextNode(usuarioActivo))
+  usuario.append(document.createTextNode(gifsEnDisplay[posicion].username))
   usuario.className = "epigrafeModal"
 
   let flechaIzq = document.createElement("A");

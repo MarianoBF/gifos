@@ -55,7 +55,7 @@ function buscar (busqueda, limiteBusqueda) {
   }
 
 function mostrarGiphyBusqueda (gif) {
-  gifsEnDisplay.push(gif.images.original.url)
+  gifsEnDisplay.push(gif)
   let contenedorImagen = document.createElement("DIV");
   contenedorImagen.className = "contenedorImagen"
 
@@ -82,7 +82,7 @@ function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
     .then(({ data }) => data.map(mostrarGiphyNoBusquedaAux))
 
   function mostrarGiphyNoBusquedaAux(gif2) {
-    gifsEnDisplay.push(gif2.images.original.url)
+    gifsEnDisplay.push(gif2)
     let contenedorImagen = document.createElement("DIV");
     contenedorImagen.className = "contenedorImagen"
 
