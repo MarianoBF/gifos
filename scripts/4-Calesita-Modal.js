@@ -135,6 +135,7 @@ function cerrarModalGifDesk() {
 } 
 
 function modalGifMob() {
+  console.log("a")
   idActivo = this.id;
   urlActivo = this.src;
   usuarioActivo = this.data_usuario;
@@ -146,13 +147,13 @@ function modalGifMob() {
 
 let subContenedor;
 
-function modalGifMobDisplay() {
+function modalGifMobDisplay(pos) {
 
   subContenedor = document.createElement("DIV");
   subContenedor.innerHTML = " "
 
   let imagenModal = document.createElement("IMG");
-  imagenModal.src = gifsEnDisplay[posicion];
+  imagenModal.src = gifsEnDisplay[posicion]||pos;
   imagenModal.className = "modalGifImagen";
   imagenModal.id = "modalAbierto"
 
@@ -183,8 +184,8 @@ function modalGifMobDisplay() {
       subContenedor.removeChild(textoViejo[i]); }
   
 
-  subContenedor.append(imagenModal, titulo, usuario,)
-  contenedorModal.append(subContenedor, flechaDer, flechaIzq);
+  subContenedor.append(imagenModal, titulo, usuario, flechaDer, flechaIzq)
+  contenedorModal.append(subContenedor);
 
 
   contenedorModal.classList.add("modalGifContenedor");
@@ -205,7 +206,7 @@ function modalIzquierda() {
 }
 
 function modalDerecha() {
-  posicion <= 10 ? posicion++ : posicion = 11;
+  posicion < (gifsEnDisplay.length - 1) ? posicion++ : posicion = gifsEnDisplay.length - 1;
   subContenedor.innerHTML = ""
   modalGifMobDisplay()
 }

@@ -1,5 +1,10 @@
 "use strict";
 let gifsEnDisplay;
+let gifsEnDisplayTrending;
+
+
+// Constantes
+const APIKEY = "uTnjhcYC0B52sTn6MzoPXGkdJ6yxZgYQ"
 
 
 
@@ -50,6 +55,7 @@ function buscar (busqueda, limiteBusqueda) {
   }
 
 function mostrarGiphyBusqueda (gif) {
+  gifsEnDisplay.push(gif.images.original.url)
   let contenedorImagen = document.createElement("DIV");
   contenedorImagen.className = "contenedorImagen"
 
@@ -76,7 +82,7 @@ function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
     .then(({ data }) => data.map(mostrarGiphyNoBusquedaAux))
 
   function mostrarGiphyNoBusquedaAux(gif2) {
-
+    gifsEnDisplay.push(gif2.images.original.url)
     let contenedorImagen = document.createElement("DIV");
     contenedorImagen.className = "contenedorImagen"
 

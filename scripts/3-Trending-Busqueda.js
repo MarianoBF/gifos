@@ -88,6 +88,8 @@ function buscarTrending() {
   localStorage.setItem("limite", 12)
 }
 
+const urlGifTrending = "https://api.giphy.com/v1/gifs/trending?"+"api_key="+APIKEY+"&limit=12"
+
 async function getTrending(urlGifTrending) {
   let resultado = await fetch(urlGifTrending)
   let datos = await resultado.json()
@@ -112,6 +114,8 @@ function mostrarTrending (gif) {
 
 getTrending(urlGifTrending).then(gifs => {
   gifs.forEach(gif => mostrarTrending(gif));
-  gifsEnDisplay = gifs.map(gif => gif.images.original.url)
+
+  gifsEnDisplayTrending = gifs.map(gif => gif.images.original.url)
+  gifsEnDisplay = gifsEnDisplayTrending
 });
 

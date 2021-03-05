@@ -4,6 +4,7 @@ document.getElementById("enlaceFavoritos").addEventListener("click", mostrarFavo
 
 function mostrarFavoritos() {
   cerrarNav()
+  gifsEnDisplay = [];
   document.getElementById("contenedorFavoritos").innerHTML = "";
   document.getElementById("favoritos").style.display = "initial";
   document.getElementById("misGifos").style.display = "none";
@@ -57,6 +58,7 @@ document.getElementById("enlaceMisGifos").addEventListener("click", mostrarMisGi
 
 function mostrarMisGifos() {
   cerrarNav()
+  gifsEnDisplay = [];
   document.getElementById("contenedorMisGifos").innerHTML = "";
   document.getElementById("favoritos").style.display = "none";
   document.getElementById("misGifos").style.display = "initial";
@@ -109,6 +111,7 @@ document.getElementById("enlaceCaptura").addEventListener("click", mostrarCaptur
 
 function mostrarCaptura() {
   cerrarNav()
+  gifsEnDisplay = [];
   document.getElementById("contenedorFavoritos").innerHTML = "";
   document.getElementById("favoritos").style.display = "none";
   document.getElementById("misGifos").style.display = "none";
@@ -122,6 +125,7 @@ document.getElementById("logo").addEventListener("click", mostrarInicio)
 
 function mostrarInicio() {
   cerrarNav()
+  gifsEnDisplay = gifsEnDisplayTrending;
   document.getElementById("busqueda").style.display = "initial";
   document.getElementById("trendingGifos").style.display = "initial";
   document.getElementById("favoritos").style.display = "none";
