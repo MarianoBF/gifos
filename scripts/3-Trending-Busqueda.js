@@ -101,7 +101,7 @@ function mostrarTrending (gif) {
   contenedorImagen.className = "contenedorImagenTrending"
 
   let imagen = document.createElement("IMG");
-  imagen.src = gif.images.original.url;
+  imagen.src = gif.images.fixed_width.url;
   imagen.data_titulo = gif.title;
   imagen.data_usuario = gif.username;
   imagen.className = "gifTrending";
@@ -115,7 +115,7 @@ function mostrarTrending (gif) {
 getTrending(urlGifTrending).then(gifs => {
   gifs.forEach(gif => mostrarTrending(gif));
 
-  gifsEnDisplayTrending = gifs //  gifs.map(gif => gif.images.original.url)
+  gifsEnDisplayTrending = gifs
   gifsEnDisplay = gifsEnDisplayTrending
 });
 

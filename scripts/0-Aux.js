@@ -60,7 +60,7 @@ function mostrarGiphyBusqueda (gif) {
   contenedorImagen.className = "contenedorImagen"
 
   let imagen = document.createElement("IMG");
-  imagen.src = gif.images.original.url;
+  imagen.src = gif.images.fixed_width.url;
   imagen.data_titulo = gif.title;
   imagen.data_usuario = gif.username;
   imagen.id = gif.id;
@@ -87,7 +87,7 @@ function mostrarGiphyNoBusqueda (gif, puntoInsercion) {
     contenedorImagen.className = "contenedorImagen"
 
     let imagen = document.createElement("IMG");
-    imagen.src = gif2.images.original.url;
+    imagen.src = gif2.images.fixed_width.url;
     imagen.data_titulo = gif2.title;
     imagen.data_usuario = gif2.username;
     imagen.id = gif2.id;

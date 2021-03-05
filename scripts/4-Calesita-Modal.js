@@ -62,7 +62,7 @@ function modalGifDesk() {
 
   urlActivo = this.firstChild.src;
 
-  posicion = (gifsEnDisplay.findIndex(item => item.images.original.url === urlActivo))
+  posicion = (gifsEnDisplay.findIndex(item => item.images.fixed_width.url === urlActivo))
 
   idActivo = gifsEnDisplay[posicion].id;
   usuarioActivo = gifsEnDisplay[posicion].username;
@@ -139,7 +139,7 @@ function cerrarModalGifDesk() {
 function modalGifMob() {
    clearInterval(calesitaGirando)
    urlActivo = this.src;
-  posicion = (gifsEnDisplay.findIndex(item => item.images.original.url === urlActivo))
+  posicion = (gifsEnDisplay.findIndex(item => item.images.fixed_width.url === urlActivo))
   idActivo = gifsEnDisplay[posicion].id;
   // urlActivo = this.src;
   usuarioActivo = gifsEnDisplay[posicion].username;
@@ -241,7 +241,8 @@ function cerrarModalGif() {
 document.getElementById("guardarGif").addEventListener("click", guardarGifFavorito);
 
 function guardarGifFavorito() {
-  localStorage.getItem("gifFavorito"+idActivo) ? null : localStorage.setItem("gifFavorito"+idActivo, idActivo)
+  console.log(gifsEnDisplay[posicion].id, idActivo, localStorage.getItem("gifFavorito"+gifsEnDisplay[posicion].id))
+  localStorage.getItem("gifFavorito"+gifsEnDisplay[posicion].id) ? null : localStorage.setItem("gifFavorito"+gifsEnDisplay[posicion].id, gifsEnDisplay[posicion].id)
 }
 
 document.getElementById("borrarGif").addEventListener("click", borrarGifFavoritoMob);
@@ -252,7 +253,7 @@ function borrarGifFavorito() {
 }
 
 function borrarGifFavoritoMob() {
-  localStorage.removeItem("gifFavorito"+idActivo);
+  localStorage.removeItem("gifFavorito"+gifsEnDisplay[posicion].id);
   cerrarModalGif()
   mostrarFavoritos();
 }
@@ -260,7 +261,7 @@ function borrarGifFavoritoMob() {
 document.getElementById("descargarGif").addEventListener("click", descargarGif);
 
 function descargarGif() {
-  fetch(urlActivo)
+  fetch(gifsEnDisplay[posicion].images.original.url)
   .then((response) => response.blob())
   .then((blob) => {
     const urlAux = window.URL.createObjectURL(new Blob([blob]));
