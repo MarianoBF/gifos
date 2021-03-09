@@ -550,13 +550,21 @@ input[type="search"]::-webkit-search-cancel-button {
 ***********************************************
 */
 
+#enlaceCaptura {
+    margin: 0 auto;
+}
+
+#camaraCaptura, #cintaCaptura {
+    display: none;
+}
+
 #contenedorCaptura {
     position: relative;
 }
 
 #contenedorVioleta {
     border: 1px solid #572EE5;
-    width: 50vw;
+    max-width: 95vw;
     height: 50vh;
     padding: 20px 30px;
     display: flex;
@@ -565,7 +573,7 @@ input[type="search"]::-webkit-search-cancel-button {
     position: relative;
 }
 
-#video, #permisoCaptura, #iniciarCaptura, #finalizarCaptura, #statusSubida, #textoSubida, #enlaceCaptura {
+#video, #permisoCaptura, #iniciarCaptura, #finalizarCaptura, #statusSubida, #textoSubida {
     display: none;
 }
 
@@ -597,7 +605,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .barraGruesa {
     background: #572EE5;
-    width: 55%;
+    width: 75%;
     height: 5px;
     margin: 0.5em auto;
 }
@@ -624,19 +632,13 @@ input[type="search"]::-webkit-search-cancel-button {
     display: flex;
     justify-content: space-evenly;
     max-width: 430px;
-}
-
-#paso1 {
-    padding-left: 50px;
-}
-
-#paso3 {
-    padding-right: 50px;
+    flex-wrap: wrap;
 }
 
 #cronometro {
     justify-self: right;
     white-space: nowrap;
+    flex-basis: 100%;    
 }
 
 #contenedorVideo {
@@ -647,7 +649,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 video {
-    max-width: 480px;
+    max-width: 80vw;
     max-height: 320px;
     margin: 0 auto;
 }
@@ -878,7 +880,37 @@ video {
     }
       
     #enlaceCaptura {
-        display: initial;
+        margin: unset;
+    }
+
+    video {
+        max-width: 480px;
+        max-height: 320px;
+        margin: 0 auto;
+    }
+
+    #cronometro {
+        flex-basis: unset;
+    }
+
+    #paso1 {
+        padding-left: 50px;
+    }
+    
+    #paso3 {
+        padding-right: 50px;
+    }
+
+    .barraGruesa {
+        width: 55%;
+    }
+
+    #camaraCaptura, #cintaCaptura {
+        display: initial
+    }
+
+    #contenedorVioleta {
+        width: 50vw;
     }
 
     #calesita {
