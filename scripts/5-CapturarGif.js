@@ -15,6 +15,7 @@
       document.getElementById("iniciarCaptura").style.display = "none";
       document.getElementById("textoCaptura").style.display = "none";
       document.getElementById("permisoCaptura").style.display = "initial";
+      document.getElementById("video").style.height = "1px";
       empezarCaptura()
           
       function empezarCaptura() {
@@ -25,6 +26,7 @@
           }
         })
         .then(function(stream) {
+          video.style.height = "initial"
           video.srcObject = stream;
           localStream = stream;
           video.play()
